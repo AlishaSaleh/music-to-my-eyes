@@ -1,7 +1,7 @@
 import React from "react";
 import {Container, Row, Col} from "../components/Grid";
 
-function ProfSetting() {
+function ProfileSettings() {
   return (
     <Container fluid>
       <Row>
@@ -13,4 +13,4 @@ function ProfSetting() {
   );
 }
 
-export default ProfSetting;
+export default ProfileSettings;
