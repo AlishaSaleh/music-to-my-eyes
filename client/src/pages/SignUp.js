@@ -38,7 +38,7 @@ function SignUp() {
                 </select>
             </div>
             
-                <button className="btn btn-primary" type="submit">Submit form</button>
+                <button className="btn btn-primary" type="submit">Sign Up</button>
         </form>
     </div>
     );
