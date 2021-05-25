@@ -13,7 +13,7 @@ const userSchema = new Schema({
         required: true,
         trim: true,
         lowercase: true,
-        unique: true
+        unique: true // need to add return message if email has already been used
         // THREE OPTIONS FOR VALIDATION ->
         // 1: validate with validator package
         //         validate: [validator.isEmail, 'invalid email'] 
@@ -59,6 +59,26 @@ const userSchema = new Schema({
         },
     ]
 });
+
+// BCRYPT PASSWORD HASHING
+userSchema.methods = {
+	checkPassword: function(inputPassword) {
+		return bcrypt.compareSync(inputPassword, this.password);
+	},
+	hashPassword: plainTextPassword => {
+		return bcrypt.hashSync(plainTextPassword, 10);
+	}
+};
+
+userSchema.pre('save', function(next) {
+	if (!this.password) {
+		console.log('No password!');
+		next();
+	} else {
+		this.password = this.hashPassword(this.password);
+		next();
+	}
+})
 
 const User = mongoose.model("User", userSchema);
 
