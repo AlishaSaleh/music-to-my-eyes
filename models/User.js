@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 // const validator = require('validator');
+const bcrypt = require('bcryptjs');
 
 const userSchema = new Schema({
     name: {
@@ -46,9 +47,10 @@ const userSchema = new Schema({
             }
         }
     ], // will need front-end validation to limit to 3 items in array
+    // add required: true later on?
     image: {
         type: String,
-        required: true
+        default: 'https://commons.wikimedia.org/wiki/File:Profile_avatar_placeholder_large.png'
     },
     matches: [
         {
