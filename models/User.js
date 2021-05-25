@@ -19,6 +19,7 @@ const userSchema = new Schema({
         // 2: use a regex validator 
         //         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
         // 3: or validate on front-end only
+        // ---> SAME OPTIONS FOR PASSWORD VAILDATION
     },
     password: {
         type: String,
@@ -32,11 +33,19 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    top_songs: {
-        type: [String],
-        required: true,
-        maxItems: 3
-    },
+    top_songs: [
+        {
+            song: {
+                type: String,
+            },
+            artist: {
+                type: String,
+            },
+            url: {
+                type: String
+            }
+        }
+    ], // will need front-end validation to limit to 3 items in array
     image: {
         type: String,
         required: true
