@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
-import InputGroup from 'react-bootstrap/InputGroup';
-
+import Emoji from "../Emoji"
 
 function UserSettingsForm() {
   const [validated, setValidated] = useState(false);
@@ -29,7 +28,7 @@ function UserSettingsForm() {
             placeholder="First name"
             defaultValue=""
           />
-          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+          <Form.Control.Feedback>Looks good!<Emoji symbol="👍" label="thumbs-up"/></Form.Control.Feedback>
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="validationCustom02">
           <Form.Label>Last name</Form.Label>
