@@ -34,6 +34,9 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    location: {
+        type: String
+    },
     top_songs: [
         {
             song: {
