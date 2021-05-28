@@ -1,15 +1,102 @@
-import React, { useEffect, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Emoji from "../Emoji"
 import ProfilePic from "../ProfilePic";
 import "./index.css";
+import Loader from "../Loader";
+import { useSpring, animated } from 'react-spring';
 
-function UserSettingsForm() {
+export function SaveButton({ isLoading, children, ...props }) {
+  /* showLoader is used to stay in the "isLoading state" a bit longer to avoid loading flashes
+   if the loading state is too short. */
+  const [showLoader, setShowLoader] = useState(false);
+
+  useEffect(() => {
+    if (isLoading) {
+      setShowLoader(true);
+    }
+
+    // Show loader a bits longer to avoid loading flash
+    if (!isLoading && showLoader) {
+      const timeout = setTimeout(() => {
+        setShowLoader(false);
+      }, 400);
+
+      return () => {
+        clearTimeout(timeout);
+      };
+    }
+  }, [isLoading, showLoader]);
+
+  /* Capture the dimensions of the button before the loading happens
+  so it doesn’t change size.
+  These hooks can be put in a seprate file. */
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    if (ref.current && ref.current.getBoundingClientRect().width) {
+      setWidth(ref.current.getBoundingClientRect().width);
+    }
+    if (ref.current && ref.current.getBoundingClientRect().height) {
+      setHeight(ref.current.getBoundingClientRect().height);
+    }
+  }, [children]);
+
+  // Hooks used to fade in/out the loader or the button contents
+  const fadeOutProps = useSpring({ opacity: showLoader ? 1 : 0 });
+  const fadeInProps = useSpring({ opacity: showLoader ? 0 : 1 });
+
+  return (
+    <button
+      {...props}
+      className="button inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+      ref={ref}
+      type="submit"
+      style={
+        showLoader
+          ? {
+              width: `${width}px`,
+              height: `${height}px`
+            }
+          : {}
+      }
+    >
+      {showLoader ? (
+        <animated.div style={fadeOutProps}>
+          <Loader />
+        </animated.div>
+      ) : (
+        <animated.div style={fadeInProps}>{children}</animated.div>
+      )}
+    </button>
+  );
+}
+
+export function UserSettingsForm() {
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    setIsButtonLoading(true);
+  }
+
+  const [isButtonLoading, setIsButtonLoading] = useState(false);
+
+  useEffect(() => {
+    if (isButtonLoading) {
+      setTimeout(() => {
+        setIsButtonLoading(false);
+      }, 1000 / 1);
+    }
+  });
+
+
   return (
     <>
       <div>
         <div className="md:grid md:grid-cols-3 md:gap-6">
           <div className="mt-5 md:mt-0 md:col-span-2">
-            <form action="#" method="POST">
+            <form action="#">
               <div className="shadow sm:rounded-md sm:overflow-hidden">
                 <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
                   <div className="md:col-span-1">
@@ -32,7 +119,7 @@ function UserSettingsForm() {
                       </button>
                     </div>
                   </div>
-                  <div className="col-span-6 sm:col-span-3">
+                  <div className="col-span-3">
                     <label htmlFor="first_name" className="block text-sm font-medium text-gray-700">
                       First name
                       </label>
@@ -45,7 +132,7 @@ function UserSettingsForm() {
                     />
                   </div>
 
-                  <div className="col-span-6 sm:col-span-3">
+                  <div className="col-span-5">
                     <label htmlFor="last_name" className="block text-sm font-medium text-gray-700">
                       Last name
                       </label>
@@ -369,12 +456,7 @@ function UserSettingsForm() {
                 </div>
 
                 <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                  <button
-                    type="submit"
-                    className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    Save
-                  </button>
+                  <SaveButton isLoading={isButtonLoading} onClick={handleSubmit} onSubmit={handleSubmit}>Save Profile</SaveButton>
                 </div>
               </div>
             </form>
@@ -384,5 +466,4 @@ function UserSettingsForm() {
     </>
   )
 }
-export default UserSettingsForm;
 

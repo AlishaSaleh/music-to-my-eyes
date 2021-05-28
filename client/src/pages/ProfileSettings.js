@@ -2,7 +2,7 @@ import React from "react";
 import {Container, Row, Col} from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
 import ProfilePic from "../components/ProfilePic";
-import UserSettingsForm from "../components/UserSettingsForm";
+import {UserSettingsForm} from "../components/UserSettingsForm";
 
 function ProfileSettings() {
   return (
