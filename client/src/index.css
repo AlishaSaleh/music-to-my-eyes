@@ -16,3 +16,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@layer utilities {
+  .change-pp {
+    position: absolute;
+    margin-top: 6rem;
+    width: 128px;
+    border-radius: 0px 0px 8px 8px;
+  }
+
+  .btn {
+    background-color: white;
+  }
+  @variants hover {
+  .btn-hov {
+    background-color: #dddddd;
+  }
+}
+}

@@ -12,7 +12,6 @@ function ProfileSettings() {
           <Jumbotron>
             <h1>Profile Settings</h1>
           </Jumbotron>
-          <ProfilePic src="https://randomuser.me/api/portraits/men/47.jpg" />
           <UserSettingsForm />
         </Col>
       </Row>
