@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from '../components/Home';
 import RedirectPage from '../components/RedirectPage';
-import SpotifyDashboard from '../pages/SpotifyDashboard';
+import SpotifyDashboard from '../components/Spotify/SpotifyDashboard';
 import NotFoundPage from '../pages/NotFoundPage';
 
 class AppRouter extends React.Component {
