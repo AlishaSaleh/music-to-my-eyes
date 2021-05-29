@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import ProfileSettings from "./pages/ProfileSettings.js";
 // import NoMatch from "./pages/NoMatch";
 import Navbar from "./components/Navbar";
+import error404 from "./pages/404";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/profile-settings" component={ProfileSettings} />
+          <Route exact path="/error404" component={error404} />
         </Switch>
       </div>
     </Router>

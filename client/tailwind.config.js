@@ -3,9 +3,10 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     colors: {
-        'mint': '#A3BFBF',
-        'mint-dark': '#356161',
-        'mint-light': '#7EE6E6'
+        'red': '#f54f4f',
+        'red-light': '#fac0c0',
+        'pink': '#f670bb',
+        'purple': '#cdaef8'
     },
     extend: {},
   },
