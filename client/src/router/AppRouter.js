@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Home from '../components/Home';
+import SpotifyHome from '../components/Spotify/SpotifyHome';
 import RedirectPage from '../components/RedirectPage';
 import SpotifyDashboard from '../components/Spotify/SpotifyDashboard';
 import NotFoundPage from '../pages/NotFoundPage';
@@ -41,7 +41,7 @@ class AppRouter extends React.Component {
               path="/"
               exact={true}
               render={(props) => (
-                <Home isValidSession={this.isValidSession} {...props} />
+                <SpotifyHome isValidSession={this.isValidSession} {...props} />
               )}
             />
             <Route
