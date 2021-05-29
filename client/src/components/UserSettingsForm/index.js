@@ -94,7 +94,7 @@ export function UserSettingsForm() {
   return (
     <>
       <div>
-        <div className="md:grid md:grid-cols-6 md:gap-6 xl:grid-cols-7">
+        <div className="md:grid md:grid-cols-6 md:gap-6 xl:grid-cols-7 neg-mt relative mb-5">
           {/* <div class="col-span-1"></div> */}
           <div className="col-start-1 md:col-start-2 xl:col-start-3 mt-5 md:mt-0 col-span-4 md:col-span-4 xl:col-span-3">
             <form action="#" method="POST">
@@ -109,7 +109,7 @@ export function UserSettingsForm() {
                       </button>
                   </div>
                   </div>
-              <div className="xl:px-5 shadow sm:rounded-md sm:overflow-hidden pt-5">
+              <div className="xl:px-5 shadow sm:rounded-md bg-white sm:overflow-hidden pt-5">
                 <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
                   <div className="grid grid-cols-3 md:grind-cols-6 gap-6">
 
