@@ -1,7 +1,7 @@
 import React from "react";
 import {Container, Row, Col} from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
-import ProfilePic from "../components/ProfilePic";
+import Divider from "../components/Divider";
 import {UserSettingsForm} from "../components/UserSettingsForm";
 
 function ProfileSettings() {
@@ -11,6 +11,7 @@ function ProfileSettings() {
         <Col size="md-12">
           <Jumbotron>
             <h1>Profile Settings</h1>
+            <Divider />
           </Jumbotron>
           <UserSettingsForm />
         </Col>
