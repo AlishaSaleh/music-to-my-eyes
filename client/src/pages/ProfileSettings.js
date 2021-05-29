@@ -9,7 +9,7 @@ function ProfileSettings() {
     <Container fluid>
       <Row>
         <Col size="md-12">
-          <Jumbotron name="gradient-1">
+          <Jumbotron>
             <h1>Profile Settings</h1>
             <Divider />
           </Jumbotron>
