@@ -21,6 +21,27 @@ const SpotifySearchForm = (props) => {
         }
     };
 
+    return (
+        <div>
+          <Form onSubmit={handleSearch}>
+            {errorMsg && <p className="errorMsg">{errorMsg}</p>}
+            <Form.Group controlId="formBasicEmail">
+              <Form.Label>Enter search term</Form.Label>
+              <Form.Control
+                type="search"
+                name="searchTerm"
+                value={searchTerm}
+                placeholder="Search for album, artist or playlist"
+                onChange={handleInputChange}
+                autoComplete="off"
+              />
+            </Form.Group>
+            <Button variant="info" type="submit">
+              Search
+            </Button>
+          </Form>
+        </div>
+      );
    
 };
 
