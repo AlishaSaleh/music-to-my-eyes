@@ -32,7 +32,10 @@ router.post("/signup", (req, res) => {
             const newUser = new User({
                 name: req.body.name,
                 email: req.body.email,
-                password: req.body.password
+                password: req.body.password,
+                dob: req.body.dob,
+                gender: req.body.gender,
+                location: req.body.location
             });
             // Hashing already done in model but this is alternative place for it if it doesn't work
             bcrypt.genSalt(10, (err, salt) => {
