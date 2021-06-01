@@ -1,8 +1,6 @@
 // user sign up, login and get routes
 const express = require('express');
 const router = express.Router();
-//const userController = require("../../controllers/userController");
-// will need to require whichever middleware we use for authenticatiton here
 
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -14,10 +12,6 @@ const validateRegisterInput = require("../../validation/signup");
 const validateLoginInput = require("../../validation/login");
 
 // user/[route]
-//router.get('/', userController.getUser);
-// 1: signup using the userController
-// router.post('/signup', userController.signUp);
-// 2: OR signup using function
 router.post("/signup", (req, res) => {
     // Form validation
     const { errors, isValid } = validateRegisterInput(req.body);
@@ -53,9 +47,7 @@ router.post("/signup", (req, res) => {
         }
     });
 });
-// 1: login in with userController
-// router.post('/login', userController.login);
-// 2: OR login with  function
+
 router.post("/login", (req, res) => {
     // Form validation
     const { errors, isValid } = validateLoginInput(req.body);
@@ -106,7 +98,6 @@ router.post("/login", (req, res) => {
     });
 });
 
-//router.post('/logout', userController.logout);
 // User log out route
 router.post('/logout', (req, res) => {
     if (req.session.logged_in) {
