@@ -4,6 +4,17 @@ const routes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+const passport = require("passport");
+//const users = require("./routes/api/users");
+
+// Passport middleware
+app.use(passport.initialize());
+// Passport config
+require("./config/passport")(passport);
+
+// Routes
+//app.use("/api/users", users);
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
