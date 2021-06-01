@@ -5,7 +5,7 @@ import {
   initiateLoadMoreAlbums,
   initiateLoadMorePlaylist,
   initiateLoadMoreArtists
-} from '../actions/result';
+} from '../../actions/result';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import SearchResult from './SpotifySearchResults';

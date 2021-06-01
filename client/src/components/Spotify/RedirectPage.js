@@ -1,109 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
+import _ from 'lodash';
+import { getParamValues } from '../../utils/functions';
 
-import {
-  initiateGetResult,
-  initiateLoadMoreAlbums,
-  initiateLoadMorePlaylist,
-  initiateLoadMoreArtists
-} from '../actions/result';
-import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import SearchResult from './SearchResult';
-import SearchForm from './SearchForm';
-import Header from './SpotifyHeader';
-import Loader from './Loader';
-
-const Dashboard = (props) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState('albums');
-  const { isValidSession, history } = props;
-
-  const handleSearch = (searchTerm) => {
-    if (isValidSession()) {
-      setIsLoading(true);
-      props.dispatch(initiateGetResult(searchTerm)).then(() => {
-        setIsLoading(false);
-        setSelectedCategory('albums');
-      });
-    } else {
-      history.push({
-        pathname: '/',
-        state: {
-          session_expired: true
-        }
-      });
-    }
-  };
-
-  const loadMore = async (type) => {
-    if (isValidSession()) {
-      const { dispatch, albums, artists, playlist } = props;
-      setIsLoading(true);
-      switch (type) {
-        case 'albums':
-          await dispatch(initiateLoadMoreAlbums(albums.next));
-          break;
-        case 'artists':
-          await dispatch(initiateLoadMoreArtists(artists.next));
-          break;
-        case 'playlist':
-          await dispatch(initiateLoadMorePlaylist(playlist.next));
-          break;
-        default:
+export default class RedirectPage extends React.Component {
+  componentDidMount() {
+    const { setExpiryTime, history, location } = this.props;
+    try {
+      if (_.isEmpty(location.hash)) {
+        return history.push('/dashboard');
       }
-      setIsLoading(false);
-    } else {
-      history.push({
-        pathname: '/',
-        state: {
-          session_expired: true
-        }
-      });
+
+      const access_token = getParamValues(location.hash);
+      const expiryTime = new Date().getTime() + access_token.expires_in * 1000;
+      localStorage.setItem('params', JSON.stringify(access_token));
+      localStorage.setItem('expiry_time', expiryTime);
+      setExpiryTime(expiryTime);
+      history.push('/dashboard');
+    } catch (error) {
+      history.push('/');
     }
-  };
+  }
 
-  const setCategory = (category) => {
-    setSelectedCategory(category);
-  };
-
-  const { albums, artists, playlist } = props;
-  const result = { albums, artists, playlist };
-
-  return (
-    <React.Fragment>
-      {isValidSession() ? (
-        <div>
-          <Header />
-          <SearchForm handleSearch={handleSearch} />
-          <Loader show={isLoading}>Loading...</Loader>
-          <SearchResult
-            result={result}
-            loadMore={loadMore}
-            setCategory={setCategory}
-            selectedCategory={selectedCategory}
-            isValidSession={isValidSession}
-          />
-        </div>
-      ) : (
-        <Redirect
-          to={{
-            pathname: '/',
-            state: {
-              session_expired: true
-            }
-          }}
-        />
-      )}
-    </React.Fragment>
-  );
-};
-
-const mapStateToProps = (state) => {
-  return {
-    albums: state.albums,
-    artists: state.artists,
-    playlist: state.playlist
-  };
-};
-
-export default connect(mapStateToProps)(Dashboard);
+  render() {
+    return null;
+  }
+}

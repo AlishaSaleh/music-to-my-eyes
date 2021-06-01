@@ -2,7 +2,7 @@ import React from 'react';
 import { Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
-import Header from './Header';
+import Header from './SpotifyHeader';
 import { Redirect } from 'react-router-dom';
 
 const SpotifyHome = (props) => {
