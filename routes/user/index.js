@@ -24,7 +24,9 @@ router.post("/signup", (req, res) => {
     // Check validation
     if (!isValid) {
         return res.status(400).json(errors);
-    } User.findOne({ email: req.body.email }).then(user => {
+    } 
+    
+    User.findOne({ email: req.body.email }).then(user => {
         if (user) {
             return res.status(400).json({ email: "Email already exists" });
         } else {
@@ -105,5 +107,15 @@ router.post("/login", (req, res) => {
 });
 
 //router.post('/logout', userController.logout);
+// User log out route
+router.post('/logout', (req, res) => {
+    if (req.session.logged_in) {
+        req.session.destroy(() => {
+            res.status(204).end();
+        });
+    } else {
+        res.status(404).end();
+    }
+});
 
 module.exports = router;
