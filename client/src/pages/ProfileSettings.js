@@ -1,12 +1,19 @@
 import React from "react";
 import {Container, Row, Col} from "../components/Grid";
+import Jumbotron from "../components/Jumbotron";
+import ProfilePic from "../components/ProfilePic";
+import UserSettingsForm from "../components/UserSettingsForm";
 
 function ProfileSettings() {
   return (
     <Container fluid>
       <Row>
         <Col size="md-12">
-        <p>test</p>
+          <Jumbotron>
+            <h1>Profile Settings</h1>
+          </Jumbotron>
+          <ProfilePic src="https://randomuser.me/api/portraits/men/47.jpg" />
+          <UserSettingsForm />
         </Col>
       </Row>
     </Container>
