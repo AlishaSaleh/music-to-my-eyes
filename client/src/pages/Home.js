@@ -45,7 +45,7 @@ function Home() {
                         </div>
                         <div className="flex justify-center items-center mb-10 sm:mb-20">
                             <div className="inline-block mr-2 mt-2">
-                            <button type="button" class="btn-outline text-4xl transition duration-300 ease-in-out transform hover:scale-110 border border-pink hover:bg-gradient-to-r from-pink to-purple text-mint-dark hover:text-white font-normal py-2 px-4 rounded">Sign Up</button>
+                            <button type="button" class="text-4xl transition duration-300 ease-in-out transform hover:scale-110 border border-pink hover:bg-gradient-to-r from-pink to-purple text-mint-dark hover:text-white font-normal py-2 px-4 rounded">Sign Up</button>
                             </div>
                             <div class="inline-block mr-2 mt-2">
                             <button type="button" class="btn-outline text-4xl transition duration-300 ease-in-out transform hover:scale-110 border border-mint-dark hover:bg-mint-dark text-mint-dark hover:text-white font-normal py-2 px-4 rounded">Login</button>
