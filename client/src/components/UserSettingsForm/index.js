@@ -429,6 +429,19 @@ export function UserSettingsForm() {
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
+                    <div className="col-span-12 md:col-span-2 xl:col-span-2">
+                      <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                        Date of Birth
+                      </label>
+                      <input
+                      disabled
+                      defaultValue={'1969-12-25'}
+                        type="date"
+                        name="dob"
+                        id="dob"
+                        className="mt-1 bg-disabled focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      />
+                    </div>
                     <hr className="m-5 col-span-12"></hr>
                     <div className="col-span-12 md:col-span-2 xl:col-span-2">
                       <label htmlFor="email_address" className="block text-sm font-medium text-gray-700">
