@@ -8,21 +8,25 @@ import ProfileSettings from "./pages/ProfileSettings.js";
 import Navbar from "./components/Navbar";
 import error404 from "./pages/404";
 import Profile from "./pages/Profile";
+import { Provider } from "react-redux";
+import store from "./store";
 
 function App() {
   return (
-    <Router>
-      <div>
-        <Navbar />
-        <Switch>
-          <Route exact path="/signup" component={SignUp} />
-          <Route exact path="/" component={Home} />
-          <Route exact path="/profile-settings" component={ProfileSettings} />
-          <Route exact path="/error404" component={error404} />
-          <Route exact path="/profile" component={Profile} />
-        </Switch>
-      </div>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <div>
+          <Navbar />
+          <Switch>
+            <Route exact path="/signup" component={SignUp} />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/profile-settings" component={ProfileSettings} />
+            <Route exact path="/error404" component={error404} />
+            <Route exact path="/profile" component={Profile} />
+          </Switch>
+        </div>
+      </Router>
+    </Provider>
   );
 }
 
