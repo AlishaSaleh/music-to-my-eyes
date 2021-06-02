@@ -31,7 +31,8 @@ router.post("/signup", (req, res) => {
                 password: req.body.password,
                 dob: req.body.dob,
                 gender: req.body.gender,
-                location: req.body.location
+                location: req.body.location,
+                orientation: req.body.orientation
             });
             // Hashing already done in model but this is alternative place for it if it doesn't work
             bcrypt.genSalt(10, (err, salt) => {
@@ -99,14 +100,14 @@ router.post("/login", (req, res) => {
 });
 
 // User log out route
-router.post('/logout', (req, res) => {
-    if (req.session.logged_in) {
-        req.session.destroy(() => {
-            res.status(204).end();
-        });
-    } else {
-        res.status(404).end();
-    }
-});
+// router.post('/logout', (req, res) => {
+//     if (req.session.logged_in) {
+//         req.session.destroy(() => {
+//             res.status(204).end();
+//         });
+//     } else {
+//         res.status(404).end();
+//     }
+// });
 
 module.exports = router;

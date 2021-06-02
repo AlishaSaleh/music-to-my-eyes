@@ -34,6 +34,9 @@ const userSchema = new Schema({
         type: String,
         // required: true
     },
+    orientation: {
+        type: String
+    },
     location: {
         type: String
     },
