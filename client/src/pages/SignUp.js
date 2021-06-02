@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import API from "../utils/API";
 
 class SignUp extends Component {
     constructor() {
@@ -29,7 +30,7 @@ class SignUp extends Component {
             location: this.state.location,
 
         };
-        console.log(newUser);
+        API.createUser(newUser);
     };
 
     render() {
