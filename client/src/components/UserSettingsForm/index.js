@@ -5,6 +5,7 @@ import "./index.css";
 import Loader from "../Loader";
 import { useSpring, animated } from 'react-spring';
 
+
 export function SaveButton({ isLoading, children, ...props }) {
   /* showLoader is used to stay in the "isLoading state" a bit longer to avoid loading flashes
    if the loading state is too short. */
@@ -90,7 +91,6 @@ export function UserSettingsForm() {
     }
   });
 
-
   return (
     <>
       <div>
@@ -102,8 +102,9 @@ export function UserSettingsForm() {
               <div className="mt-1 flex items-center">
                       {<ProfilePic src="https://randomuser.me/api/portraits/men/47.jpg" />}
                       <button
+                      id="upload_widget"
                         type="button"
-                        className="change-pp hover:btn-hov btn py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        className="cloudinary-button change-pp hover:btn-hov btn py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                       >
                         Change
                       </button>
