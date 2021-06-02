@@ -76,19 +76,14 @@ class SignUp extends Component {
                             value={this.state.dob}
                             error={errors.dob} />
 
-                        <div className="col-span-12 md:col-span-2 xl:col-span-2 xl:col-start-1">
-                            <label htmlFor="country" className="block text-sm font-medium text-gray-700 ">
-                                Country
-                      </label>
-                            <select
-                                id="country"
-                                name="country"
-                                autoComplete="country"
-                                className="mt-1 block w-full py-2 px-3 border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+
+                        <div className="input-group mb-3">
+                            <label className="form-label" for="location"> Please select your country</label>
+                            <select className="form-select" id="location"
                                 onChange={this.onChange}
                                 value={this.state.location}
-                                error={errors.location}
-                            >
+                                error={errors.location}>
+
                                 <option value="Afghanistan">Afghanistan</option>
                                 <option value="Åland Islands">Åland Islands</option>
                                 <option value="Albania">Albania</option>
@@ -335,31 +330,24 @@ class SignUp extends Component {
                                 <option value="Zimbabwe">Zimbabwe</option>
                             </select>
                         </div>
+                        <div className="input-group mb-3">
+                            <label className="form-label" for="gender"> Please select your gender</label>
+                            <select className="form-select" id="gender"
+                                onChange={this.onChange}
+                                value={this.state.gender}
+                                error={errors.gender}>
+                                <option value="" disabled selected hidden>Gender</option>
+                                <option value="Female">Female</option>
+                                <option value="Male">Male</option>
+                                <option value="Other">Other/Prefer not to say</option>
+                            </select>
+                        </div>
 
 
-                    </div>
-
-
-
-
-                    <div className="input-group mb-3">
-                        <label className="form-label" for="gender"> Please select your gender</label>
-                        <select className="form-select" id="gender"
-                            onChange={this.onChange}
-                            value={this.state.gender}
-                            error={errors.gender}>
-                            <option value="" disabled selected hidden>Gender</option>
-                            <option value="Female">Female</option>
-                            <option value="Male">Male</option>
-                            <option value="Other">Other/Prefer not to say</option>
-                        </select>
-                    </div>
-                    
-
-
-                    <button className="btn btn-primary" type="submit">Sign Up</button>
+                        <button className="btn btn-primary" type="submit">Sign Up</button>
+                        </div>
                 </form>
-            </div>
+             </div>
 
         );
     }
