@@ -7,7 +7,7 @@ export default class RedirectPage extends React.Component {
     const { setExpiryTime, history, location } = this.props;
     try {
       if (_.isEmpty(location.hash)) {
-        return history.push('/dashboard');
+        return history.push('/spotify');
       }
 
       const access_token = getParamValues(location.hash);
@@ -15,7 +15,7 @@ export default class RedirectPage extends React.Component {
       localStorage.setItem('params', JSON.stringify(access_token));
       localStorage.setItem('expiry_time', expiryTime);
       setExpiryTime(expiryTime);
-      history.push('/dashboard');
+      history.push('/spotify');
     } catch (error) {
       history.push('/');
     }

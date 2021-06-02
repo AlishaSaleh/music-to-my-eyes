@@ -55,7 +55,7 @@ class AppRouter extends React.Component {
               )}
             />
             <Route
-              path="/dashboard"
+              path="/spotify"
               render={(props) => (
                 <SpotifyDashboard isValidSession={this.isValidSession} {...props} />
               )}
