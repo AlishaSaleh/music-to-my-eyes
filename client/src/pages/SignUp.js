@@ -53,7 +53,7 @@ class SignUp extends Component {
                             value={this.state.name}
                             error={errors.name} />
 
-                        <label for="emailAddress" className="form-label">Email Address</label>
+                        <label for="email" className="form-label">Email Address</label>
                         <input type="email" className="form-control" id="email"
                             placeholder="name@example.com" onChange={this.onChange}
                             value={this.state.email}
