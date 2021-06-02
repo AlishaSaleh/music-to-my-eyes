@@ -94,9 +94,9 @@ export function UserSettingsForm() {
   return (
     <>
       <div>
-        <div className="md:grid md:grid-cols-6 md:gap-6 xl:grid-cols-7 neg-mt relative mb-5">
+        <div className="md:grid md:grid-cols-6 md:gap-6 2xl:grid-cols-7 neg-mt relative mb-5">
           {/* <div class="col-span-1"></div> */}
-          <div className="col-start-1 md:col-start-2 xl:col-start-3 mt-5 md:mt-0 col-span-4 md:col-span-4 xl:col-span-3">
+          <div className="col-start-1 md:col-start-2 2xl:col-start-3 mt-5 md:mt-0 col-span-4 md:col-span-4 2xl:col-span-3">
             <form action="#" method="POST">
             <div className="w-full flex justify-center neg-mb-50">
               <div className="mt-1 flex items-center">
@@ -111,7 +111,7 @@ export function UserSettingsForm() {
                   </div>
               <div className="xl:px-5 shadow sm:rounded-md bg-white sm:overflow-hidden pt-5">
                 <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
-                  <div className="grid grid-cols-3 md:grind-cols-6 gap-6">
+                  <div className="grid grid-cols-3 gap-3">
 
                     <div className="col-span-12">
                       <div>
@@ -144,6 +144,19 @@ export function UserSettingsForm() {
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
+                    <div className="col-span-12 md:col-span-1 xl:col-span-1">
+                      <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                        Date of Birth
+                      </label>
+                      <input
+                      disabled
+                      defaultValue={'1969-12-25'}
+                        type="date"
+                        name="dob"
+                        id="dob"
+                        className="mt-1 bg-disabled focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      />
+                    </div>
                     <div className="col-span-12 md:col-span-11 xl:col-span-8 xl:col-start-1">
                       <label htmlFor="about" className="block text-sm font-medium text-gray-700">
                         About
@@ -163,14 +176,14 @@ export function UserSettingsForm() {
                     </p>
                     </div>
                     <div className="col-span-12 md:col-span-2 xl:col-span-2 xl:col-start-1">
-                      <label htmlFor="country" className="block text-sm font-medium text-gray-700">
-                        Country / Region
+                      <label htmlFor="country" className="block text-sm font-medium text-gray-700 ">
+                        Country
                       </label>
                       <select
                         id="country"
                         name="country"
                         autoComplete="country"
-                        className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        className="mt-1 block w-full py-2 px-3 border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       >
                         <option value="Afghanistan">Afghanistan</option>
                         <option value="Åland Islands">Åland Islands</option>
@@ -429,19 +442,7 @@ export function UserSettingsForm() {
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
-                    <div className="col-span-12 md:col-span-2 xl:col-span-2">
-                      <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                        Date of Birth
-                      </label>
-                      <input
-                      disabled
-                      defaultValue={'1969-12-25'}
-                        type="date"
-                        name="dob"
-                        id="dob"
-                        className="mt-1 bg-disabled focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                      />
-                    </div>
+                    
                     <hr className="m-5 col-span-12"></hr>
                     <div className="col-span-12 md:col-span-2 xl:col-span-2">
                       <label htmlFor="email_address" className="block text-sm font-medium text-gray-700">
