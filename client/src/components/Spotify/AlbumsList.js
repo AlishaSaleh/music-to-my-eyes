@@ -35,6 +35,7 @@ const AlbumsList = ({ albums }) => {
                         {album.artists.map((artist) => artist.name).join(', ')}
                       </small>
                     </Card.Text>
+                    <button className="btn-danger btn-lg"> + </button>
                   </Card.Body>
                 </Card>
               </React.Fragment>
