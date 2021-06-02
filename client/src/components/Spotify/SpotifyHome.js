@@ -12,8 +12,13 @@ const SpotifyHome = (props) => {
     REACT_APP_REDIRECT_URL
   } = process.env;
 
+  console.log(process.env.REACT_APP_CLIENT_ID)
+  
   const handleLogin = () => {
     window.location = `${REACT_APP_AUTHORIZE_URL}?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_REDIRECT_URL}&response_type=token&show_dialog=true`;
+    console.log(REACT_APP_AUTHORIZE_URL)
+    console.log(REACT_APP_CLIENT_ID)
+    console.log(REACT_APP_REDIRECT_URL)
   };
 
   // window.location = `${REACT_APP_AUTHORIZE_URL}?response_type=code&client_id=${REACT_APP_CLIENT_ID}&scope=user-read-private%20&user-read-email&redirect_uri=${REACT_APP_REDIRECT_URL}`
