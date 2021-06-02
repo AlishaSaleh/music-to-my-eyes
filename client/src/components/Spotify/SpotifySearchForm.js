@@ -36,7 +36,7 @@ const SpotifySearchForm = (props) => {
                 autoComplete="off"
               />
             </Form.Group>
-            <Button variant="info" type="submit">
+            <Button className='btn-danger' variant="info" type="submit">
               Search
             </Button>
           </Form>

@@ -29,6 +29,7 @@ const PlayList = ({ playlist }) => {
                     <Card.Text>
                       <small>By {item.owner.display_name}</small>
                     </Card.Text>
+                    <button className="btn-danger btn-lg"> + </button>
                   </Card.Body>
                 </Card>
               </React.Fragment>

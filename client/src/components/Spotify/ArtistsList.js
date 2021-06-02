@@ -30,6 +30,7 @@ const ArtistsList = ({ artists }) => {
                   </a>
                   <Card.Body>
                     <Card.Title>{artist.name}</Card.Title>
+                    <button className="btn-danger btn-lg"> + </button>
                   </Card.Body>
                 </Card>
               </React.Fragment>
