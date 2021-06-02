@@ -4,6 +4,10 @@ import albumsReducer from '../reducers/albums';
 import artistsReducer from '../reducers/artists';
 import playlistReducer from '../reducers/playlist';
 
+const initialState = {};
+const middleware = [thunk];
+
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   combineReducers({

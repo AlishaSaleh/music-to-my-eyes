@@ -9,7 +9,7 @@ import Navbar from "./components/Navbar";
 import error404 from "./pages/404";
 import Profile from "./pages/Profile";
 import { Provider } from "react-redux";
-import store from "./store";
+import store from "./store/store";
 
 function App() {
   return (
