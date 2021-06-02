@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 import AlbumsList from './AlbumsList';
 import ArtistsList from './ArtistsList';
 import PlayList from './Playlist';
-import './spotify.css'
+import './spotify.css';
 
 const SearchResult = (props) => {
   const {
