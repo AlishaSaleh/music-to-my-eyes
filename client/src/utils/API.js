@@ -10,7 +10,7 @@ export default {
         return axios.get("/user/" + id);
     },
     loginUser: function (user) {
-        return axios.post("/user/login", user);
+        return axios.post("/user/login", user).then(document.location.replace('/dashboard'));
     },
     // Deletes the user with the given id
     deleteUser: function (id) {
