@@ -1,4 +1,9 @@
 import React, { Component } from "react";
+import { Link, withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { registerUser } from "../actions/authActions";
+import classnames from "classnames";
 
 class SignUp extends Component {
     constructor() {
@@ -14,9 +19,19 @@ class SignUp extends Component {
             errors: {}
         };
     }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.errors) {
+            this.setState({
+                errors: nextProps.errors
+            });
+        }
+    }
+
     onChange = e => {
         this.setState({ [e.target.id]: e.target.value });
     };
+
     onSubmit = e => {
         e.preventDefault();
         const newUser = {
@@ -29,7 +44,9 @@ class SignUp extends Component {
             location: this.state.location,
 
         };
-        console.log(newUser);
+        //console.log(newUser);
+        this.props.registerUser(newUser, this.props.history);
+
     };
 
     render() {
@@ -47,28 +64,46 @@ class SignUp extends Component {
 
                     <div className="mb-3">
                         <label for="name" className="form-label">Name</label>
-                        <input type="text" className="form-control" placeholder="Kat Midden" aria-label="name" id="name"
+                        <input type="text" className={classnames("form-control", {
+                            invalid: errors.name
+                        })}
+                            placeholder="Kat Midden" aria-label="name" id="name"
                             onChange={this.onChange}
                             value={this.state.name}
-                            error={errors.name} />
+                            error={errors.name}
+                        />
+                        <span className="red-text">{errors.name}</span>
 
                         <label for="emailAddress" className="form-label">Email Address</label>
-                        <input type="email" className="form-control" id="email"
-                            placeholder="name@example.com" onChange={this.onChange}
+                        <input type="email" className={classnames("form-control", {
+                            invalid: errors.email
+                        })} id="email"
+                            placeholder="name@example.com"
+                            onChange={this.onChange}
                             value={this.state.email}
                             error={errors.email} />
+                        <span className="red-text">{errors.email}</span>
 
                         <label for="password" className="form-label">Password</label>
-                        <input type="password" className="form-control" id="password" onChange={this.onChange}
+                        <input type="password" className={classnames("form-control", {
+                            invalid: errors.password
+                        })} id="password"
+                            onChange={this.onChange}
                             value={this.state.password}
                             error={errors.password}
                         />
+                        <span className="red-text">{errors.password}</span>
 
                         <label for="password2" className="form-label">Please re-type your password</label>
-                        <input type="password" className="form-control" id="password2" onChange={this.onChange}
+                        <input type="password" type="password"
+                            className={classnames("form-control", {
+                                invalid: errors.password2
+                            })} id="password2"
+                            onChange={this.onChange}
                             value={this.state.password2}
                             error={errors.password2}
                         />
+                        <span className="red-text">{errors.password2}</span>
 
                         <label for="dob" className="form-label">Date of Birth</label>
                         <input type="date" className="form-control" placeholder="01-01-2001" aria-label="date" id="dob"
@@ -345,13 +380,26 @@ class SignUp extends Component {
 
 
                         <button className="btn btn-primary" type="submit">Sign Up</button>
-                        </div>
+                    </div>
                 </form>
-             </div>
+            </div>
 
         );
     }
 }
 
+SignUp.propTypes = {
+    registerUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired,
+    errors: PropTypes.object.isRequired
+};
 
-export default SignUp;
+const mapStateToProps = state => ({
+    auth: state.auth,
+    errors: state.errors
+});
+
+export default connect(
+    mapStateToProps,
+    { registerUser }
+)(withRouter(SignUp));
