@@ -1,8 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const routes = require("./routes");
+const session = require('express-session');
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+const MongoStore = require('connect-mongo');
 
 const passport = require("passport");
 //const users = require("./routes/api/users");
@@ -12,6 +15,18 @@ app.use(passport.initialize());
 // Passport config
 require("./config/passport")(passport);
 
+app.use(session({
+    secret: 'teapot',
+    cookie: { maxAge: 360000 },
+    resave: false,
+    saveUninitialized: true,
+    store: new MongoStore({
+        mongoUrl: 'mongodb://localhost:27017/mtme', 
+        ttl: 14 * 24 * 60 * 60,
+        autoRemove: 'native' 
+    })
+  }));
+  
 // Routes
 //app.use("/api/users", users);
 

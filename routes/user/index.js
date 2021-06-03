@@ -70,24 +70,30 @@ router.post("/login", (req, res) => {
             if (isMatch) {
                 // User matched
                 // Create JWT Payload
-                const payload = {
-                    id: user.id,
-                    name: user.name
-                };
-                // Sign token
-                jwt.sign(
-                    payload,
-                    keys.secretOrKey,
-                    {
-                        expiresIn: 31556926 // 1 year in seconds
-                    },
-                    (err, token) => {
-                        res.json({
-                            success: true,
-                            token: "Bearer " + token
-                        });
-                    }
-                );
+                // const payload = {
+                //     id: user.id,
+                //     name: user.name
+                // };
+                // // Sign token
+                // jwt.sign(
+                //     payload,
+                //     keys.secretOrKey,
+                //     {
+                //         expiresIn: 31556926 // 1 year in seconds
+                //     },
+                //     (err, token) => {
+                //         res.json({
+                //             success: true,
+                //             token: "Bearer " + token
+                //         });
+                //     }
+                // );
+                req.session.save(() => {
+                    req.session.user_id = user._id;
+                    req.session.logged_in = true;
+                    res.status(200).json(user);
+                });
+
             } else {
                 return res
                     .status(400)
