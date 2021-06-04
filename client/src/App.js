@@ -8,6 +8,8 @@ import ProfileSettings from "./pages/ProfileSettings.js";
 import Navbar from "./components/Navbar";
 import error404 from "./pages/404";
 import Profile from "./pages/Profile";
+import Match from "./pages/Match";
+import './App.css';
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
           <Route exact path="/profile-settings" component={ProfileSettings} />
           <Route exact path="/error404" component={error404} />
           <Route exact path="/profile" component={Profile} />
+          <Route exact path="/match" component={Match} />
         </Switch>
       </div>
     </Router>
