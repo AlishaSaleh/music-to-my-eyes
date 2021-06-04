@@ -1,55 +1,70 @@
 // user sign up, login and get routes
 const express = require('express');
 const router = express.Router();
-
+const config = require('../../config');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const keys = require("../../config/keys");
 const User = require("../../models/User");
 
 // input validation
 const validateRegisterInput = require("../../validation/signup");
 const validateLoginInput = require("../../validation/login");
+const { sanitiseUser } = require('../../utils/sanitiseUser');
+const { authCheck } = require('../../middleware/authCheck');
 
 // user/[route]
-router.post("/signup", (req, res) => {
+router.post("/signup", async (req, res) => {
+
     // Form validation
     const { errors, isValid } = validateRegisterInput(req.body);
     // Check validation
     if (!isValid) {
         return res.status(400).json(errors);
-    } 
-    
-    User.findOne({ email: req.body.email }).then(user => {
-        if (user) {
-            return res.status(400).json({ email: "Email already exists" });
-        } else {
-            // newUser not currently read with the hashing function removed
-            const newUser = new User({
-                name: req.body.name,
-                email: req.body.email,
-                password: req.body.password,
-                dob: req.body.dob,
-                gender: req.body.gender,
-                location: req.body.location,
-                orientation: req.body.orientation
-            });
-            // Hashing already done in model but this is alternative place for it if it doesn't work
-            bcrypt.genSalt(10, (err, salt) => {
-                bcrypt.hash(newUser.password, salt, (err, hash) => {
-                    if (err) throw err;
-                    newUser.password = hash;
-                    newUser
-                        .save()
-                        .then(user => res.json(user))
-                        .catch(err => console.log(err));
-                });
-            });
+    }
+
+    // Check if username and password
+    const { name, email, password, dob, gender, location, orientation, image } = req.body;
+
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
+
+    const newUser = new User({
+        name,
+        email,
+        password: hash,
+        dob,
+        gender,
+        location,
+        orientation,
+        image
+    });
+
+    //console.log(newUser);
+
+    await newUser.save();
+
+    const token = jwt.sign({ id: newUser.id }, config.secret, { expiresIn: '24h' });
+
+    res.json({
+        token,
+        user: {
+            id: newUser.id,
+            name: newUser.name,
+            email: newUser.email,
+            password: newUser.password,
+            dob: newUser.dob,
+            gender: newUser.gender,
+            location: newUser.location,
+            orientation: newUser.orientation
         }
     });
+
+
+    // res.status(500).json(error);
+
 });
 
-router.post("/login", (req, res) => {
+router.post("/login", async (req, res) => {
     // Form validation
     const { errors, isValid } = validateLoginInput(req.body);
 
@@ -57,47 +72,31 @@ router.post("/login", (req, res) => {
     if (!isValid) {
         return res.status(400).json(errors);
     }
+    const { email, password } = req.body;
 
-    const email = req.body.email;
-    const password = req.body.password;
+    const user = await User.findOne({ email })
 
-    // Find user by email
-    User.findOne({ email }).then(user => {
-        // Check if user exists
-        if (!user) {
-            return res.status(404).json({ emailnotfound: "Email not found" });
-        }
-        // Check password
-        bcrypt.compare(password, user.password).then(isMatch => {
-            if (isMatch) {
-                // User matched
-                // Create JWT Payload
-                const payload = {
-                    id: user.id,
-                    name: user.name
-                };
-                // Sign token
-                jwt.sign(
-                    payload,
-                    keys.secretOrKey,
-                    {
-                        expiresIn: 31556926 // 1 year in seconds
-                    },
-                    (err, token) => {
-                        res.json({
-                            success: true,
-                            token: "Bearer " + token
-                        });
-                    }
-                );
-            } else {
-                return res
-                    .status(400)
-                    .json({ passwordincorrect: "Password incorrect" });
-            }
-        });
-    });
+    if (!user) {
+        return res.status(404).json({ message: "User doesn't exist" })
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) return res.status(401).json({ message: 'password incorrect' });
+
+    const token = jwt.sign({ id: user.id }, config.secret, { expiresIn: "24h" });
+    res.json({ user: sanitiseUser(user), token })
+
 });
+
+router.get("/test", authCheck, (req, res) => {
+    res.json({ message: "authenticated!" })
+})
+
+router.get("/dashboard", authCheck, async (req, res) => {
+    const user = await User.findById(req.user.id);
+    res.json({ user: user.name });
+})
+
 
 // User log out route
 // router.post('/logout', (req, res) => {
