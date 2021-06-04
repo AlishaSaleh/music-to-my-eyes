@@ -88,11 +88,13 @@ router.post("/login", (req, res) => {
                 //         });
                 //     }
                 // );
+                console.log(user._id)
                 req.session.save(() => {
                     req.session.user_id = user._id;
                     req.session.logged_in = true;
                     res.status(200).json(user);
                 });
+                console.log(req.session.logged_in);
 
             } else {
                 return res
@@ -113,5 +115,14 @@ router.post('/logout', (req, res) => {
         res.status(404).end();
     }
 });
+
+// router.get('/:id/dashboard', (req, res) => {
+
+//     if {
+//        return 
+//     } else (err) {
+//         return res.status(500).json(err);
+//     }
+// });
 
 module.exports = router;

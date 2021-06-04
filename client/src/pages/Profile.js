@@ -1,6 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import API from '../utils/API';
 
 function Profile() {
+    // const [user, setUser] = useState({});
+    useEffect(() => {
+        API.getDashboard()
+    }, []);
     return (
         <div>
             <main className="profile-page">

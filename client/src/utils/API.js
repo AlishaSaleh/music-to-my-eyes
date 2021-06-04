@@ -23,5 +23,8 @@ export default {
     // Updaes a user in the database
     updateUser: function (id, userData) {
         return axios.put("/user/" + id, userData);
-    }
+    },
+    getDashboard: function () {
+        return axios.get("/dashboard");
+    },
 };
