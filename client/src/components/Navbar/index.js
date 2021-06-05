@@ -27,10 +27,10 @@ function Navbar() {
                     </div>
                     <ul className="flex text-3xl md:text-base items-center py-8 md:flex flex-col md:flex-row justify-center fixed md:relative top-0 bottom-0 left-0 right-0 bg-white z-20">
                         <li className="text-gray-600 hover:text-gray-800 cursor-pointer md:ml-10 pt-10 md:pt-0">
-                            <a href="javascript: void(0)">Login</a>
+                            <a href="/login">Login</a>
                         </li>
                         <li className="text-gray-600 hover:text-gray-800 cursor-pointer md:ml-10 pt-10 md:pt-0">
-                            <a href="javascript: void(0)">Sign Up</a>
+                            <a href="/signup">Sign Up</a>
                         </li>
                     </ul>
                 </div>
