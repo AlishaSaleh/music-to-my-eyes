@@ -4,7 +4,7 @@ import ProfilePic from "../ProfilePic";
 import "./index.css";
 import Loader from "../Loader";
 import { useSpring, animated } from 'react-spring';
-
+import Modal from "../Modal";
 
 export function SaveButton({ isLoading, children, ...props }) {
   /* showLoader is used to stay in the "isLoading state" a bit longer to avoid loading flashes
@@ -74,6 +74,7 @@ export function SaveButton({ isLoading, children, ...props }) {
   );
 }
 
+
 export function UserSettingsForm() {
 
   function handleSubmit(e) {
@@ -91,6 +92,8 @@ export function UserSettingsForm() {
     }
   });
 
+
+
   return (
     <>
       <div>
@@ -100,14 +103,8 @@ export function UserSettingsForm() {
             <form action="#" method="POST">
             <div className="w-full flex justify-center neg-mb-50">
               <div className="mt-1 flex items-center">
-                      {<ProfilePic src="https://randomuser.me/api/portraits/men/47.jpg" />}
-                      <button
-                      id="upload_widget"
-                        type="button"
-                        className="cloudinary-button change-pp hover:btn-hov btn py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                      >
-                        Change
-                      </button>
+                      {<ProfilePic src="https://randomuser.me/api/portraits/men/47.jpg"/>}
+                      <Modal></Modal>
                   </div>
                   </div>
               <div className="xl:px-5 shadow sm:rounded-md bg-white sm:overflow-hidden pt-5">
@@ -483,3 +480,5 @@ export function UserSettingsForm() {
     </>
   )
 }
+
+export default UserSettingsForm;
