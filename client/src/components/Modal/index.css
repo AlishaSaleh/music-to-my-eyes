@@ -9,3 +9,8 @@ margin-bottom: -50px;
 .neg-mt {
     margin-top: -280px;
  }
+
+ #prev-img {
+    position: absolute;
+    left: 5px;
+ }

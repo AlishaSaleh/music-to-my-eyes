@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useState } from "react";
-import Emoji from "../Emoji"
 import ProfilePic from "../ProfilePic";
 import "./index.css";
 import Loader from "../Loader";
