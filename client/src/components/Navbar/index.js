@@ -4,10 +4,10 @@ function Navbar() {
     const [show, setShow] = useState(false);
     return (
         <nav className="w-full">
-        <div className="container mx-auto px-6 flex items-center justify-between">
+        <div className="mx-auto px-6 flex items-center justify-between">
             <div className="flex items-center">
                 <img src="https://drive.google.com/thumbnail?id=1wrKHE8yDrIQ7GlOzDzb_1PvTbqPo7is7" className="object-scale-down h-10 w-10" />
-                <p className="ml-2 lg:ml-4 text-base lg:text-2xl font-bold text-gray-800">Music To My Eyes</p>
+                <p className="ml-2 lg:ml-4 text-base lg:text-2xl font-bold text-gray-800 logo"><span class="text-red" >Music</span> To My <span class="text-red" >Eyes</span></p>
             </div>
             <div>
                 <div onClick={() => setShow(!show)} className="sm:block md:hidden lg:hidden text-gray-500 hover:text-gray-700 focus:text-gray-700 focus:outline-none">

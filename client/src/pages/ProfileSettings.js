@@ -11,7 +11,7 @@ function ProfileSettings() {
       <Row>
         <Col size="md-12">
           <Jumbotron>
-            <h1>Profile Settings</h1>
+            <h1 class="header-txt">Profile Settings</h1>
             <Divider />
           </Jumbotron>
           <UserSettingsForm/>

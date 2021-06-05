@@ -4,5 +4,14 @@
 }
 
 .gradient-1 {
-    background: linear-gradient(90deg, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+    background: rgb(245,79,79);
+    background: linear-gradient(0deg, rgba(245,79,79,1) 0%, rgba(253,187,45,1) 100%);
+}
+
+.header-txt {
+    color: white;
+    font-size: 1.6rem;
+    letter-spacing: -0.06rem;
+    text-transform: uppercase;
+    font-weight: 700;
 }

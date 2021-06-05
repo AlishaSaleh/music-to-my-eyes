@@ -14,9 +14,18 @@
     background-color: white;
   }
 
+  .logo {
+    font-size: 2rem;
+    letter-spacing: -0.06rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: 'Nanum Pen Script', cursive;
+  }
+  
+
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    font-family: 'Poppins', sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
       'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
       sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -30,6 +39,12 @@
   @variants hover {
   .btn-hov {
     background-color: #dddddd;
+  }
+
+  a:hover {
+    border-bottom: 2px solid #f54f4f;
+    text-decoration: none;
+    color: #f54f4f;
   }
 }
 }

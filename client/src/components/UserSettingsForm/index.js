@@ -142,7 +142,7 @@ export function UserSettingsForm() {
                       />
                     </div>
                     <div className="col-span-12 md:col-span-1 xl:col-span-1">
-                      <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                      <label htmlFor="dob" className="block text-sm font-medium text-gray-700">
                         Date of Birth
                       </label>
                       <input
