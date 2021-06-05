@@ -20,7 +20,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/profile-settings" component={ProfileSettings} />
           <Route component={error404} />
-          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/dashboard" component={Profile} />
         </Switch>
       </div>
     </Router>
