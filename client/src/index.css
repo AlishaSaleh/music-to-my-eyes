@@ -22,6 +22,9 @@
     font-family: 'Nanum Pen Script', cursive;
   }
   
+  .a-logo {
+    display: inline-flex;
+  }
 
   body {
     margin: 0;
@@ -32,6 +35,10 @@
     -moz-osx-font-smoothing: grayscale;
   }
   
+  h1 {
+    letter-spacing: -0.08rem;
+  }
+
   code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;
@@ -45,6 +52,10 @@
     border-bottom: 2px solid #f54f4f;
     text-decoration: none;
     color: #f54f4f;
+  }
+
+  .a-logo:hover {
+    border-bottom: 0px solid #fff;
   }
 }
 }

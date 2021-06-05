@@ -1,0 +1,16 @@
+#pp-img {
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.pp {
+    width: 128px;
+    height: 128px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
