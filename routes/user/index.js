@@ -92,10 +92,10 @@ router.get("/test", authCheck, (req, res) => {
     res.json({ message: "authenticated!" })
 })
 
-router.get("/dashboard", authCheck, async (req, res) => {
-    const user = await User.findById(req.user.id);
-    res.json({ user: user.name });
-})
+// router.get("/dashboard", authCheck, async (req, res) => {
+//     const user = await User.findById(req.user.id);
+//     res.json({ user: user.name });
+// })
 
 
 // User log out route

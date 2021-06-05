@@ -285,10 +285,10 @@ function SignUp() {
                 <div className="input-group mb-3">
                     <label className="form-label" for="userGender"> Please select your gender</label>
                     <select className="form-select" id="userGender">
-                        <option selected>Gender</option>
-                        <option value="1">Female</option>
-                        <option value="2">Male</option>
-                        <option value="5">Other/Prefer not to say</option>
+                    <option value="" disabled selected hidden>Gender</option>
+                        <option value="Female">Female</option>
+                        <option value="Male">Male</option>
+                        <option value="Other">Other/Prefer not to say</option>
                     </select>
                 </div>
 
