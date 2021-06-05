@@ -97,7 +97,7 @@ export function UserSettingsForm() {
     <>
       <div>
         <div className="md:grid md:grid-cols-6 md:gap-6 2xl:grid-cols-7 neg-mt relative mb-5">
-          {/* <div class="col-span-1"></div> */}
+          {/* <div className="col-span-1"></div> */}
           <div className="col-start-1 md:col-start-2 2xl:col-start-3 mt-5 md:mt-0 col-span-4 md:col-span-4 2xl:col-span-3">
             <form action="#" method="PUT">
             <div className="w-full flex justify-center neg-mb-50">

@@ -1,6 +1,12 @@
 import axios from "axios";
 
 export default {
+    goToLogin: function () {
+        (document.location.replace('/login'));
+    },
+    goToSignUp: function () {
+        (document.location.replace('/signup'));
+    },
     // Gets all users
     getUsers: function () {
         return axios.get("/user");

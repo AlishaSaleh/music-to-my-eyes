@@ -35,8 +35,29 @@
     -moz-osx-font-smoothing: grayscale;
   }
   
+  .section {
+    height: 500px;
+  }
+
   h1 {
     letter-spacing: -0.08rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: -0.08rem;
+    margin-bottom: 10px;
+  }
+
+  .second-half {
+    padding: 2rem 0px 0px 2rem;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  strong {
+    color: #f54f4f;
   }
 
   code {
@@ -46,6 +67,15 @@
   @variants hover {
   .btn-hov {
     background-color: #dddddd;
+  }
+
+  .btn-shadow {
+    box-shadow: 0 1px 4px 0px #000000ad;
+  }
+
+  .bg-1 {
+    background-image: url('https://images.unsplash.com/photo-1530098403657-0d93d64d087d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=759&q=80');
+    height: 100%;
   }
 
   a:hover {

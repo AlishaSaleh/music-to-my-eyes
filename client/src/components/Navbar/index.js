@@ -6,8 +6,8 @@ function Navbar() {
         <nav className="w-full">
         <div className="mx-auto px-6 flex items-center justify-between">
             <div className="flex items-center">
-                <a href="/" class="a-logo"><img src="https://drive.google.com/thumbnail?id=1wrKHE8yDrIQ7GlOzDzb_1PvTbqPo7is7" className="object-scale-down h-10 w-10" />
-                <p className="ml-2 lg:ml-4 text-base lg:text-2xl font-bold text-gray-800 logo"><span class="text-red" >Music</span> To My <span class="text-red" >Eyes</span></p>
+                <a href="/" className="a-logo"><img alt="mtme logo" src="https://drive.google.com/thumbnail?id=1wrKHE8yDrIQ7GlOzDzb_1PvTbqPo7is7" className="object-scale-down h-10 w-10" />
+                <p className="ml-2 lg:ml-4 text-base lg:text-2xl font-bold text-gray-800 logo"><span className="text-red" >Music</span> To My <span className="text-red" >Eyes</span></p>
                 </a>
             </div>
             <div>
