@@ -4,16 +4,16 @@ const routes = require("./routes");
 const session = require('express-session');
 const app = express();
 const PORT = process.env.PORT || 3001;
+require('dotenv').config();
 
-const MongoStore = require('connect-mongo');
 
-const passport = require("passport");
+//const passport = require("passport");
 //const users = require("./routes/api/users");
 
 // Passport middleware
-app.use(passport.initialize());
-// Passport config
-require("./config/passport")(passport);
+// app.use(passport.initialize());
+// // Passport config
+// require("./config/passport")(passport);
 
 app.use(session({
     secret: 'teapot',

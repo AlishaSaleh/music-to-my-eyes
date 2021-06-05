@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SignUp from "./pages/SignUp.js";
 // import NoMatch from "./pages/NoMatch";
@@ -20,7 +19,7 @@ function App() {
           <Route exact path="/login" component={Login} />
           <Route exact path="/" component={Home} />
           <Route exact path="/profile-settings" component={ProfileSettings} />
-          <Route exact path="/error404" component={error404} />
+          <Route component={error404} />
           <Route exact path="/profile" component={Profile} />
         </Switch>
       </div>

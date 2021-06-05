@@ -24,4 +24,5 @@ export default {
     updateUser: function (id, userData) {
         return axios.put("/user/" + id, userData);
     }
+    // GET DASHBOARD
 };
