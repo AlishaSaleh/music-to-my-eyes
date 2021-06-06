@@ -26,6 +26,10 @@ export default {
     },
     // GET DASHBOARD
     getDash: function () {
-        return axios.get("/dashboard");
+        return axios.get("/api/dashboard", {
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("access_token")}`
+            }
+        });
     }
 };

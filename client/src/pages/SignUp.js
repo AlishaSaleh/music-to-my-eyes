@@ -24,13 +24,13 @@ function SignUp() {
     const passwordRef = useRef();
     const password2Ref = useRef();
     const dobRef = useRef();
-   // const genderRef = useRef();
-    const locationRef = useRef();
+    // const genderRef = useRef();
+    //const locationRef = useRef();
     const orientRef = useRef();
 
     const submitForm = (e) => {
         e.preventDefault();
-        console.log(genderState);
+        //console.log(genderState);
         //console.log(nameRef.current.value, emailRef.current.value, passwordRef.current.value);
         const newUser = {
             name: nameRef.current.value,
@@ -42,13 +42,13 @@ function SignUp() {
             location: locationState,
 
         };
-       API.createUser(newUser).then(response => {
-           if (response.status === 200) {
-               setAuthToken(response.data.token);
-               // returning on localhost/3000 instead of 3001
-               API.getDash().then(response => console.log(response));
-           }
-       });
+        API.createUser(newUser).then(response => {
+            if (response.status === 200) {
+                setAuthToken(response.data.token);
+                // returning on localhost:3000 instead of 3001
+                API.getDash().then(response => console.log(response));
+            }
+        });
 
     }
     // SET STATE
@@ -74,10 +74,10 @@ function SignUp() {
                     <label for="emailAddress" className="form-label">Email Address</label>
                     <input ref={emailRef} type="email" className="form-control" id="userEmail"
                         placeholder="name@example.com" />
-                    <label for="emailAddress" className="form-label">Password</label>
+                    <label for="password" className="form-label">Password</label>
                     <input ref={passwordRef} type="password" className="form-control" id="firstPassword"
                     />
-                    <label for="emailAddress" className="form-label">Please re-type your password</label>
+                    <label for="password2" className="form-label">Please re-type your password</label>
                     <input ref={password2Ref} type="password" className="form-control" id="retypePassword"
                     />
                     <label for="dob" className="form-label">Date of Birth</label>
