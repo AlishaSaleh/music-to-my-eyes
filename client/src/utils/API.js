@@ -18,13 +18,13 @@ export default {
     },
     // Saves a user to the database
     createUser: function (userData) {
-        return axios.post("/user/signup", userData);
+        return axios.post("/user/signup", userData).then(document.location.replace('/login'));
     },
     // Updaes a user in the database
     updateUser: function (id, userData) {
         return axios.put("/user/" + id, userData);
     },
-    // GET DASHBOARD
+    // GET DASHBOARD and get Bearer token from local storage
     getDash: function () {
         return axios.get("/api/dashboard", {
             headers: {
