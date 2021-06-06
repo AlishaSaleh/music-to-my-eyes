@@ -1,6 +1,6 @@
 module.exports.sanitiseUser = (user) => {
-    const {  name, email, dob, gender, location, orientation, image } = user
+    const { id, name, email, dob, gender, location, orientation, image } = user
     return {
-        name, email, dob, gender, location, orientation, image
+       id, name, email, dob, gender, location, orientation, image
     }
 }

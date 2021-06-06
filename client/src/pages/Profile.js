@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { isAuth } from '../utils/isAuth';
 
 function Profile() {
+
     return (
+
         <div>
             <main className="profile-page">
                 <section className="relative block" style={{ height: "500px" }}>

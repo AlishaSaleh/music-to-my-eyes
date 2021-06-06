@@ -77,11 +77,11 @@ router.post("/login", async (req, res) => {
     const user = await User.findOne({ email })
 
     if (!user) {
-        return res.status(404).json({ message: "User doesn't exist" })
+        return res.status(404).json({ message: "Email or password incorrect" })
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(401).json({ message: 'password incorrect' });
+    if (!isMatch) return res.status(401).json({ message: 'Email or password incorrect' });
 
     const token = jwt.sign({ id: user.id }, config.secret, { expiresIn: "24h" });
     res.json({ user: sanitiseUser(user), token })
@@ -92,10 +92,10 @@ router.get("/test", authCheck, (req, res) => {
     res.json({ message: "authenticated!" })
 })
 
-router.get("/dashboard", authCheck, async (req, res) => {
-    const user = await User.findById(req.user.id);
-    res.json({ user: user.name });
-})
+// router.get("/dashboard", authCheck, async (req, res) => {
+//     const user = await User.findById(req.user.id);
+//     res.json({ user: user.name });
+// })
 
 
 // User log out route
