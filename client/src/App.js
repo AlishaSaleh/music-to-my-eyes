@@ -8,8 +8,11 @@ import Navbar from "./components/Navbar";
 import error404 from "./pages/404";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
-import Spotify from "./pages/SpotifyLogin"
+import SpotifyLogin from "./components/SpotifyComp/SpotifyLogin"
+import SpotifyDashboard from "./components/SpotifyComp/SpotifyDashboard"
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute.js";
+
+const code = new URLSearchParams(window.location.search).get("code")
 
 function App() {
   return (
@@ -21,8 +24,9 @@ function App() {
           <Route exact path="/login" component={Login} />
           <Route exact path="/" component={Home} />
           <Route exact path="/profile-settings" component={ProfileSettings} />
+          <Route exact path="/spotify-login" component={SpotifyLogin} />
           <PrivateRoute exact path="/dashboard" component={Profile} />
-          <Route exact path="/spotify" component={Spotify} />
+          code ? <SpotifyDashboard code={code} /> <SpotifyLogin />
           <Route component={error404} />
   
           {/* <Route exact path="/dashboard" component={Profile} /> */}
