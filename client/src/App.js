@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import error404 from "./pages/404";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
+import Spotify from "./pages/SpotifyLogin"
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute.js";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/profile-settings" component={ProfileSettings} />
           <PrivateRoute exact path="/dashboard" component={Profile} />
+          <Route exact path="/spotify" component={Spotify} />
           <Route component={error404} />
   
           {/* <Route exact path="/dashboard" component={Profile} /> */}

@@ -50,6 +50,7 @@
     "react-cloudinary-upload-widget": "^1.4.3",
     "react-spring": "^9.2.0",
     "react-toastify": "^7.0.4",
+    "spotify-web-api-node": "^5.0.2",
     "validator": "^13.6.0"
   },
   "bugs": {

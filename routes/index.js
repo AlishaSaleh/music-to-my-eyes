@@ -8,7 +8,7 @@ const spotifyRoutes = require("./spotify")
 router.use("/api", apiRoutes);
 router.use("/user", userRoutes);
 //router.use("/dashboard", dashRoutes);
-router.use("spotify, spotifyRoutes");
+router.use("/spotify", spotifyRoutes);
 
 // builds the react app if there are no API routes to hit
 // router.use((req, res) =>
