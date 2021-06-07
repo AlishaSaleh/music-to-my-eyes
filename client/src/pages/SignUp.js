@@ -42,11 +42,14 @@ function SignUp() {
             location: locationState,
 
         };
-        API.createUser(newUser).then(response => {
+        API.createUser(newUser)
+        .then(response => {
+            console.log(response);
             if (response.status === 200) {
+                console.log(response.data.token)
                 setAuthToken(response.data.token);
                 // returning on localhost:3000 instead of 3001
-                API.getDash().then(response => console.log(response));
+                //API.getDash().then(response => console.log(response));
             }
         });
 

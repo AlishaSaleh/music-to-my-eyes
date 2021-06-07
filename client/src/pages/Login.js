@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import API from "../utils/API";
+import setAuthToken from "../utils/setAuthToken";
 
 function Login() {
 
@@ -19,7 +20,17 @@ function Login() {
         };
         console.log(user);
 
-        API.loginUser(user).then(response => console.log(response));
+        API.loginUser(user).then(response => {
+            // not getting here
+            console.log('here')
+            console.log(response)
+            if (response.status === 200) {
+                setAuthToken(response.data.token);
+                console.log(response.data.token)
+                // returning on localhost:3000 instead of 3001
+                API.getDash().then(response => console.log(response));
+            }
+        });
     }
 
 
@@ -28,7 +39,7 @@ function Login() {
 
 
         <div className="row" >
-            <form noValidate onSubmit={e => submitLogin(e)} className="col-md-6 offset-md-3 bodyPad">
+            <form onSubmit={e => submitLogin(e)} className="col-md-6 offset-md-3 bodyPad">
 
                 <h1>Login</h1>
                 <p>Please sign up below:</p>

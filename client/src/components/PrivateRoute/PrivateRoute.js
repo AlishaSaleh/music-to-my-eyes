@@ -5,16 +5,11 @@ import { isAuth } from '../../utils/isAuth';
 // Check if the user is logged in
 export function PrivateRoute({ component: Component, ...rest }) {
 
-    const [isAuthed, setIsAuthed] = useState(false);
-    useEffect(() => {
-        setIsAuthed(isAuth());
-    }, []);
-
     return (
         <Route
             {...rest}
             render={props =>
-                isAuthed
+                isAuth()
                     ? <Component {...props} />
                     : <Redirect
                         to='/login'
