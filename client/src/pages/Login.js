@@ -28,6 +28,7 @@ function Login() {
             if (response.status === 200) {
                 setAuthToken(response.data.token);
                 setAuthUser(response.data.user);
+                window.location.replace("/dashboard");
                 // returning on localhost:3000 instead of 3001
                 API.getDash().then(response => console.log(response));
             }
