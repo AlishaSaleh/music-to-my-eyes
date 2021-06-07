@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import error404 from "./pages/404";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
+import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute.js";
 
 function App() {
   return (
@@ -19,8 +20,10 @@ function App() {
           <Route exact path="/login" component={Login} />
           <Route exact path="/" component={Home} />
           <Route exact path="/profile-settings" component={ProfileSettings} />
+          <PrivateRoute exact path="/dashboard" component={Profile} />
           <Route component={error404} />
-          <Route exact path="/profile" component={Profile} />
+  
+          {/* <Route exact path="/dashboard" component={Profile} /> */}
         </Switch>
       </div>
     </Router>

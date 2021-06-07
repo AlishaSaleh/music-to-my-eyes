@@ -1,34 +1,87 @@
-import React from "react";
+import React, { useRef, useState } from "react";
+import API from "../utils/API";
+import setAuthToken from "../utils/setAuthToken";
 
 function SignUp() {
+
+    const [errorState, setErrorState] = useState([]);
+
+    const [genderState, setGender] = useState()
+    const [locationState, setLocation] = useState()
+    // Orientation useState to be added
+
+    const nameRef = useRef();
+    const emailRef = useRef();
+    const passwordRef = useRef();
+    const password2Ref = useRef();
+    const dobRef = useRef();
+
+    const submitForm = (e) => {
+        e.preventDefault();
+        //console.log(genderState);
+        //console.log(nameRef.current.value, emailRef.current.value, passwordRef.current.value);
+        const newUser = {
+            name: nameRef.current.value,
+            email: emailRef.current.value,
+            password: passwordRef.current.value,
+            password2: password2Ref.current.value,
+            dob: dobRef.current.value,
+            gender: genderState,
+            location: locationState,
+
+        };
+        API.createUser(newUser)
+        .then(response => {
+            console.log(response);
+            if (response.status === 200) {
+                console.log(response.data.token)
+                setAuthToken(response.data.token);
+                // returning on localhost:3000 instead of 3001
+                //API.getDash().then(response => console.log(response));
+            } 
+        }).catch(error => {
+            //console.log(error.response.data);4
+            const errors = Object.values(error.response.data);
+            console.log(errors)
+            setErrorState(errors)
+
+        })
+
+    }
+
     return (
 
 
         <div className="row">
-            <form className="col-md-6 offset-md-3 bodyPad">
+            <form onSubmit={e => submitForm(e)} className="col-md-6 offset-md-3 bodyPad">
 
                 <h1>Sign Up!</h1>
                 <p>Please sign up below:</p>
+                {/* Errors to style */}
+                {errorState.map(error => (
+                    <p>{error}</p>
+                ))}
 
                 <div className="mb-3">
                     <label for="name" className="form-label">Name</label>
-                    <input type="text" className="form-control" placeholder="Kat Midden" aria-label="name" id="userName" />
+                    <input ref={nameRef} type="text" className="form-control" placeholder="Kat Midden" aria-label="name" id="userName" />
                     <label for="emailAddress" className="form-label">Email Address</label>
-                    <input type="email" className="form-control" id="userEmail"
+                    <input ref={emailRef} type="email" className="form-control" id="userEmail"
                         placeholder="name@example.com" />
-                    <label for="emailAddress" className="form-label">Password</label>
-                    <input type="password" className="form-control" id="firstPassword"
+                    <label for="password" className="form-label">Password</label>
+                    <input ref={passwordRef} type="password" className="form-control" id="firstPassword"
                     />
-                    <label for="emailAddress" className="form-label">Please re-type your password</label>
-                    <input type="password" className="form-control" id="retypePassword"
+                    <label for="password2" className="form-label">Please re-type your password</label>
+                    <input ref={password2Ref} type="password" className="form-control" id="retypePassword"
                     />
                     <label for="dob" className="form-label">Date of Birth</label>
-                    <input type="date" className="form-control" placeholder="01-01-2001" aria-label="date" id="dob" />
+                    <input ref={dobRef} type="date" className="form-control" placeholder="01-01-2001" aria-label="date" id="dob" />
                     <div className="col-span-12 md:col-span-2 xl:col-span-2 xl:col-start-1">
                         <label htmlFor="country" className="block text-sm font-medium text-gray-700">
                             Country / Region
                       </label>
                         <select
+                            onChange={e => setLocation(e.target.value)}
                             id="country"
                             name="country"
                             autoComplete="country"
@@ -284,11 +337,11 @@ function SignUp() {
                 </div>
                 <div className="input-group mb-3">
                     <label className="form-label" for="userGender"> Please select your gender</label>
-                    <select className="form-select" id="userGender">
-                        <option selected>Gender</option>
-                        <option value="1">Female</option>
-                        <option value="2">Male</option>
-                        <option value="5">Other/Prefer not to say</option>
+                    <select onChange={e => setGender(e.target.value)} className="form-select" id="userGender">
+                        <option value="" disabled selected hidden>Gender</option>
+                        <option value="Female">Female</option>
+                        <option value="Male">Male</option>
+                        <option value="Other">Other/Prefer not to say</option>
                     </select>
                 </div>
 
