@@ -1,5 +1,5 @@
 
-module.exports = function ageValidate()  {
+module.exports = function ageValidate() {
     var dob = new Date(dob);
     //calculate month difference from current date in time
     var month_diff = Date.now() - dob.getTime();
@@ -12,6 +12,7 @@ module.exports = function ageValidate()  {
 
     //now calculate the age of the user
     var age = Math.abs(year - 1970);
+    
     if (age = 18) {
         errors.dob = "You must be Over 18 to sign up";
     }
