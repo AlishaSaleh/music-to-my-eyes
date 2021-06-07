@@ -20,6 +20,16 @@
     text-transform: uppercase;
     font-weight: 700;
     font-family: 'Nanum Pen Script', cursive;
+    font-size: 1.5rem;
+  }
+
+  .nav {
+    height: 88px;
+    box-shadow: 0 3px 5px -1px rgb(0 0 0 / 10%), 0 6px 10px 0 rgb(0 0 0 / 7%), 0 1px 18px 0 rgb(0 0 0 / 6%);
+  }
+  
+  .jumbotron {
+    border-radius: 0px;
   }
   
   .a-logo {

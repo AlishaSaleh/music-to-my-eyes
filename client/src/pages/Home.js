@@ -4,11 +4,6 @@ import Emoji from "../components/Emoji";
 import API from "../utils/API";
 
 function Home() {
-    // function SignUp(e) {
-    //     e.preventDefault();
-    //     window.location.replace("/signup");
-    // }
-
     
     // const [show, setShow] = useState(false);
     return (
@@ -48,7 +43,7 @@ function Home() {
                         </div>
                     </div>
                 </nav> */}
-                <div className="w-full px-6">
+                <div className="w-full">
                     <div className="relative bg-red mx-auto flex flex-col items-center pt-12 sm:pt-24 pb-24 sm:pb-32 md:pb-48 lg:pb-56 xl:pb-64">
                         <div className="w-11/12 sm:w-2/3 mb-5 sm:mb-10">
                             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center text-white font-bold leading-tight">Press play on your love life!</h1>

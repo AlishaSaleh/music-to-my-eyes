@@ -7,7 +7,6 @@ import {UserSettingsForm} from "../components/UserSettingsForm";
 
 function ProfileSettings() {
   return (
-    <Container fluid>
       <Row>
         <Col size="md-12">
           <Jumbotron>
@@ -17,7 +16,6 @@ function ProfileSettings() {
           <UserSettingsForm/>
         </Col>
       </Row>
-    </Container>
   );
 }
 export default ProfileSettings;

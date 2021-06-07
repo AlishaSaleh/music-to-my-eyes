@@ -17,7 +17,7 @@ export function PrivateRoute({ component: Component, ...rest }) {
                 isAuthed
                     ? <Component {...props} />
                     : <Redirect
-                        to='/signup'
+                        to='/login'
                     />}
         />
     );
