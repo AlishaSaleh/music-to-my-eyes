@@ -9,7 +9,7 @@ export const isAuth = () => {
         console.log('no token given')
         return false;
     }
-    
+
     const currentTimestamp = getCurrentTimestamp();
     const decoded = jwtDecoded(token);
     console.log(decoded.exp);
@@ -18,6 +18,5 @@ export const isAuth = () => {
     if (currentTimestamp < decoded.exp) {
         return true;
     }
-
     return false;
 }
