@@ -1,4 +1,5 @@
 import axios from "axios";
+import setAuthToken from "./setAuthToken";
 
 export default {
     // Gets all users
@@ -10,7 +11,8 @@ export default {
         return axios.get("/user/" + id);
     },
     loginUser: function (user) {
-        return axios.post("/user/login", user).then(document.location.replace('/dashboard'));
+        return axios.post("/user/login", user)
+        //.then(document.location.replace('/dashboard'));
     },
     // Deletes the user with the given id
     deleteUser: function (id) {
@@ -18,7 +20,8 @@ export default {
     },
     // Saves a user to the database
     createUser: function (userData) {
-        return axios.post("/user/signup", userData).then(document.location.replace('/login'));
+        return axios.post("/user/signup", userData)
+        //.then(document.location.replace('/login'));
     },
     // Updaes a user in the database
     updateUser: function (id, userData) {

@@ -6,6 +6,7 @@ export const isAuth = () => {
     const token = getToken();
 
     if (!token) {
+        console.log('no token given')
         return false;
     }
     

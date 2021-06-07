@@ -8,6 +8,8 @@ export function PrivateRoute({ component: Component, ...rest }) {
     const [isAuthed, setIsAuthed] = useState(false);
     useEffect(() => {
         setIsAuthed(isAuth());
+        // returning false when should be true
+        console.log(isAuthed);
     }, []);
 
     return (
