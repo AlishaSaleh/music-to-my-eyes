@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const SpotifyWebApi = require("spotify-web-api-node")
 
-router.post("/refresh", (req, res) => {
+router.post("/spotify-refresh", (req, res) => {
     const refreshToken = req.body.refreshToken
     const spotifyApi = new SpotifyWebApi({
       redirectUri: process.env.REACT_APP_AUTHORIZE_URL,
@@ -25,7 +25,7 @@ router.post("/refresh", (req, res) => {
       })
   });
 
-  router.post("/login", (req, res) => {
+  router.post("/spotify-login", (req, res) => {
     const code = req.body.code
     const spotifyApi = new SpotifyWebApi({
         redirectUri: process.env.REACT_APP_AUTHORIZE_URL,

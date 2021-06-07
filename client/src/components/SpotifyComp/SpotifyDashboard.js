@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Container, Form } from 'react-bootstrap'
-import spotifyUserAuth from "./spotifyUserAuth"
+import useAuth from "./spotifyUserAuth"
 import SpotifyWebApi from 'spotify-web-api-node'
 
 const spotifyApi = new SpotifyWebApi({
@@ -8,9 +8,20 @@ const spotifyApi = new SpotifyWebApi({
 })
 
 export default function SpotifyDashboard({ code }) {
-    const accessToken = spotifyUserAuth(code);
+    const accessToken = useAuth(code);
     const [songSearch, setSongSearch] = useState("");
     const [searchResults, setSearchResults] = useState([]);
+
+    useEffect(() => {
+        if (!accessToken) return
+        spotifyApi.setAccessToken(accessToken)
+      }, [accessToken])
+    
+      useEffect(() => {
+        if (!search) return setSearchResults([])
+        if (!accessToken) return
+
+      });
     return (
         <Container>
             <Form.Control 
