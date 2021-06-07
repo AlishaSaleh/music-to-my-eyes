@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import API from "../utils/API";
 import setAuthToken from "../utils/setAuthToken";
+import setAuthUser from "../utils/setAuthUser";
 
 function SignUp() {
 
@@ -28,14 +29,16 @@ function SignUp() {
             dob: dobRef.current.value,
             gender: genderState,
             location: locationState,
+            image: "https://commons.wikimedia.org/wiki/File:Profile_avatar_placeholder_large.png",
 
         };
         API.createUser(newUser)
         .then(response => {
             console.log(response);
             if (response.status === 200) {
-                console.log(response.data.token)
                 setAuthToken(response.data.token);
+                setAuthUser(response.data.user);
+                window.location.replace("/dashboard");
                 // returning on localhost:3000 instead of 3001
                 //API.getDash().then(response => console.log(response));
             } 

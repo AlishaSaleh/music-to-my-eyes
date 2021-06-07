@@ -1,13 +1,16 @@
+import { stringify } from 'postcss';
 import React, {useState } from 'react';
+import API from "../../utils/API";
 
 function Navbar() {
     const [show, setShow] = useState(false);
     return (
         <nav className="w-full">
-        <div className="container mx-auto px-6 flex items-center justify-between">
+        <div className="mx-auto px-3 flex items-center justify-between nav">
             <div className="flex items-center">
-                <img src="https://drive.google.com/thumbnail?id=1wrKHE8yDrIQ7GlOzDzb_1PvTbqPo7is7" className="object-scale-down h-10 w-10" />
-                <p className="ml-2 lg:ml-4 text-base lg:text-2xl font-bold text-gray-800">Music To My Eyes</p>
+                <a href="/" className="a-logo"><img alt="mtme logo" src="https://drive.google.com/thumbnail?id=1wrKHE8yDrIQ7GlOzDzb_1PvTbqPo7is7" className="object-scale-down h-10 w-10" />
+                <p className="ml-2 lg:ml-4 text-base lg:text-2xl font-bold text-gray-800 logo"><span className="text-red" >Music</span> To My <span className="text-red" >Eyes</span></p>
+                </a>
             </div>
             <div>
                 <div onClick={() => setShow(!show)} className="sm:block md:hidden lg:hidden text-gray-500 hover:text-gray-700 focus:text-gray-700 focus:outline-none">
@@ -25,14 +28,20 @@ function Navbar() {
                             <line x1={6} y1={6} x2={18} y2={18} />
                         </svg>
                     </div>
+                    {window.localStorage.length < 1 ? 
                     <ul className="flex text-3xl md:text-base items-center py-8 md:flex flex-col md:flex-row justify-center fixed md:relative top-0 bottom-0 left-0 right-0 bg-white z-20">
                         <li className="text-gray-600 hover:text-gray-800 cursor-pointer md:ml-10 pt-10 md:pt-0">
-                            <a href="javascript: void(0)">Login</a>
+                            <a href="/login">Login</a>
                         </li>
                         <li className="text-gray-600 hover:text-gray-800 cursor-pointer md:ml-10 pt-10 md:pt-0">
-                            <a href="javascript: void(0)">Sign Up</a>
+                            <a href="/signup">Sign Up</a>
                         </li>
-                    </ul>
+                    </ul> :
+                    <ul className="flex text-3xl md:text-base items-center py-8 md:flex flex-col md:flex-row justify-center fixed md:relative top-0 bottom-0 left-0 right-0 bg-white z-20">
+                        <li className="text-gray-600 hover:text-gray-800 cursor-pointer md:ml-10 pt-10 md:pt-0">
+                            <a href="/" onClick={API.logoutUser}>Logout</a>
+                        </li>
+                    </ul>                    }
                 </div>
             </div>
         </div>

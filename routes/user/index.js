@@ -55,7 +55,8 @@ router.post("/signup", async (req, res) => {
             dob: newUser.dob,
             gender: newUser.gender,
             location: newUser.location,
-            orientation: newUser.orientation
+            orientation: newUser.orientation,
+            image: newUser.image,
         }
     });
 

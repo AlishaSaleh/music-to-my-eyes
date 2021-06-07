@@ -49,6 +49,7 @@
     "react-bootstrap": "^1.6.0",
     "react-cloudinary-upload-widget": "^1.4.3",
     "react-spring": "^9.2.0",
+    "react-tinder-card": "^1.4.0",
     "react-toastify": "^7.0.4",
     "validator": "^13.6.0"
   },

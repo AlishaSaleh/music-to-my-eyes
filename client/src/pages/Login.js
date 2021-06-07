@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import API from "../utils/API";
 import setAuthToken from "../utils/setAuthToken";
+import setAuthUser from "../utils/setAuthUser";
 
 function Login() {
 
@@ -26,7 +27,8 @@ function Login() {
             console.log(response)
             if (response.status === 200) {
                 setAuthToken(response.data.token);
-                console.log(response.data.token)
+                setAuthUser(response.data.user);
+                window.location.replace("/dashboard");
                 // returning on localhost:3000 instead of 3001
                 API.getDash().then(response => console.log(response));
             }
