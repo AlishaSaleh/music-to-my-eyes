@@ -1,4 +1,6 @@
+import { stringify } from 'postcss';
 import React, {useState } from 'react';
+import API from "../../utils/API";
 
 function Navbar() {
     const [show, setShow] = useState(false);
@@ -26,6 +28,7 @@ function Navbar() {
                             <line x1={6} y1={6} x2={18} y2={18} />
                         </svg>
                     </div>
+                    {window.localStorage.length < 1 ? 
                     <ul className="flex text-3xl md:text-base items-center py-8 md:flex flex-col md:flex-row justify-center fixed md:relative top-0 bottom-0 left-0 right-0 bg-white z-20">
                         <li className="text-gray-600 hover:text-gray-800 cursor-pointer md:ml-10 pt-10 md:pt-0">
                             <a href="/login">Login</a>
@@ -33,7 +36,12 @@ function Navbar() {
                         <li className="text-gray-600 hover:text-gray-800 cursor-pointer md:ml-10 pt-10 md:pt-0">
                             <a href="/signup">Sign Up</a>
                         </li>
-                    </ul>
+                    </ul> :
+                    <ul className="flex text-3xl md:text-base items-center py-8 md:flex flex-col md:flex-row justify-center fixed md:relative top-0 bottom-0 left-0 right-0 bg-white z-20">
+                        <li className="text-gray-600 hover:text-gray-800 cursor-pointer md:ml-10 pt-10 md:pt-0">
+                            <a href="/" onClick={API.logoutUser}>Logout</a>
+                        </li>
+                    </ul>                    }
                 </div>
             </div>
         </div>

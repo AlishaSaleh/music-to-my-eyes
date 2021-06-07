@@ -40,5 +40,9 @@ export default {
                 "Authorization": `Bearer ${localStorage.getItem("access_token")}`
             }
         });
+    },
+    logoutUser: function () {
+        localStorage.clear();
+        document.location.replace('/login');
     }
 };
