@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Container, Form } from 'react-bootstrap'
 import useAuth from "./spotifyUserAuth"
 import SpotifyWebApi from 'spotify-web-api-node'
+import TrackSearchResult from './TrackSearchResult'
 
 
 const spotifyApi = new SpotifyWebApi({
@@ -12,6 +13,10 @@ export default function SpotifyDashboard({ code }) {
     const accessToken = useAuth(code);
     const [songSearch, setSongSearch] = useState("");
     const [searchResults, setSearchResults] = useState([]);
+
+    function chooseTrack(track) {
+        setSongSearch("")
+      }
 
     useEffect(() => {
         if (!accessToken) return
@@ -64,13 +69,9 @@ export default function SpotifyDashboard({ code }) {
           <TrackSearchResult
             track={track}
             key={track.uri}
+            chooseTrack={chooseTrack}
           />
         ))}
-        {searchResults.length === 0 && (
-          <div className="text-center" style={{ whiteSpace: "pre" }}>
-            {lyrics}
-          </div>
-        )}
       </div>
         </Container>
     )
