@@ -1,6 +1,11 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
+import React from "react";
+import Emoji from "../components/Emoji";
+import API from "../utils/API";
+
 function Home() {
-    const [show, setShow] = useState(false);
+    
+    // const [show, setShow] = useState(false);
     return (
         <>
             <div>
@@ -38,25 +43,31 @@ function Home() {
                         </div>
                     </div>
                 </nav> */}
-                <div className="w-full px-6">
-                    <div className="mt-8 relative rounded-lg bg-gradient-to-r from-red to-red-light container mx-auto flex flex-col items-center pt-12 sm:pt-24 pb-24 sm:pb-32 md:pb-48 lg:pb-56 xl:pb-64">
+                <div className="w-full">
+                    <div className="relative bg-red mx-auto flex flex-col items-center pt-12 sm:pt-24 pb-24 sm:pb-32 md:pb-48 lg:pb-56 xl:pb-64">
                         <div className="w-11/12 sm:w-2/3 mb-5 sm:mb-10">
                             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center text-white font-bold leading-tight">Press play on your love life!</h1>
                         </div>
                         <div className="flex justify-center items-center mb-10 sm:mb-20">
                             <div className="inline-block mr-2 mt-2">
-                            <button type="button" class="text-4xl transition duration-300 ease-in-out transform hover:scale-110 border border-pink hover:bg-gradient-to-r from-pink to-purple text-mint-dark hover:text-white font-normal py-2 px-4 rounded">Sign Up</button>
+                            <button type="button" onClick={API.goToSignUp} className="bg-white text-2xl mx-3 transition duration-300 btn-shadow ease-in-out font-bold transform hover:scale-110 border border-pink hover:bg-gradient-to-r from-pink to-purple text-mint-dark hover:text-white font-normal py-2 px-4 rounded">Sign Up</button>
                             </div>
-                            <div class="inline-block mr-2 mt-2">
-                            <button type="button" class="btn-outline text-4xl transition duration-300 ease-in-out transform hover:scale-110 border border-mint-dark hover:bg-mint-dark text-mint-dark hover:text-white font-normal py-2 px-4 rounded">Login</button>
+                            <div className="inline-block mr-2 mt-2">
+                            <button type="button" onClick={API.goToLogin} className="bg-white btn-outline text-2xl transition duration-300 btn-shadow ease-in-out font-bold transform hover:scale-110 border border-mint-dark hover:bg-mint-dark text-mint-dark hover:text-white font-normal py-2 px-4 rounded">Login</button>
                             </div>
+                            
                         </div>
+                        <div class="flex justify-center items-center"><img alt="heart soundwave" src="https://drive.google.com/thumbnail?id=1NWXErFipm2mTdSJJOE6YCaSdAwlZQetU" className="absolute"/></div>
                     </div>
-                    <div className="container mx-auto flex justify-center md:-mt-56 -mt-20 sm:-mt-40">
-                        <div className="relative sm:w-2/3 w-11/12">
-                            {/* <img src="https://tuk-cdn.s3.amazonaws.com/assets/components/hero/h_2.png" alt className="absolute" /> */}
-                            <img src="https://drive.google.com/thumbnail?id=1NWXErFipm2mTdSJJOE6YCaSdAwlZQetU" className="absolute" />
-                        </div>
+                    <div className="w-full grid grid-cols-2 section">
+
+                    <div className="col-span-1 bg-1">
+                    
+                    </div>
+                    <div className="col-span-1 second-half">
+                        <h2>Find your cliché <Emoji symbol="💕" aria-label="hearts"/></h2>
+                        <p>It's time to find your </p>
+                    </div>
                     </div>
                 </div>
             </div>

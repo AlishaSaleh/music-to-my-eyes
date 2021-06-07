@@ -8,7 +8,7 @@ function error404() {
                     <div className="w-11/12 sm:w-2/3 mb-5 sm:mb-10"></div>
                     <div className="md:container md:mx-auto content-center">
                             <h1 className="text-white text-4xl">Oops! Something went wrong, let's try again.</h1>
-                        <img src="https://drive.google.com/thumbnail?id=1rukVDLTGZYhz-f_WTv6vx_aGQYhcys-O" />
+                        <img alt="broken record" src="https://drive.google.com/thumbnail?id=1rukVDLTGZYhz-f_WTv6vx_aGQYhcys-O" />
                     </div>
                 </div>
             </div>

@@ -1,32 +1,21 @@
 import React, { useRef, useState } from "react";
 import API from "../utils/API";
 import setAuthToken from "../utils/setAuthToken";
+import setAuthUser from "../utils/setAuthUser";
 
 function SignUp() {
 
-    const [user, setUser] = useState({
-        name: "",
-        email: "",
-        password: "",
-        password2: "",
-        dob: "",
-        gender: "",
-        location: "",
-        orientation: ""
-        // errors: {}
-    });
+    const [errorState, setErrorState] = useState([]);
 
     const [genderState, setGender] = useState()
     const [locationState, setLocation] = useState()
+    // Orientation useState to be added
 
     const nameRef = useRef();
     const emailRef = useRef();
     const passwordRef = useRef();
     const password2Ref = useRef();
     const dobRef = useRef();
-    // const genderRef = useRef();
-    //const locationRef = useRef();
-    const orientRef = useRef();
 
     const submitForm = (e) => {
         e.preventDefault();
@@ -40,27 +29,28 @@ function SignUp() {
             dob: dobRef.current.value,
             gender: genderState,
             location: locationState,
+            image: "https://commons.wikimedia.org/wiki/File:Profile_avatar_placeholder_large.png",
 
         };
         API.createUser(newUser)
         .then(response => {
             console.log(response);
             if (response.status === 200) {
-                console.log(response.data.token)
                 setAuthToken(response.data.token);
+                setAuthUser(response.data.user);
+                window.location.replace("/dashboard");
                 // returning on localhost:3000 instead of 3001
                 //API.getDash().then(response => console.log(response));
-            }
-        });
+            } 
+        }).catch(error => {
+            //console.log(error.response.data);4
+            const errors = Object.values(error.response.data);
+            console.log(errors)
+            setErrorState(errors)
+
+        })
 
     }
-    // SET STATE
-    // EVENT LISTENERS: ONCHANGE ONSUBMIT
-    // useRef get the value of selected option
-    // USER AUTH
-    // API REQUEST
-
-    // REDIRECT TO DASHBOARD
 
     return (
 
@@ -70,6 +60,10 @@ function SignUp() {
 
                 <h1>Sign Up!</h1>
                 <p>Please sign up below:</p>
+                {/* Errors to style */}
+                {errorState.map(error => (
+                    <p>{error}</p>
+                ))}
 
                 <div className="mb-3">
                     <label for="name" className="form-label">Name</label>

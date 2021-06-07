@@ -2,6 +2,12 @@ import axios from "axios";
 import setAuthToken from "./setAuthToken";
 
 export default {
+    goToLogin: function () {
+        (document.location.replace('/login'));
+    },
+    goToSignUp: function () {
+        (document.location.replace('/signup'));
+    },
     // Gets all users
     getUsers: function () {
         return axios.get("/user");
@@ -34,5 +40,9 @@ export default {
                 "Authorization": `Bearer ${localStorage.getItem("access_token")}`
             }
         });
+    },
+    logoutUser: function () {
+        localStorage.clear();
+        document.location.replace('/login');
     }
 };

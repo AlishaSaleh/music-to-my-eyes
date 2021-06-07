@@ -1,10 +1,9 @@
 import React, { useRef, useEffect, useState } from "react";
-import Emoji from "../Emoji"
 import ProfilePic from "../ProfilePic";
 import "./index.css";
 import Loader from "../Loader";
 import { useSpring, animated } from 'react-spring';
-
+import Modal from "../Modal";
 
 export function SaveButton({ isLoading, children, ...props }) {
   /* showLoader is used to stay in the "isLoading state" a bit longer to avoid loading flashes
@@ -74,6 +73,7 @@ export function SaveButton({ isLoading, children, ...props }) {
   );
 }
 
+
 export function UserSettingsForm() {
 
   function handleSubmit(e) {
@@ -91,23 +91,19 @@ export function UserSettingsForm() {
     }
   });
 
+
+
   return (
     <>
       <div>
         <div className="md:grid md:grid-cols-6 md:gap-6 2xl:grid-cols-7 neg-mt relative mb-5">
-          {/* <div class="col-span-1"></div> */}
+          {/* <div className="col-span-1"></div> */}
           <div className="col-start-1 md:col-start-2 2xl:col-start-3 mt-5 md:mt-0 col-span-4 md:col-span-4 2xl:col-span-3">
-            <form action="#" method="POST">
+            <form action="#" method="PUT">
             <div className="w-full flex justify-center neg-mb-50">
               <div className="mt-1 flex items-center">
-                      {<ProfilePic src="https://randomuser.me/api/portraits/men/47.jpg" />}
-                      <button
-                      id="upload_widget"
-                        type="button"
-                        className="cloudinary-button change-pp hover:btn-hov btn py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                      >
-                        Change
-                      </button>
+                      {<ProfilePic src="https://randomuser.me/api/portraits/men/47.jpg"/>}
+                      <Modal></Modal>
                   </div>
                   </div>
               <div className="xl:px-5 shadow sm:rounded-md bg-white sm:overflow-hidden pt-5">
@@ -121,32 +117,34 @@ export function UserSettingsForm() {
                       </div>
                     </div>
                     <div className="col-span-12 md:col-span-2 xl:col-span-2">
-                      <label htmlFor="first_name" className="block text-sm font-medium text-gray-700">
-                        First name
+                      <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                        Name
                       </label>
                       <input
                         type="text"
-                        name="first_name"
-                        id="first_name"
+                        name="name"
+                        id="_name"
                         autoComplete="given-name"
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
-
                     <div className="col-span-12 md:col-span-9 xl:col-span-9">
-                      <label htmlFor="last_name" className="block text-sm font-medium text-gray-700">
-                        Last name
+                      <label htmlFor="gender" className="block text-sm font-medium text-gray-700 ">
+                        Gender
                       </label>
-                      <input
-                        type="text"
-                        name="last_name"
-                        id="last_name"
-                        autoComplete="family-name"
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                      />
-                    </div>
-                    <div className="col-span-12 md:col-span-1 xl:col-span-1">
-                      <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                      <select
+                        id="gender"
+                        name="gender"
+                        autoComplete="gender"
+                        className="mt-1 block w-full py-2 px-3 border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      >
+                        <option value="female">Female</option>
+                        <option value="male">Male</option>
+                        <option value="other">Other</option>
+                        </select>
+                        </div>
+                    <div className="col-span-12 md:col-span-1 xl:col-span-1 xl:col-start-1">
+                      <label htmlFor="dob" className="block text-sm font-medium text-gray-700">
                         Date of Birth
                       </label>
                       <input
@@ -483,3 +481,5 @@ export function UserSettingsForm() {
     </>
   )
 }
+
+export default UserSettingsForm;

@@ -7,17 +7,15 @@ import {UserSettingsForm} from "../components/UserSettingsForm";
 
 function ProfileSettings() {
   return (
-    <Container fluid>
       <Row>
         <Col size="md-12">
           <Jumbotron>
-            <h1>Profile Settings</h1>
+            <h1 className="header-txt">Profile Settings</h1>
             <Divider />
           </Jumbotron>
           <UserSettingsForm/>
         </Col>
       </Row>
-    </Container>
   );
 }
 export default ProfileSettings;
