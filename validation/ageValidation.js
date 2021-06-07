@@ -12,6 +12,8 @@ module.exports = function ageValidate()  {
 
     //now calculate the age of the user
     var age = Math.abs(year - 1970);
-
+    if (age = 18) {
+        errors.dob = "You must be Over 18 to sign up";
+    }
 
 }
