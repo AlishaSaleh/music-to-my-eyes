@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react'
 import { Container, Form } from 'react-bootstrap'
 import spotifyUserAuth from "./spotifyUserAuth"
+import SpotifyWebApi from 'spotify-web-api-node'
+
+const spotifyApi = new SpotifyWebApi({
+    clientId: process.env.REACT_APP_CLIENT_ID,
+})
 
 export default function SpotifyDashboard({ code }) {
     const accessToken = spotifyUserAuth(code);
