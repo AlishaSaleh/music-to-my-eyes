@@ -59,9 +59,19 @@ export default function SpotifyDashboard({ code }) {
                 value={songSearch}
                 onChange={e => setSongSearch(e.target.value)}
             />
-            <div className="flex-grow-1 my-2" style={{ overflowY: "auto" }} >
-                Songs
-            </div>
+            <div className="flex-grow-1 my-2" style={{ overflowY: "auto" }}>
+        {searchResults.map(track => (
+          <TrackSearchResult
+            track={track}
+            key={track.uri}
+          />
+        ))}
+        {searchResults.length === 0 && (
+          <div className="text-center" style={{ whiteSpace: "pre" }}>
+            {lyrics}
+          </div>
+        )}
+      </div>
         </Container>
     )
 }
