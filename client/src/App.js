@@ -9,6 +9,7 @@ import error404 from "./pages/404";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute.js";
+import Match from "./pages/Match.js";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/profile-settings" component={ProfileSettings} />
           <PrivateRoute exact path="/dashboard" component={Profile} />
+          <PrivateRoute exact path="/match" component={Match} />
           <Route component={error404} />
   
           {/* <Route exact path="/dashboard" component={Profile} /> */}

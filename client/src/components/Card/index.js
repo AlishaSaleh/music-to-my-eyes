@@ -1,39 +1,30 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import TinderCard from 'react-tinder-card'
 import "./index.css";
+import API from "../../utils/API";
 
-
-const db = [
-  {
-    name: 'Richard Hendricks',
-    url: './img/richard.jpg'
-  },
-  {
-    name: 'Erlich Bachman',
-    url: './img/erlich.jpg'
-  },
-  {
-    name: 'Monica Hall',
-    url: './img/monica.jpg'
-  },
-  {
-    name: 'Jared Dunn',
-    url: './img/jared.jpg'
-  },
-  {
-    name: 'Dinesh Chugtai',
-    url: './img/dinesh.jpg'
-  }
-]
-
+// holds the people already shown to the user to avoid repetition 
 const alreadyRemoved = []
-let charactersState = db // This fixes issues with updating characters state forcing it to use the current state and not the state that was active when the card was created.
 
-function Advanced () {
-  const [characters, setCharacters] = useState(db)
+function CardMatch() {
+  const [characters, setCharacters] = useState([])
   const [lastDirection, setLastDirection] = useState()
 
-  const childRefs = useMemo(() => Array(db.length).fill(0).map(i => React.createRef()), [])
+  let charactersState = characters;
+
+  useEffect(() => {
+    async function fetchData() {
+      API.getUsers().then((res) => {
+          console.log(res.data.users);
+          // console.log(res.data.users[0].image);
+          setCharacters(res.data.users);
+      });
+    };
+    fetchData()
+  }, [])
+
+
+  const childRefs = useMemo(() => Array(characters.length).fill(0).map(i => React.createRef()), [])
 
   const swiped = (direction, nameToDelete) => {
     console.log('removing: ' + nameToDelete)
@@ -48,24 +39,29 @@ function Advanced () {
   }
 
   const swipe = (dir) => {
-    const cardsLeft = characters.filter(person => !alreadyRemoved.includes(person.name))
+    const cardsLeft = characters.filter(person => !alreadyRemoved.includes(person._id))
     if (cardsLeft.length) {
-      const toBeRemoved = cardsLeft[cardsLeft.length - 1].name // Find the card object to be removed
-      const index = db.map(person => person.name).indexOf(toBeRemoved) // Find the index of which to make the reference to
+      const toBeRemoved = cardsLeft[cardsLeft.length - 1]._id // Find the card object to be removed
+      const index = characters.map(person => person._id).indexOf(toBeRemoved) // Find the index of which to make the reference to
       alreadyRemoved.push(toBeRemoved) // Make sure the next card gets removed next time if this card do not have time to exit the screen
       childRefs[index].current.swipe(dir) // Swipe the card!
     }
   }
 
+  // Need to add PUT request for likes and dislikes
+
+  console.log(alreadyRemoved);
+
   return (
     <div>
-      <link href='https://fonts.googleapis.com/css?family=Damion&display=swap' rel='stylesheet' />
-      <link href='https://fonts.googleapis.com/css?family=Alatsi&display=swap' rel='stylesheet' />
-      <h1>React Tinder Card</h1>
+      <h1>Are they music to your eyes?</h1>
+      <br />
+      <br />
+      <br />
       <div className='cardContainer'>
         {characters.map((character, index) =>
-          <TinderCard ref={childRefs[index]} className='swipe' key={character.name} onSwipe={(dir) => swiped(dir, character.name)} onCardLeftScreen={() => outOfFrame(character.name)}>
-            <div style={{ backgroundImage: 'url(' + character.url + ')' }} className='card'>
+          <TinderCard ref={childRefs[index]} className='swipe' key={character._id} onSwipe={(dir) => swiped(dir, character._id)} onCardLeftScreen={() => outOfFrame(character._id)}>
+            <div style={{ backgroundImage: 'url(' + character.image + ')' }} className='card'>
               <h3>{character.name}</h3>
             </div>
           </TinderCard>
@@ -80,4 +76,4 @@ function Advanced () {
   )
 }
 
-export default Advanced
+export default CardMatch
