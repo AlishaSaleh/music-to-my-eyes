@@ -107,6 +107,22 @@ router.get("/", async (req, res) => {
     } catch (err) {
         res.status(500).json(err);
     }
-})
+});
+
+// Update User with their likes 
+router.put("/match/:id/like/", async (req, res) => {
+    try {
+        console.log(req.params);
+        const likeData = await User.findByIdAndUpdate(
+            { _id: req.params.id },
+            { $push: { likes: req.body } }, // works with id e.g. '60b602cd2c09b7409853a947' <-- format
+            { new: true }
+        )
+        console.log(req.params.id);
+        return res.json(likeData)
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
 
 module.exports = router;

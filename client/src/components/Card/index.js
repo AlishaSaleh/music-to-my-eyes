@@ -48,13 +48,14 @@ function CardMatch() {
     }
   }
 
+  // Need to randomise users before rendering to Cards
   // Need to add PUT request for likes and dislikes
 
   console.log(alreadyRemoved);
 
   return (
     <div>
-      <h1>Are they music to your eyes?</h1>
+      <h1>Are they the music to your eyes?</h1>
       <br />
       <br />
       <br />
