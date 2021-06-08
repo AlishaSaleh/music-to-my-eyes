@@ -58,6 +58,18 @@ const userSchema = new Schema({
         type: String,
         default: 'https://commons.wikimedia.org/wiki/File:Profile_avatar_placeholder_large.png'
     },
+    likes: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+        },
+    ],
+    dislikes: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+        },
+    ],
     matches: [
         {
             type: Schema.Types.ObjectId,

@@ -89,25 +89,19 @@ router.post("/login", async (req, res) => {
 
 });
 
+// Testing Auth in Postman
 router.get("/test", authCheck, (req, res) => {
     res.json({ message: "authenticated!" })
 })
 
-// router.get("/dashboard", authCheck, async (req, res) => {
-//     const user = await User.findById(req.user.id);
-//     res.json({ user: user.name });
-// })
-
-
-// User log out route
-// router.post('/logout', (req, res) => {
-//     if (req.session.logged_in) {
-//         req.session.destroy(() => {
-//             res.status(204).end();
-//         });
-//     } else {
-//         res.status(404).end();
-//     }
-// });
+// [user]/ -- GET all users for Match page
+router.get("/", async (req, res) => {
+    try {
+        const userData = await User.find({})
+        return res.json({ users: userData })
+    } catch (err) {
+        res.status(500).json(err);
+    }
+})
 
 module.exports = router;
