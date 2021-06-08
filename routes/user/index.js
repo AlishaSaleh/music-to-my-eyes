@@ -97,7 +97,12 @@ router.get("/test", authCheck, (req, res) => {
 // [user]/ -- GET all users for Match page
 router.get("/", async (req, res) => {
     try {
-        const userData = await User.find({})
+        //const { user } = req.headers;
+        const userData = await User.find({});
+        // console.log(req.headers);
+        // need to remove password before returning
+        // need to remove this user from data - client or serverside?
+        // findOne (the currently logged in user) - exclude from the find()
         return res.json({ users: userData })
     } catch (err) {
         res.status(500).json(err);
