@@ -67,7 +67,7 @@ function Advanced () {
           <TinderCard ref={childRefs[index]} className='swipe' key={newUser.name} onSwipe={(dir) => swiped(dir, newUser.name)} onCardLeftScreen={() => outOfFrame(newUser.name)}>
             <div style={{ backgroundImage: 'url(' + newUser.url + ')' }} className='card'>
               <h3>{newUser.name}</h3>
-              <h3>{newUser.age</h3>
+              <h3>{newUser.age}</h3>
             </div>
           </TinderCard>
         )}
