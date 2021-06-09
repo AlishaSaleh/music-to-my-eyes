@@ -68,6 +68,10 @@ function Advanced () {
             <div style={{ backgroundImage: 'url(' + newUser.url + ')' }} className='card'>
               <h3>{newUser.name}</h3>
               <h3>{newUser.age}</h3>
+              <h3>{newUser.location}</h3>
+              <h3>Top Songs:
+                {newUser}
+              </h3>
             </div>
           </TinderCard>
         )}
@@ -81,4 +85,4 @@ function Advanced () {
   )
 }
 
-export default Advanced
+export default Advanced;
