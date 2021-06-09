@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const SpotifyWebApi = require("spotify-web-api-node")
+const SpotifyWebApi = require("spotify-web-api-node");
+require('dotenv').config();
 
-router.post("/spotify-refresh", (req, res) => {
+router.post("/refresh", (req, res) => {
     const refreshToken = req.body.refreshToken
     const spotifyApi = new SpotifyWebApi({
-      redirectUri: process.env.REACT_APP_AUTHORIZE_URL,
-      clientId: process.env.REACT_APP_CLIENT_ID,
-      clientSecret: process.env.REACT_APP_CLIENT_SECRET,
+      redirectUri: process.env.REDIRECT_URL,
+      clientId: process.env.CLIENT_ID,
+      clientSecret: process.env.CLIENT_SECRET,
       refreshToken,
     })
   
@@ -25,16 +26,20 @@ router.post("/spotify-refresh", (req, res) => {
       })
   });
 
-  router.post("/spotify-login", (req, res) => {
-    const code = req.body.code
+  //Login route for spotify authentication
+  router.post("/login", (req, res) => {
+    console.log('show code 1')
+    const code = req.body.code // This is the code that's returned as a query parameter to the redirect URI
     const spotifyApi = new SpotifyWebApi({
-        redirectUri: process.env.REACT_APP_AUTHORIZE_URL,
-        clientId: process.env.REACT_APP_CLIENT_ID,
-        clientSecret: process.env.REACT_APP_CLIENT_SECRET,
+        redirectUri: process.env.REDIRECT_URL,
+        clientId: process.env.CLIENT_ID,
+        clientSecret: process.env.CLIENT_SECRET,
     })
-  
+    console.log(code)
+   console.log(spotifyApi)
+    //This retrieves the access and refresh token
     spotifyApi
-      .authorizationCodeGrant(code)
+      .authorizationCodeGrant(code) //checks that we have an authorised code and then gives access to tokens
       .then(data => {
         res.json({
           accessToken: data.body.access_token,

@@ -4,13 +4,12 @@ import useAuth from "./spotifyUserAuth"
 import SpotifyWebApi from 'spotify-web-api-node'
 import TrackSearchResult from './TrackSearchResult'
 
-
 const spotifyApi = new SpotifyWebApi({
     clientId: process.env.REACT_APP_CLIENT_ID,
 })
 
 export default function SpotifyDashboard({ code }) {
-    const accessToken = useAuth(code);
+      const accessToken = useAuth(code);
     const [songSearch, setSongSearch] = useState("");
     const [searchResults, setSearchResults] = useState([]);
 

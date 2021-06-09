@@ -8,11 +8,12 @@ import Navbar from "./components/Navbar";
 import error404 from "./pages/404";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
-import SpotifyLogin from "./components/SpotifyComp/SpotifyLogin"
-import SpotifyDashboard from "./components/SpotifyComp/SpotifyDashboard"
+import SpotifyHome from "./pages/SpotifyHome"
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute.js";
 
-const code = new URLSearchParams(window.location.search).get("code")
+//this gives us the query parameter of our URL. In this case it's ?code=
+//If we have a code, then we need to render a new component (Spotify Dashboard)
+//const code = new URLSearchParams(window.location.search).get("code") 
 
 function App() {
   return (
@@ -24,11 +25,9 @@ function App() {
           <Route exact path="/login" component={Login} />
           <Route exact path="/" component={Home} />
           <Route exact path="/profile-settings" component={ProfileSettings} />
-          <Route exact path="/spotify-login" component={SpotifyLogin} />
           <PrivateRoute exact path="/dashboard" component={Profile} />
-          code ? <SpotifyDashboard code={code} /> <SpotifyLogin />
+          <Route exact path="/spotify-home" component={SpotifyHome} />
           <Route component={error404} />
-  
           {/* <Route exact path="/dashboard" component={Profile} /> */}
         </Switch>
       </div>
