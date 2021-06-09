@@ -28,8 +28,8 @@ function App() {
           <Route exact path="/profile-settings" component={ProfileSettings} />
           <Route exact path="/dashboard" component={Profile} />
           <Route exact path="/spotify-home" component={SpotifyHome} />
-          <Route component={error404} />
           <Route exact path="/match" component={Match} />
+          <Route component={error404} />
           {/* <Route exact path="/dashboard" component={Profile} /> */}
         </Switch>
       </div>
