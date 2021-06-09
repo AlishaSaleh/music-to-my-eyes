@@ -109,16 +109,41 @@ router.get("/", async (req, res) => {
     }
 });
 
-// Update User with their likes 
+// Get User by ID --> works in Postman
+router.get("/:id/", async (req, res) => {
+    try {
+        const userData = await User.findById(
+            { _id: req.params.id }
+        );
+
+        if (!userData) {
+            res.status(404).json({ message: 'No user found with this id!' });
+            return;
+        }
+        
+        // console.log(req.params.id);
+        return res.json(userData)
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+// Update User with their likes --> works in Postman
 router.put("/:id/like/", async (req, res) => {
     try {
-        console.log(req.params);
+        // console.log(req.params);
         const likeData = await User.findByIdAndUpdate(
             { _id: req.params.id },
             { $push: { likes: req.body } }, // works with id e.g. '60b602cd2c09b7409853a947' <-- format
             { new: true }
-        )
-        console.log(req.params.id);
+        );
+
+        if (!likeData) {
+            res.status(404).json({ message: 'No user found with this id!' });
+            return;
+        }
+
+        // console.log(req.params.id);
         return res.json(likeData)
     } catch (err) {
         res.status(500).json(err);
@@ -129,30 +154,61 @@ router.put("/:id/like/", async (req, res) => {
 // MIGHT NOT BE USED 
 router.put("/:id/dislike/", async (req, res) => {
     try {
-        console.log(req.params);
+        // console.log(req.params);
         const likeData = await User.findByIdAndUpdate(
             { _id: req.params.id },
             { $push: { dislikes: req.body } }, // works with id e.g. '60b602cd2c09b7409853a947' <-- format
             { new: true }
-        )
-        console.log(req.params.id);
+        );
+             
+        if (!likeData) {
+            res.status(404).json({ message: 'No user found with this id!' });
+            return;
+        }
+
+        // console.log(req.params.id);
         return res.json(likeData)
     } catch (err) {
         res.status(500).json(err);
     }
 });
 
-// Update User info - profile settings
+// Update User info - profile settings --> works in Postman
 router.put("/:id/", async (req, res) => {
     try {
-        console.log(req.body);
+        // console.log(req.body);
         const userData = await User.findByIdAndUpdate(
             { _id: req.params.id },
             // sets all the new info into the database
             { $set: req.body }, 
             { new: true }
-        )
-        console.log(req.params.id);
+        );
+
+        if (!userData) {
+            res.status(404).json({ message: 'No user found with this id!' });
+            return;
+        }
+
+        // console.log(req.params.id);
+        return res.json(userData)
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+// Delete a User --> works in Postman
+router.delete("/:id/", async (req, res) => {
+    try {
+        const userData = await User.findByIdAndRemove(
+            { _id: req.params.id }
+        );
+
+        if (!userData) {
+            res.status(404).json({ message: 'No user found with this id!' });
+            return;
+        }
+
+        // console.log(req.params.id);
         return res.json(userData)
     } catch (err) {
         res.status(500).json(err);

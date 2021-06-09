@@ -4,7 +4,8 @@ import "./index.css";
 import API from "../../utils/API";
 
 // holds the people already shown to the user to avoid repetition 
-const alreadyRemoved = []
+const alreadyRemoved = [];
+const liked = [];
 
 function CardMatch() {
   const [characters, setCharacters] = useState([])
@@ -24,9 +25,11 @@ function CardMatch() {
   }, [])
 
 
-  const childRefs = useMemo(() => Array(characters.length).fill(0).map(i => React.createRef()), [])
+  const childRefs = useMemo(() => Array(characters.length).fill(0).map(i => React.createRef()), []);
+  console.log(childRefs);
 
   const swiped = (direction, nameToDelete) => {
+    console.log(direction);
     console.log('removing: ' + nameToDelete)
     setLastDirection(direction)
     alreadyRemoved.push(nameToDelete)
@@ -50,6 +53,7 @@ function CardMatch() {
 
   // Need to randomise users before rendering to Cards
   // Need to add PUT request for likes and dislikes
+
 
   console.log(alreadyRemoved);
 
