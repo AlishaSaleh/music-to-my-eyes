@@ -7,7 +7,7 @@ const { authCheck } = require('../../middleware/authCheck');
 
 router.get("/dashboard", authCheck, async (req, res) => {
 
-    console.log(req.user);
+    // console.log(req.user);
 
     const user = await User.findById(req.user.id);
     res.json({ user: user.name });

@@ -1,5 +1,4 @@
 import axios from "axios";
-import setAuthToken from "./setAuthToken";
 
 export default {
     goToLogin: function () {
@@ -44,5 +43,9 @@ export default {
     logoutUser: function () {
         localStorage.clear();
         document.location.replace('/login');
+    },
+    // Update Likes
+    addLike: function (id, likeData) {
+        return axios.put(`/user/${id}/like`, likeData)
     }
 };

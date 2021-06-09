@@ -12,8 +12,8 @@ export const isAuth = () => {
 
     const currentTimestamp = getCurrentTimestamp();
     const decoded = jwtDecoded(token);
-    console.log(decoded.exp);
-    console.log(currentTimestamp);
+    // console.log(decoded.exp);
+    // console.log(currentTimestamp);
 
     if (currentTimestamp < decoded.exp) {
         return true;
