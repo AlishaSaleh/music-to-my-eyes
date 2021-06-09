@@ -20,12 +20,10 @@ export default function useAuth(code) {
         code,
       })
       .then(res => {
-        console.log(res)
         setAccessToken(res.data.accessToken)
-        console.log(res.data)
         setRefreshToken(res.data.refreshToken)
         setExpiresIn(res.data.expiresIn)
-        // window.history.pushState({}, null, "/") //removes the code param from our URL
+        window.history.pushState({}, null, "/spotify-home") //removes the code param from our URL
       })
       .catch(() => {
         console.log('Ive got an error')
