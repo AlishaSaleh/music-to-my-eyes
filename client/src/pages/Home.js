@@ -31,7 +31,7 @@ function Home() {
                             </div>
                         <div className="col-span-1 text-center p-10 pt-20">
                             <h2>Find your cliché <Emoji symbol="💕" aria-label="hearts" /></h2>
-                            <p>It's time to find your </p>
+                            <p>It's time to find your playlist partner! </p>
                         </div>
 
                     </div>
