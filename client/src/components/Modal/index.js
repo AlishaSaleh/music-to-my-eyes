@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./index.css";
 import { SaveButton } from "../UserSettingsForm";
 import ProfilePic from "../ProfilePic";
+import API from "../../utils/API";
 
-export default function Modal() {
+export default function Modal(props) {
   const [showPreview, setShowPreview] = useState(false);
   const [showModal, setShowModal] = useState(false);
   //Cloudinary Info
   const [image, setImage] = useState("");
+  const imageRef = useRef();
+
   const [url, setUrl] = useState("");
   const uploadImage = () => {
     const data = new FormData()
@@ -22,6 +25,7 @@ export default function Modal() {
       .then(data => {
         setUrl(data.url)
         console.log(data);
+        setUserImage(data);
       })
       .catch(err => console.log(err))
   }
@@ -31,6 +35,18 @@ export default function Modal() {
     e.preventDefault();
     setIsButtonLoading(true);
     setShowModal(false);
+  }
+
+  function setUserImage(data) {
+    debugger;
+    console.log(data);
+    var image = {image: data.url};
+    var id = props.user.id;
+    console.log(image, id);
+    API.updateUser(id, image);
+
+    // const image = document.querySelector('#pp-img').getAttribute("src");
+
   }
 
   const [isButtonLoading, setIsButtonLoading] = useState(false);
@@ -88,8 +104,8 @@ export default function Modal() {
                 {/*body*/}
                 <div className="relative p-6 flex-auto">
                   <p className="mt-4 text-blueGray-500 text-lg leading-relaxed">
-                  {showPreview ?
-                      <ProfilePic src={url} /> : null}
+                    {showPreview ?
+                      <ProfilePic ref={imageRef} src={url} /> : null}
                     <input type="file" className="my-4" onChange={(e) => setImage(e.target.files[0])}
                       id="upload_widget"
                     />
@@ -113,7 +129,7 @@ export default function Modal() {
                   >
                     Close
                   </button>
-                  <SaveButton isLoading={isButtonLoading} onClick={handleSubmit} onSubmit={handleSubmit}>Save Profile</SaveButton>
+                  <SaveButton isLoading={isButtonLoading} onClick={handleSubmit} onSubmit={handleSubmit}>Save Profile Picture</SaveButton>
                 </div>
               </div>
             </div>

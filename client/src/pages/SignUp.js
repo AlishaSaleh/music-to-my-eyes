@@ -40,7 +40,7 @@ function SignUp() {
             gender: genderState,
             location: locationState,
             orientation: orientationState,
-            image: "https://commons.wikimedia.org/wiki/File:Profile_avatar_placeholder_large.png",
+            image: `https://ui-avatars.com/api/?color=f54f4f&name=${nameRef.current.value}`,
 
         };
         API.createUser(newUser)
@@ -77,18 +77,18 @@ function SignUp() {
                     <label for="name" className="form-label">Name</label>
                     <input ref={nameRef} type="text" className="form-control" placeholder="Kat Midden" aria-label="name" id="userName" />
                     <label for="emailAddress" className="form-label">Email Address</label>
-                    <input ref={emailRef} type="email" className="form-control" id="userEmail"
+                    <input ref={emailRef} type="email" className="form-control mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" id="userEmail"
                         placeholder="name@example.com" />
                     <label for="password" className="form-label">Password</label>
-                    <input ref={passwordRef} type="password" className="form-control" id="firstPassword"
+                    <input ref={passwordRef} type="password" className="form-control mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" id="firstPassword"
                     />
                     <label for="password2" className="form-label">Please re-type your password</label>
-                    <input ref={password2Ref} type="password" className="form-control" id="retypePassword"
+                    <input ref={password2Ref} type="password" className="form-control mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" id="retypePassword"
                     />
                     <label for="dob" className="form-label">Date of Birth</label>
                     <input ref={dobRef} type="date" className="form-select mt-1 block w-full py-2 px-3 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="01-01-2001" aria-label="date" id="dob" />
                     <div className="input-group mb-3">
-                    <label className="form-label" for="userLocation"> Please select your gender</label>
+                    <label className="form-label" for="userLocation"> Please select your country</label>
                     <select onChange={e => setLocation(e.target.value)} className="form-select mt-1 block w-full py-2 px-3 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" id="userLocation">
                             <option value="Afghanistan">Afghanistan</option>
                             <option value="Åland Islands">Åland Islands</option>
