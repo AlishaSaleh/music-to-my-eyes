@@ -27,10 +27,10 @@ const db = [
 ]
 
 const alreadyRemoved = []
-let charactersState = db // This fixes issues with updating characters state forcing it to use the current state and not the state that was active when the card was created.
+let newUsersState = db // This fixes issues with updating newUsers state forcing it to use the current state and not the state that was active when the card was created.
 
 function Advanced () {
-  const [characters, setCharacters] = useState(db)
+  const [newUsers, setnewUsers] = useState(db)
   const [lastDirection, setLastDirection] = useState()
 
   const childRefs = useMemo(() => Array(db.length).fill(0).map(i => React.createRef()), [])
@@ -43,12 +43,12 @@ function Advanced () {
 
   const outOfFrame = (name) => {
     console.log(name + ' left the screen!')
-    charactersState = charactersState.filter(character => character.name !== name)
-    setCharacters(charactersState)
+    newUsersState = newUsersState.filter(newUser => newUser.name !== name)
+    setnewUsers(newUsersState)
   }
 
   const swipe = (dir) => {
-    const cardsLeft = characters.filter(person => !alreadyRemoved.includes(person.name))
+    const cardsLeft = newUsers.filter(person => !alreadyRemoved.includes(person.name))
     if (cardsLeft.length) {
       const toBeRemoved = cardsLeft[cardsLeft.length - 1].name // Find the card object to be removed
       const index = db.map(person => person.name).indexOf(toBeRemoved) // Find the index of which to make the reference to
@@ -63,10 +63,11 @@ function Advanced () {
       <link href='https://fonts.googleapis.com/css?family=Alatsi&display=swap' rel='stylesheet' />
       <h1>React Tinder Card</h1>
       <div className='cardContainer'>
-        {characters.map((character, index) =>
-          <TinderCard ref={childRefs[index]} className='swipe' key={character.name} onSwipe={(dir) => swiped(dir, character.name)} onCardLeftScreen={() => outOfFrame(character.name)}>
-            <div style={{ backgroundImage: 'url(' + character.url + ')' }} className='card'>
-              <h3>{character.name}</h3>
+        {newUsers.map((newUser, index) =>
+          <TinderCard ref={childRefs[index]} className='swipe' key={newUser.name} onSwipe={(dir) => swiped(dir, newUser.name)} onCardLeftScreen={() => outOfFrame(newUser.name)}>
+            <div style={{ backgroundImage: 'url(' + newUser.url + ')' }} className='card'>
+              <h3>{newUser.name}</h3>
+              <h3>{newUser.age</h3>
             </div>
           </TinderCard>
         )}
