@@ -6,9 +6,11 @@ module.exports = {
       'red': '#f54f4f',
       'red-light': '#fac0c0',
       'pink': '#f670bb',
+      "pinklight": "#F5ADB5",
       'purple': '#cdaef8',
       'disabled': '#e5e7eb',
-      "black" : '#000000'
+      "black" : '#000000',
+      
   },
     extend: {},
   },
