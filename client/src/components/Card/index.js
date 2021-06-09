@@ -73,9 +73,7 @@ function Advanced () {
               <h3>{User.location}</h3>
               <h3>Top Songs:
                 {/* The react links below are not accurate, need to confirm */}
-                1. {User.songtitle}
-                2. {User.artist}
-                3.
+                 {User.top_songs}
               </h3>
             </div>
           </TinderCard>
