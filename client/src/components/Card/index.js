@@ -14,7 +14,7 @@ function CardMatch() {
   // 1: set likedUsers from the 'right' swipes
   // const [likedUsers, setLikes] = useState([]);
   const loggedUser = JSON.parse(localStorage.getItem("user"));
-  // console.log(loggedUser.id)
+  console.log(loggedUser)
 
   // setting the state
   const likes = (dir, user) => {
@@ -28,7 +28,10 @@ function CardMatch() {
         id: user
       }
       // console.log(likedUserId)
-      API.addLike(loggedUser.id, likedUserId).then(res => console.log(res))
+      API.addLike(loggedUser.id, likedUserId).then(res => {
+        console.log(res);
+        setAuthUser(res.data);
+      });
     } else {
       console.log('user disliked!');
     }
@@ -39,16 +42,26 @@ function CardMatch() {
 
   let userMatchState = userMatch;
 
+  const loggedUserLikes = JSON.parse(localStorage.getItem("user"));
+
+  console.log("Currently likes:", loggedUserLikes.likes)
+
   useEffect(() => {
     async function fetchData() {
       API.getUsers().then((res) => {
         console.log(res.data.users);
-        // console.log(res.data.users[0].image);
+        // exclude users that the user already has in 'likes'
+        // const data = res.data.users;
+
+        // exclude the currently logged in user
+        // const currentUser = data.filter(user => user.id === loggedUserLikes.id);
+        // console.log(currentUser);
+        
         setuserMatch(res.data.users);
       });
     };
     fetchData()
-  }, [])
+  }, []);
 
 
   const childRefs = useMemo(() => Array(userMatch.length).fill(0).map(i => React.createRef()), []);
@@ -80,14 +93,12 @@ function CardMatch() {
   }
 
   // Need to randomise users before rendering to Cards
-  // Need to add PUT request for likes and dislikes
-
 
   console.log(alreadyRemoved);
 
   return (
     <div>
-      <h1>Are they the music to your eyes?</h1>
+      <h1>{loggedUser.name}, are they the music to your eyes?</h1>
       <br />
       <br />
       <br />
