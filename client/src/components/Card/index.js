@@ -67,12 +67,12 @@ function Advanced () {
         {newUsers.map((newUser, index) =>
           <TinderCard ref={childRefs[index]} className='swipe' key={User.name} onSwipe={(dir) => swiped(dir, User.name)} onCardLeftScreen={() => outOfFrame(User.name)}>
             <div style={{ backgroundImage: 'url(' + User.url + ')' }} className='card'>
+              {/* Cloudinary needed for the below? */}
               <img> {User.image}</img>
               <h3>{User.name}</h3>
               <h3>{User.age}</h3>
               <h3>{User.location}</h3>
               <h3>Top Songs:
-                {/* The react links below are not accurate, need to confirm */}
                  {User.top_songs}
               </h3>
             </div>
