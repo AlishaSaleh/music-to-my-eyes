@@ -110,7 +110,7 @@ router.get("/", async (req, res) => {
 });
 
 // Update User with their likes 
-router.put("/match/:id/like/", async (req, res) => {
+router.put("/:id/like/", async (req, res) => {
     try {
         console.log(req.params);
         const likeData = await User.findByIdAndUpdate(
@@ -125,4 +125,20 @@ router.put("/match/:id/like/", async (req, res) => {
     }
 });
 
+// Update user with their dislikes so they are no longer returned to the user
+// MIGHT NOT BE USED 
+router.put("/:id/dislike/", async (req, res) => {
+    try {
+        console.log(req.params);
+        const likeData = await User.findByIdAndUpdate(
+            { _id: req.params.id },
+            { $push: { dislikes: req.body } }, // works with id e.g. '60b602cd2c09b7409853a947' <-- format
+            { new: true }
+        )
+        console.log(req.params.id);
+        return res.json(likeData)
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
 module.exports = router;
