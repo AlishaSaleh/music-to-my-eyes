@@ -9,7 +9,8 @@ function SignUp() {
 
     const [genderState, setGender] = useState()
     const [locationState, setLocation] = useState()
-    // Orientation useState to be added
+    const [orientationState, setOrientation] = useState()
+
 
     const nameRef = useRef();
     const emailRef = useRef();
@@ -29,7 +30,8 @@ function SignUp() {
             dob: dobRef.current.value,
             gender: genderState,
             location: locationState,
-            image: "https://commons.wikimedia.org/wiki/File:Profile_avatar_placeholder_large.png",
+            orientation: orientationState,
+            image: `https://ui-avatars.com/api/?color=f54f4f&name=${nameRef.current.value}`,
 
         };
         API.createUser(newUser)
@@ -69,27 +71,19 @@ function SignUp() {
                     <label for="name" className="form-label">Name</label>
                     <input ref={nameRef} type="text" className="form-control" placeholder="Kat Midden" aria-label="name" id="userName" />
                     <label for="emailAddress" className="form-label">Email Address</label>
-                    <input ref={emailRef} type="email" className="form-control" id="userEmail"
+                    <input ref={emailRef} type="email" className="form-control mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" id="userEmail"
                         placeholder="name@example.com" />
                     <label for="password" className="form-label">Password</label>
-                    <input ref={passwordRef} type="password" className="form-control" id="firstPassword"
+                    <input ref={passwordRef} type="password" className="form-control mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" id="firstPassword"
                     />
                     <label for="password2" className="form-label">Please re-type your password</label>
-                    <input ref={password2Ref} type="password" className="form-control" id="retypePassword"
+                    <input ref={password2Ref} type="password" className="form-control mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" id="retypePassword"
                     />
                     <label for="dob" className="form-label">Date of Birth</label>
-                    <input ref={dobRef} type="date" className="form-control" placeholder="01-01-2001" aria-label="date" id="dob" />
-                    <div className="col-span-12 md:col-span-2 xl:col-span-2 xl:col-start-1">
-                        <label htmlFor="country" className="block text-sm font-medium text-gray-700">
-                            Country / Region
-                      </label>
-                        <select
-                            onChange={e => setLocation(e.target.value)}
-                            id="country"
-                            name="country"
-                            autoComplete="country"
-                            className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        >
+                    <input ref={dobRef} type="date" className="form-select mt-1 block w-full py-2 px-3 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="01-01-2001" aria-label="date" id="dob" />
+                    <div className="input-group mb-3">
+                    <label className="form-label" for="userLocation"> Please select your country</label>
+                    <select onChange={e => setLocation(e.target.value)} className="form-select mt-1 block w-full py-2 px-3 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" id="userLocation">
                             <option value="Afghanistan">Afghanistan</option>
                             <option value="Åland Islands">Åland Islands</option>
                             <option value="Albania">Albania</option>
@@ -319,7 +313,7 @@ function SignUp() {
                             <option value="Uganda">Uganda</option>
                             <option value="Ukraine">Ukraine</option>
                             <option value="United Arab Emirates">United Arab Emirates</option>
-                            <option value="United Kingdom" selected="selected">United Kingdom</option>
+                            <option value="United Kingdom"  disabled selected hidden>United Kingdom</option>
                             <option value="United States">United States</option>
                             <option value="United States Minor Outlying Islands">United States Minor Outlying Islands</option>
                             <option value="Uruguay">Uruguay</option>
@@ -340,11 +334,21 @@ function SignUp() {
                 </div>
                 <div className="input-group mb-3">
                     <label className="form-label" for="userGender"> Please select your gender</label>
-                    <select onChange={e => setGender(e.target.value)} className="form-select" id="userGender">
+                    <select onChange={e => setGender(e.target.value)} className="form-select mt-1 block w-full py-2 px-3 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" id="userGender">
                         <option value="" disabled selected hidden>Gender</option>
                         <option value="Female">Female</option>
                         <option value="Male">Male</option>
                         <option value="Other">Other/Prefer not to say</option>
+                    </select>
+                </div>
+                <div className="input-group mb-3">
+                    <label className="form-label" for="userOrientation"> Who are you interested in seeing?</label>
+                    <select onChange={e => setOrientation(e.target.value)} className="form-select mt-1 block w-full py-2 px-3 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" id="userOrientation">
+                        <option value="" disabled selected hidden>Sexual Orientation</option>
+                        <option value="Straight">Heterosexual</option>
+                        <option value="Gay/Lesbian">Gay/Lesbian</option>
+                        <option value="Bisexual">Bisexual</option>
+                        <option value="Pansexual">Pansexual</option>
                     </select>
                 </div>
 
