@@ -141,4 +141,23 @@ router.put("/:id/dislike/", async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+// Update User info - profile settings
+router.put("/:id/", async (req, res) => {
+    try {
+        console.log(req.body);
+        const userData = await User.findByIdAndUpdate(
+            { _id: req.params.id },
+            // sets all the new info into the database
+            { $set: req.body }, 
+            { new: true }
+        )
+        console.log(req.params.id);
+        return res.json(userData)
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+
 module.exports = router;
