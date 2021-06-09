@@ -70,7 +70,7 @@ function Advanced () {
               <h3>{newUser.age}</h3>
               <h3>{newUser.location}</h3>
               <h3>Top Songs:
-                {newUser}
+                {newUser.}
               </h3>
             </div>
           </TinderCard>
