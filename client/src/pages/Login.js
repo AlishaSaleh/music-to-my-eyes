@@ -19,18 +19,15 @@ function Login() {
             email: emailRef.current.value,
             password: passwordRef.current.value,
         };
-        console.log(user);
+        //console.log(user);
 
         API.loginUser(user).then(response => {
-            // not getting here
-            console.log('here')
-            console.log(response)
             if (response.status === 200) {
                 setAuthToken(response.data.token);
                 setAuthUser(response.data.user);
                 window.location.replace("/dashboard");
-                // returning on localhost:3000 instead of 3001
-                API.getDash().then(response => console.log(response));
+                API.getDash()
+                //.then(response => console.log(response));
             }
         });
     }

@@ -40,24 +40,27 @@ const userSchema = new Schema({
     location: {
         type: String
     },
-    top_songs: [
-        {
-            song: {
-                type: String,
-            },
-            artist: {
-                type: String,
-            },
-            url: {
-                type: String
-            }
-        }
-    ], // will need front-end validation to limit to 3 items in array
+    top_songs: {
+        type: [String],
+    },
+     // will need front-end validation to limit to 3 items in array
     // add required: true later on?
     image: {
         type: String,
         default: 'https://commons.wikimedia.org/wiki/File:Profile_avatar_placeholder_large.png'
     },
+    likes: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+        },
+    ],
+    dislikes: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+        },
+    ],
     matches: [
         {
             type: Schema.Types.ObjectId,

@@ -1,12 +1,12 @@
   
   h1 {
-    font-family: 'Damion', cursive;
-    color: #fff;
-    text-shadow: 0px 0px 60px 0px rgba(0,0,0,0.30);
+    /* font-family: 'Damion', cursive; */
+    color: rgb(0, 0, 0);
+    text-shadow: 0px 0px 60px 0px rgba(255, 255, 255, 0.3);
   }
   
   h2 {
-    color: #fff;
+    color: rgb(0, 0, 0);
   }
   
   .swipe {
@@ -25,7 +25,7 @@
     width: 80vw;
     max-width: 260px;
     height: 300px;
-    box-shadow: 0px 0px 60px 0px rgba(0,0,0,0.30);
+    box-shadow: 0px 0px 10px 0px rgba(97, 97, 97, 0.3);
     border-radius: 20px;
     background-size: cover;
     background-position: center;
@@ -40,7 +40,7 @@
     position: absolute;
     bottom: 0;
     margin: 10px;
-    color: #fff;
+    color: rgb(0, 0, 0);
   }
   
   .infoText {
@@ -48,7 +48,7 @@
     height: 28px;
     justify-content: center;
     display: flex;
-    color: #fff;
+    color: rgb(0, 0, 0);
     animation-name: popup;
     animation-duration: 800ms;
   }

@@ -5,21 +5,12 @@ import setAuthUser from "../utils/setAuthUser";
 
 function SignUp() {
 
-    const [user, setUser] = useState({
-        name: "",
-        email: "",
-        password: "",
-        password2: "",
-        dob: "",
-        gender: "",
-        location: "",
-        orientation: ""
-        // errors: {}
-    });
+    const [errorState, setErrorState] = useState([]);
 
     const [genderState, setGender] = useState()
     const [locationState, setLocation] = useState()
     const [orientationState, setOrientation] = useState()
+
 
     const nameRef = useRef();
     const emailRef = useRef();
@@ -52,17 +43,16 @@ function SignUp() {
                 window.location.replace("/dashboard");
                 // returning on localhost:3000 instead of 3001
                 //API.getDash().then(response => console.log(response));
-            }
-        });
+            } 
+        }).catch(error => {
+            //console.log(error.response.data);4
+            const errors = Object.values(error.response.data);
+            console.log(errors)
+            setErrorState(errors)
+
+        })
 
     }
-    // SET STATE
-    // EVENT LISTENERS: ONCHANGE ONSUBMIT
-    // useRef get the value of selected option
-    // USER AUTH
-    // API REQUEST
-
-    // REDIRECT TO DASHBOARD
 
     return (
 
@@ -72,6 +62,10 @@ function SignUp() {
 
                 <h1>Sign Up!</h1>
                 <p>Please sign up below:</p>
+                {/* Errors to style */}
+                {errorState.map(error => (
+                    <p>{error}</p>
+                ))}
 
                 <div className="mb-3">
                     <label for="name" className="form-label">Name</label>

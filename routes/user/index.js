@@ -89,6 +89,7 @@ router.post("/login", async (req, res) => {
 
 });
 
+
 router.put("/user/+id", async (req, res) => {
 
       
@@ -141,25 +142,132 @@ router.put("/user/+id", async (req, res) => {
   }
 });
 
+// Testing Auth in Postman
+
 router.get("/test", authCheck, (req, res) => {
     res.json({ message: "authenticated!" })
 })
 
-// router.get("/dashboard", authCheck, async (req, res) => {
-//     const user = await User.findById(req.user.id);
-//     res.json({ user: user.name });
-// })
+// [user]/ -- GET all users for Match page
+router.get("/", async (req, res) => {
+    try {
+        //const { user } = req.headers;
+        const userData = await User.find({});
+        // console.log(req.headers);
+        // need to remove password before returning
+        // need to remove this user from data - client or serverside?
+        // findOne (the currently logged in user) - exclude from the find()
+        return res.json({ users: userData })
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
 
+// Get User by ID --> works in Postman
+router.get("/:id/", async (req, res) => {
+    try {
+        const userData = await User.findById(
+            { _id: req.params.id }
+        );
 
-// User log out route
-// router.post('/logout', (req, res) => {
-//     if (req.session.logged_in) {
-//         req.session.destroy(() => {
-//             res.status(204).end();
-//         });
-//     } else {
-//         res.status(404).end();
-//     }
-// });
+        if (!userData) {
+            res.status(404).json({ message: 'No user found with this id!' });
+            return;
+        }
+        
+        // console.log(req.params.id);
+        return res.json(userData)
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+// Update User with their likes --> works in Postman
+router.put("/:id/like/", async (req, res) => {
+    try {
+        console.log(req.body);
+        const likeData = await User.findByIdAndUpdate(
+            { _id: req.params.id },
+            { $push: { likes: req.body.id } }, // works with id e.g. '60b602cd2c09b7409853a947' <-- format
+            { new: true }
+        );
+
+        if (!likeData) {
+            res.status(404).json({ message: 'No user found with this id!' });
+            return;
+        }
+
+        console.log(req.params.id);
+        return res.json(likeData)
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+// Update user with their dislikes so they are no longer returned to the user
+// MIGHT NOT BE USED 
+router.put("/:id/dislike/", async (req, res) => {
+    try {
+        // console.log(req.params);
+        const likeData = await User.findByIdAndUpdate(
+            { _id: req.params.id },
+            { $push: { dislikes: req.body } }, // works with id e.g. '60b602cd2c09b7409853a947' <-- format
+            { new: true }
+        );
+             
+        if (!likeData) {
+            res.status(404).json({ message: 'No user found with this id!' });
+            return;
+        }
+
+        // console.log(req.params.id);
+        return res.json(likeData)
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+// Update User info - profile settings --> works in Postman
+router.put("/:id/", async (req, res) => {
+    try {
+        // console.log(req.body);
+        const userData = await User.findByIdAndUpdate(
+            { _id: req.params.id },
+            // sets all the new info into the database
+            { $set: req.body }, 
+            { new: true }
+        );
+
+        if (!userData) {
+            res.status(404).json({ message: 'No user found with this id!' });
+            return;
+        }
+
+        // console.log(req.params.id);
+        return res.json(userData)
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+// Delete a User --> works in Postman
+router.delete("/:id/", async (req, res) => {
+    try {
+        const userData = await User.findByIdAndRemove(
+            { _id: req.params.id }
+        );
+
+        if (!userData) {
+            res.status(404).json({ message: 'No user found with this id!' });
+            return;
+        }
+
+        // console.log(req.params.id);
+        return res.json(userData)
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
 
 module.exports = router;
