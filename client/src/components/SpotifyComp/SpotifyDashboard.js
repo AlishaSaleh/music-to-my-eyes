@@ -23,11 +23,6 @@ export default function SpotifyDashboard({ code }) {
     }, [accessToken])
 
     useEffect(() => {
-        if (!accessToken) return
-        spotifyApi.setAccessToken(accessToken)
-    }, [accessToken])
-
-    useEffect(() => {
         if (!songSearch) return setSearchResults([])
         if (!accessToken) return
 
