@@ -1,35 +1,61 @@
-import React, { useState, useMemo, useEffect } from 'react'
-import TinderCard from 'react-tinder-card'
+import React, { useState, useMemo, useEffect } from 'react';
+import TinderCard from 'react-tinder-card';
 import "./index.css";
 import API from "../../utils/API";
+import setAuthUser from '../../utils/setAuthUser';
 
 // holds the people already shown to the user to avoid repetition 
 const alreadyRemoved = [];
-const liked = [];
+// const liked = [];
 
 function CardMatch() {
-  const [characters, setCharacters] = useState([])
+  const [userMatch, setuserMatch] = useState([])
   const [lastDirection, setLastDirection] = useState()
+  // 1: set likedUsers from the 'right' swipes
+  // const [likedUsers, setLikes] = useState([]);
+  const loggedUser = JSON.parse(localStorage.getItem("user"));
+  // console.log(loggedUser.id)
 
-  let charactersState = characters;
+  // setting the state
+  const likes = (dir, user) => {
+    if (dir === "right") {
+      // console.log(user);
+      // liked.push(user);
+      console.log('user liked!')
+      // console.log('state: ', likedUsers);
+      // console.log('array: ', liked);
+      const likedUserId = {
+        id: user
+      }
+      // console.log(likedUserId)
+      API.addLike(loggedUser.id, likedUserId).then(res => console.log(res))
+    } else {
+      console.log('user disliked!');
+    }
+  }
+
+  // 2: send the array to the database through the API.addLike()
+
+
+  let userMatchState = userMatch;
 
   useEffect(() => {
     async function fetchData() {
       API.getUsers().then((res) => {
-          console.log(res.data.users);
-          // console.log(res.data.users[0].image);
-          setCharacters(res.data.users);
+        console.log(res.data.users);
+        // console.log(res.data.users[0].image);
+        setuserMatch(res.data.users);
       });
     };
     fetchData()
   }, [])
 
 
-  const childRefs = useMemo(() => Array(characters.length).fill(0).map(i => React.createRef()), []);
+  const childRefs = useMemo(() => Array(userMatch.length).fill(0).map(i => React.createRef()), []);
+  // returning empty array
   console.log(childRefs);
 
   const swiped = (direction, nameToDelete) => {
-    console.log(direction);
     console.log('removing: ' + nameToDelete)
     setLastDirection(direction)
     alreadyRemoved.push(nameToDelete)
@@ -37,15 +63,17 @@ function CardMatch() {
 
   const outOfFrame = (name) => {
     console.log(name + ' left the screen!')
-    charactersState = charactersState.filter(character => character.name !== name)
-    setCharacters(charactersState)
+    userMatchState = userMatchState.filter(user => user.name !== name)
+    setuserMatch(userMatchState)
   }
 
+  // this function not working as childRefs is empty 
   const swipe = (dir) => {
-    const cardsLeft = characters.filter(person => !alreadyRemoved.includes(person._id))
+    const cardsLeft = userMatch.filter(person => !alreadyRemoved.includes(person._id));
+    console.log(cardsLeft)
     if (cardsLeft.length) {
       const toBeRemoved = cardsLeft[cardsLeft.length - 1]._id // Find the card object to be removed
-      const index = characters.map(person => person._id).indexOf(toBeRemoved) // Find the index of which to make the reference to
+      const index = userMatch.map(person => person._id).indexOf(toBeRemoved) // Find the index of which to make the reference to
       alreadyRemoved.push(toBeRemoved) // Make sure the next card gets removed next time if this card do not have time to exit the screen
       childRefs[index].current.swipe(dir) // Swipe the card!
     }
@@ -64,10 +92,18 @@ function CardMatch() {
       <br />
       <br />
       <div className='cardContainer'>
-        {characters.map((character, index) =>
-          <TinderCard ref={childRefs[index]} className='swipe' key={character._id} onSwipe={(dir) => swiped(dir, character._id)} onCardLeftScreen={() => outOfFrame(character._id)}>
-            <div style={{ backgroundImage: 'url(' + character.image + ')' }} className='card'>
-              <h3>{character.name}</h3>
+        {userMatch.map((user, index) =>
+          <TinderCard
+            ref={childRefs[index]}
+            className='swipe'
+            key={user._id}
+            onSwipe={(dir) => {
+              likes(dir, user._id)
+              swiped(dir, user._id)
+            }}
+            onCardLeftScreen={() => outOfFrame(user._id)}>
+            <div style={{ backgroundImage: 'url(' + user.image + ')' }} className='card'>
+              <h3>{user.name}</h3>
             </div>
           </TinderCard>
         )}

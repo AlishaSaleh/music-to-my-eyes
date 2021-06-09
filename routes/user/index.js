@@ -131,10 +131,10 @@ router.get("/:id/", async (req, res) => {
 // Update User with their likes --> works in Postman
 router.put("/:id/like/", async (req, res) => {
     try {
-        // console.log(req.params);
+        console.log(req.body);
         const likeData = await User.findByIdAndUpdate(
             { _id: req.params.id },
-            { $push: { likes: req.body } }, // works with id e.g. '60b602cd2c09b7409853a947' <-- format
+            { $push: { likes: req.body.id } }, // works with id e.g. '60b602cd2c09b7409853a947' <-- format
             { new: true }
         );
 
@@ -143,7 +143,7 @@ router.put("/:id/like/", async (req, res) => {
             return;
         }
 
-        // console.log(req.params.id);
+        console.log(req.params.id);
         return res.json(likeData)
     } catch (err) {
         res.status(500).json(err);

@@ -1,5 +1,4 @@
 import axios from "axios";
-import setAuthToken from "./setAuthToken";
 
 export default {
     goToLogin: function () {
