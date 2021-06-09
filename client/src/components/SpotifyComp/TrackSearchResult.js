@@ -1,20 +1,18 @@
 import React from "react"
 
 export default function TrackSearchResult({ track}) {
-  //chooseTrack(track)
-  const saveTrack = () => {
-    const savedTrackArr = []
-    const q = ""
-    localStorage.setItem("trackInfo", JSON.stringify(q));
 
-    savedTrackArr.push(q);
-    localStorage.setItem("savedTrackInfo", JSON.stringify(savedTrackArr));
+  function handleClick(e) {
+    e.preventDefault();
+    console.log({track})
+    console.log('The div was clicked.');
   }
+
   return (
     <div
       className="d-flex m-2 align-items-center"
       style={{ cursor: "pointer" }}
-      onClick={saveTrack}
+      onClick={handleClick}
     >
       <img src={track.albumUrl} style={{ height: "64px", width: "64px" }} />
       <div className="ml-3">
@@ -24,3 +22,12 @@ export default function TrackSearchResult({ track}) {
     </div>
   )
 }
+
+// const saveTrack = () => {
+//   const savedTrackArr = []
+//   const q = ""
+//   localStorage.setItem("trackInfo", JSON.stringify(q));
+
+//   savedTrackArr.push(q);
+//   localStorage.setItem("savedTrackInfo", JSON.stringify(savedTrackArr));
+// }

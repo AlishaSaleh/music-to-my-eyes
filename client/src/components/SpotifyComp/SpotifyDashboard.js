@@ -9,9 +9,10 @@ const spotifyApi = new SpotifyWebApi({
 })
 
 export default function SpotifyDashboard({ code }) {
-      const accessToken = useAuth(code);
+    const accessToken = useAuth(code);
     const [songSearch, setSongSearch] = useState("");
     const [searchResults, setSearchResults] = useState([]);
+    const [saveTrack, setSaveTrack] = useState();
 
     // function chooseTrack(track) {
     //     setSongSearch("")
