@@ -9,6 +9,7 @@ import error404 from "./pages/404";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import SpotifyHome from "./pages/SpotifyHome"
+import Match from "./pages/Match";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute.js";
 
 //this gives us the query parameter of our URL. In this case it's ?code=
@@ -28,6 +29,7 @@ function App() {
           <Route exact path="/dashboard" component={Profile} />
           <Route exact path="/spotify-home" component={SpotifyHome} />
           <Route component={error404} />
+          <Route exact path="/match" component={Match} />
           {/* <Route exact path="/dashboard" component={Profile} /> */}
         </Switch>
       </div>
