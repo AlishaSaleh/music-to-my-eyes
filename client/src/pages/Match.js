@@ -1,5 +1,6 @@
 import React from 'react';
 import '../App.css';
+import Advanced from "../components/Card/index"
 
 function Match() {
     return (
@@ -10,6 +11,7 @@ function Match() {
                         <h3 className="text-xl font-semibold text-shadow">Jane Doe</h3>
                     </div>
                     <div>
+                        {Advanced}
                         <img src="https://i.postimg.cc/SxLx0fHV/bg01.jpg" alt="image1" className="w-full h-48 object-cover mb-2" />
                         <ul className="list">
                             <li>Song 1</li>
@@ -25,4 +27,4 @@ function Match() {
     )
 }
 
-export default Match
+export default Match;
