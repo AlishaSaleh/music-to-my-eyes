@@ -13,9 +13,9 @@ export default function SpotifyDashboard({ code }) {
     const [songSearch, setSongSearch] = useState("");
     const [searchResults, setSearchResults] = useState([]);
 
-    function chooseTrack(track) {
-        setSongSearch("")
-      }
+    // function chooseTrack(track) {
+    //     setSongSearch("")
+    //   }
 
     useEffect(() => {
         if (!accessToken) return
@@ -63,7 +63,7 @@ export default function SpotifyDashboard({ code }) {
           <TrackSearchResult
             track={track}
             key={track.uri}
-            chooseTrack={chooseTrack}
+            //chooseTrack={chooseTrack}
           />
         ))}
       </div>
