@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react'
 import TinderCard from 'react-tinder-card'
+import User from '../../../../models/User';
 import "./index.css";
 
 
@@ -64,13 +65,17 @@ function Advanced () {
       <h1>React Tinder Card</h1>
       <div className='cardContainer'>
         {newUsers.map((newUser, index) =>
-          <TinderCard ref={childRefs[index]} className='swipe' key={newUser.name} onSwipe={(dir) => swiped(dir, newUser.name)} onCardLeftScreen={() => outOfFrame(newUser.name)}>
-            <div style={{ backgroundImage: 'url(' + newUser.url + ')' }} className='card'>
-              <h3>{newUser.name}</h3>
-              <h3>{newUser.age}</h3>
-              <h3>{newUser.location}</h3>
+          <TinderCard ref={childRefs[index]} className='swipe' key={User.name} onSwipe={(dir) => swiped(dir, User.name)} onCardLeftScreen={() => outOfFrame(User.name)}>
+            <div style={{ backgroundImage: 'url(' + User.url + ')' }} className='card'>
+              <img> {User.image}</img>
+              <h3>{User.name}</h3>
+              <h3>{User.age}</h3>
+              <h3>{User.location}</h3>
               <h3>Top Songs:
-                {newUser.}
+                {/* The react links below are not accurate, need to confirm */}
+                1. {User.songtitle}
+                2. {User.artist}
+                3.
               </h3>
             </div>
           </TinderCard>
