@@ -37,6 +37,7 @@
     "bootstrap": "^4.6.0",
     "cloudinary": "^1.25.1",
     "connect-mongo": "^4.4.1",
+    "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.16.3",
     "express-session": "^1.17.2",
@@ -51,6 +52,7 @@
     "react-spring": "^9.2.0",
     "react-tinder-card": "^1.4.0",
     "react-toastify": "^7.0.4",
+    "spotify-web-api-node": "^5.0.2",
     "validator": "^13.6.0"
   },
   "bugs": {
