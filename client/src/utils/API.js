@@ -47,5 +47,9 @@ export default {
     // Update Likes
     addLike: function (id, likeData) {
         return axios.put(`/user/${id}/like`, likeData)
-    }
+    },
+    // Takes user to Spotify landing page from
+    goToSpotify: function () {
+        (document.location.replace('/spotify-home'));
+    },
 };
