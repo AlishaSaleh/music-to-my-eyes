@@ -1,10 +1,25 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import API from "../utils/API";
+
 import { isAuth } from '../utils/isAuth';
 import HeroBg from "../components/HeroBg"
 import API from "../utils/API";
 
 function Profile() {
-    { API.getDash().then(response => console.log(response)) }
+  
+    const [loggedUser, setLogged] = useState()
+
+    useEffect(() => {
+        async function fetchData() {
+            API.getDash().then(response => {
+                // console.log(response.data.user)
+                setLogged(response.data.user);
+            });
+        };
+        fetchData()
+    }, []);
+
+    // console.log(loggedUser)
     return (
 
         <div>
@@ -42,8 +57,11 @@ function Profile() {
                                 </div>
                                 <div className="text-center mt-12">
                                     <h3 className="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2">
-                                        NAME
-                                    </h3>
+
+                                        Welcome, {loggedUser}
+                  </h3>
+
+
                                     <button
                                         className="bg-gradient-to-r from-pink to-purple uppercase text-white font-bold hover:sh adow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
                                         type="button"
@@ -69,7 +87,6 @@ function Profile() {
                                     </div>
 
                                 </div>
-
                             </div>
                         </div>
                     </div>

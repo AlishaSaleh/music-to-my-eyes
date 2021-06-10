@@ -84,6 +84,7 @@ function SignUp() {
                     <div className="input-group mb-3">
                     <label className="form-label" for="userLocation"> Please select your country</label>
                     <select onChange={e => setLocation(e.target.value)} className="form-select mt-1 block w-full py-2 px-3 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" id="userLocation">
+                    <option value="" disabled selected hidden>Location</option>
                             <option value="Afghanistan">Afghanistan</option>
                             <option value="Åland Islands">Åland Islands</option>
                             <option value="Albania">Albania</option>
@@ -313,7 +314,7 @@ function SignUp() {
                             <option value="Uganda">Uganda</option>
                             <option value="Ukraine">Ukraine</option>
                             <option value="United Arab Emirates">United Arab Emirates</option>
-                            <option value="United Kingdom"  disabled selected hidden>United Kingdom</option>
+                            <option value="United Kingdom">United Kingdom</option>
                             <option value="United States">United States</option>
                             <option value="United States Minor Outlying Islands">United States Minor Outlying Islands</option>
                             <option value="Uruguay">Uruguay</option>

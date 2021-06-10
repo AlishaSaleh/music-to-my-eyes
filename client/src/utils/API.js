@@ -9,7 +9,11 @@ export default {
     },
     // Gets all users
     getUsers: function () {
-        return axios.get("/user");
+        return axios.get("/user", {
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("access_token")}`
+            }
+        });
     },
     // Gets the user with the given id
     getUser: function (id) {
@@ -46,7 +50,18 @@ export default {
     },
     // Update Likes
     addLike: function (id, likeData) {
-        return axios.put(`/user/${id}/like`, likeData)
+        return axios.put(`/user/${id}/like`, likeData, {
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("access_token")}`
+            },
+        });
+    },
+    getMatch: function () {
+        return axios.get("/api/matches", {
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("access_token")}`
+            }
+        });
     },
     // Takes user to Spotify landing page from
     goToSpotify: function () {
