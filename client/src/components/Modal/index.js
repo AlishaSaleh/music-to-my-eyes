@@ -32,6 +32,7 @@ export default function Modal(props) {
 
   // Save Button    
   function handleSubmit(e) {
+    uploadImage();
     e.preventDefault();
     setIsButtonLoading(true);
     setShowModal(false);
@@ -44,8 +45,10 @@ export default function Modal(props) {
     var id = props.user.id;
     console.log(image, id);
     API.updateUser(id, image);
-
-    // const image = document.querySelector('#pp-img').getAttribute("src");
+    const user = JSON.parse(localStorage.getItem('user'));
+    user.image = data.url;
+    localStorage.setItem('user', JSON.stringify(user));
+    window.location.reload();
 
   }
 
