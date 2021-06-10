@@ -1,6 +1,7 @@
 import { stringify } from 'postcss';
 import React, {useState } from 'react';
 import API from "../../utils/API";
+import Dropdown from "../Dropdown";
 
 function Navbar() {
     const [show, setShow] = useState(false);
@@ -39,12 +40,23 @@ function Navbar() {
                     </ul> :
                     <ul className="flex text-3xl md:text-base items-center py-8 md:flex flex-col md:flex-row justify-center fixed md:relative top-0 bottom-0 left-0 right-0 bg-white z-20">
                         <li className="text-gray-600 hover:text-gray-800 cursor-pointer md:ml-10 pt-10 md:pt-0">
+                            <a href="/match">Match</a>
+                        </li>
+                        <li className="text-gray-600 hover:text-gray-800 cursor-pointer md:ml-10 pt-10 md:pt-0">
+                            <a href="/dashboard">Dashboard</a>
+                        </li>
+                        <li className="text-gray-600 hover:text-gray-800 cursor-pointer md:ml-10 pt-10 md:pt-0">
+                            <a href="/profile">Account</a>
+                        </li>
+                        <li className="text-gray-600 hover:text-gray-800 cursor-pointer md:ml-10 pt-10 md:pt-0">
                             <a href="/" onClick={API.logoutUser}>Logout</a>
                         </li>
+                        <Dropdown></Dropdown>
                     </ul>                    }
                 </div>
             </div>
         </div>
+        
     </nav>
     )
 }

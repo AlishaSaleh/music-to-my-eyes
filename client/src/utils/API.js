@@ -40,6 +40,7 @@ export default {
             }
         });
     },
+    //LOGOUT
     logoutUser: function () {
         localStorage.clear();
         document.location.replace('/login');
