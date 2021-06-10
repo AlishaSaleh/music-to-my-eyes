@@ -26,11 +26,12 @@ function App() {
           <Route exact path="/login" component={Login} />
           <Route exact path="/" component={Home} />
           <Route exact path="/profile-settings" component={ProfileSettings} />
-          <PrivateRoute exact path="/dashboard" component={Profile} />
+          {/* <PrivateRoute exact path="/dashboard" component={Profile} /> */} 
+          <Route exact path="/dashboard" component={Profile} />
           <PrivateRoute exact path="/match" component={Match} />
           <Route exact path="/spotify-home" component={SpotifyHome} />
           <Route component={error404} />
-          {/* <Route exact path="/dashboard" component={Profile} /> */}
+         
         </Switch>
       </div>
     </Router>

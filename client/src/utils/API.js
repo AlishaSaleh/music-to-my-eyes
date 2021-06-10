@@ -63,4 +63,8 @@ export default {
             }
         });
     },
+    // Takes user to Spotify landing page from
+    goToSpotify: function () {
+        (document.location.replace('/spotify-home'));
+    },
 };
