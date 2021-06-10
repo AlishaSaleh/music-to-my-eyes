@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import API from "../utils/API";
-
-import { isAuth } from '../utils/isAuth';
 import HeroBg from "../components/HeroBg"
-import API from "../utils/API";
 
 function Profile() {
   
