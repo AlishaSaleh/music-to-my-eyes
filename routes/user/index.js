@@ -224,20 +224,27 @@ router.put("/:id/like/", authCheck, async (req, res) => {
         console.log(likedUser.likes);
         console.log(isLikedUser);
 
-        User.updateOne(
-            { _id: req.body.id },
-            { $push: { matches: req.user.id } },
-            { new: true },
-            function (error, success) {
-                if (error) {
-                    console.log(error);
-                } else {
-                    console.log(success);
+        if (!isLikedUser) {
+            return res.json(likeData)
+        } else {
+            User.updateOne(
+                { _id: req.body.id },
+                { $push: { matches: isLikedUser } },
+                { new: true },
+                function (error, success) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log(success);
+                    }
                 }
-            }
-        );
+            );
+            return res.json(likeData)
+        }
+
+       
         // console.log(req.params.id);
-        return res.json(likeData)
+ 
     } catch (err) {
         res.status(500).json(err);
     }
