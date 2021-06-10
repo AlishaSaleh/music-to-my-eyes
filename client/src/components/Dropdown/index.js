@@ -1,7 +1,8 @@
 import React from "react";
 import { createPopper } from "@popperjs/core";
 import ProfilePic from "../ProfilePic";
-import API from "../../utils/API"
+import API from "../../utils/API";
+import "./index.css"
 
 const Dropdown = ({ color }) => {
   // dropdown props
@@ -25,12 +26,13 @@ const Dropdown = ({ color }) => {
     const user = JSON.parse(localStorage.getItem('user'));
   return (
     <>
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap fix-height pp-hide">
         <div className="w-full sm:w-6/12 md:w-4/12 px-4">
           <div className="relative inline-flex align-middle w-full">
             <a
               type="button"
               ref={btnDropdownRef}
+              className="pp-btn"
               onClick={() => {
                 dropdownPopoverShow
                   ? closeDropdownPopover()
@@ -50,7 +52,7 @@ const Dropdown = ({ color }) => {
               <a
                 href="/profile-settings"
                 className={
-                  "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent " +
+                  "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent no-hov" +
                   (color === "white" ? " text-blueGray-700" : "text-white")
                 }
               >
@@ -60,7 +62,7 @@ const Dropdown = ({ color }) => {
               <a
                 href="/logout"
                 className={
-                  "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent " +
+                  "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent no-hov" +
                   (color === "white" ? " text-blueGray-700" : "text-white")
                 }
                 onClick={API.logoutUser}

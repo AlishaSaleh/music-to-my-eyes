@@ -179,8 +179,10 @@ router.put("/:id/dislike/", async (req, res) => {
 router.put("/:id/", async (req, res) => {
     try {
         // console.log(req.body);
+        if(req.body.password) {
         const salt = await bcrypt.genSalt(10);
         req.body.password = await bcrypt.hash(req.body.password, salt);
+        }
         const userData = await User.findByIdAndUpdate(
             { _id: req.params.id },
             // sets all the new info into the database
