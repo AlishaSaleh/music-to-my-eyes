@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
 import { isAuth } from '../utils/isAuth';
 import HeroBg from "../components/HeroBg"
+import API from "../utils/API";
 
 function Profile() {
-
+    { API.getDash().then(response => console.log(response)) }
     return (
 
         <div>
@@ -13,7 +14,7 @@ function Profile() {
                 <section className="relative block" style={{ height: "500px" }}>
                     <div
                         className="absolute top-0 w-full h-full bg-center bg-cover">
-                            <HeroBg />
+                        <HeroBg />
                         <span
                             id="blackOverlay"
                             className="w-full h-full absolute opacity-30 bg-black"
@@ -32,7 +33,7 @@ function Profile() {
                                             {/* profile picture */}
                                             {/* <img
                         alt="..."
-                        src={require(User.image).default}
+                        src={require(user.image).default}
                         className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16"
                         style={{ maxWidth: "150px" }}
                       /> */}
@@ -51,7 +52,7 @@ function Profile() {
                                      </button>
                                 </div>
 
-                                <div className="relative grid grid-cols-1 md:grid-cols-2 gap-2">
+                                <div className="relative grid grid-cols-1 md:grid-cols-2 gap-2 p-3">
 
                                     {/* music */}
                                     <div className="col-span-1 text-center p-5 pt-20 bg-gradient-to-r from-red to-pink rounded-2xl">
@@ -64,6 +65,7 @@ function Profile() {
                                     <div className="col-span-1 text-center p-5 pt-20 bg-gradient-to-l from-red to-pink rounded-2xl">
                                         <h1 className="text-2xl">My Matches</h1>
                                         <p>It's time to find your playlist partner! </p>
+
                                     </div>
 
                                 </div>
