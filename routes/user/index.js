@@ -92,29 +92,29 @@ router.post("/login", async (req, res) => {
 
 router.put("/user/+id", async (req, res) => {
 
-      
+
     const user = await User.findOne({
         where: {
-          id: req.session.user_id,
+            id: req.session.user_id,
         },
-      });
+    });
 
-      if (req.body.username == "" | req.body.username == userCurrent.username) {
+    if (req.body.username == "" | req.body.username == userCurrent.username) {
         req.body.username = userCurrent.username;
-
-      }
-
-    if (req.body.role_id == "" | req.body.role_id == userCurrent.role_id) {
-      req.body.role_id = userCurrent.role_id;
 
     }
 
-      
+    if (req.body.role_id == "" | req.body.role_id == userCurrent.role_id) {
+        req.body.role_id = userCurrent.role_id;
+
+    }
+
+
     if (req.body.picture == '' | req.body.picture == userCurrent.picture) {
         req.body.picture = userCurrent.picture;
 
     }
-          
+
     if (req.body.email == '' | req.body.email == userCurrent.email) {
         req.body.email = userCurrent.email;
     }
@@ -124,22 +124,22 @@ router.put("/user/+id", async (req, res) => {
 
     }
     else {
-       req.body.password = await bcrypt.hash(req.body.password, 10);
+        req.body.password = await bcrypt.hash(req.body.password, 10);
     }
 
-  const thisUser = await User.updateOne(req.body, {
-    where: {
-      _id: req.params.id,
-    },
-  });
-  console.log(thisUser);
-  
-  if (!thisUser) {
-    res.status(404).json({
-      message: 'No user found with this id!'
+    const thisUser = await User.updateOne(req.body, {
+        where: {
+            _id: req.params.id,
+        },
     });
-    return;
-  }
+    console.log(thisUser);
+
+    if (!thisUser) {
+        res.status(404).json({
+            message: 'No user found with this id!'
+        });
+        return;
+    }
 });
 
 // Testing Auth in Postman
@@ -149,15 +149,25 @@ router.get("/test", authCheck, (req, res) => {
 })
 
 // [user]/ -- GET all users for Match page
-router.get("/", async (req, res) => {
+router.get("/", authCheck, async (req, res) => {
     try {
         //const { user } = req.headers;
-        const userData = await User.find({});
         // console.log(req.headers);
-        // need to remove password before returning
+        const excluded = [req.user.id, ...req.user.likes]
+        const userData = await User.find({ _id: { $nin: excluded } });
+        // remove password before returning
+        const sanUsers = userData.map(users => {
+            return sanitiseUser(users);
+        });
+
+       
+        // const newUsers = sanUsers.filter(({id}) => excluded.find(userId => userId.toString() !== id.toString()))
         // need to remove this user from data - client or serverside?
+        // console.log(newUsers)
+        // console.log(excluded)
+
         // findOne (the currently logged in user) - exclude from the find()
-        return res.json({ users: userData })
+        return res.json({ users: sanUsers })
     } catch (err) {
         res.status(500).json(err);
     }
@@ -174,7 +184,7 @@ router.get("/:id/", async (req, res) => {
             res.status(404).json({ message: 'No user found with this id!' });
             return;
         }
-        
+
         // console.log(req.params.id);
         return res.json(userData)
     } catch (err) {
@@ -183,11 +193,20 @@ router.get("/:id/", async (req, res) => {
 });
 
 // Update User with their likes --> works in Postman
-router.put("/:id/like/", async (req, res) => {
+router.put("/:id/like/", authCheck, async (req, res) => {
     try {
-        console.log(req.body);
+        if (req.user.id === req.body.id) {
+            return res.json({ message: "You can't like yourself!"})
+        }
+
+        const isLiked = req.user.likes.find(userId => userId === req.body.id);
+
+        if (isLiked) {
+            return res.json({ message: "You have already liked this user!"})
+        }
+
         const likeData = await User.findByIdAndUpdate(
-            { _id: req.params.id },
+            { _id: req.user.id },
             { $push: { likes: req.body.id } }, // works with id e.g. '60b602cd2c09b7409853a947' <-- format
             { new: true }
         );
@@ -197,7 +216,17 @@ router.put("/:id/like/", async (req, res) => {
             return;
         }
 
-        console.log(req.params.id);
+        const likedUser = await User.findById(req.body.id)
+        const likeArr = likedUser.likes;
+        const isLikedUser = likeArr.find(userId => 
+            userId.toString() === req.user.id.toString()
+        );
+        console.log(likedUser.likes);
+        console.log(isLikedUser);
+
+        likedUser.update()
+
+        // console.log(req.params.id);
         return res.json(likeData)
     } catch (err) {
         res.status(500).json(err);
@@ -214,7 +243,7 @@ router.put("/:id/dislike/", async (req, res) => {
             { $push: { dislikes: req.body } }, // works with id e.g. '60b602cd2c09b7409853a947' <-- format
             { new: true }
         );
-             
+
         if (!likeData) {
             res.status(404).json({ message: 'No user found with this id!' });
             return;
@@ -234,7 +263,7 @@ router.put("/:id/", async (req, res) => {
         const userData = await User.findByIdAndUpdate(
             { _id: req.params.id },
             // sets all the new info into the database
-            { $set: req.body }, 
+            { $set: req.body },
             { new: true }
         );
 

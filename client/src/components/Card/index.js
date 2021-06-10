@@ -8,13 +8,14 @@ import setAuthUser from '../../utils/setAuthUser';
 const alreadyRemoved = [];
 // const liked = [];
 
-function CardMatch() {
+function CardMatch(props) {
+  // console.log(props);
   const [userMatch, setuserMatch] = useState([])
   const [lastDirection, setLastDirection] = useState()
   // 1: set likedUsers from the 'right' swipes
   // const [likedUsers, setLikes] = useState([]);
   const loggedUser = JSON.parse(localStorage.getItem("user"));
-  console.log(loggedUser)
+  console.log(loggedUser._id)
 
   // setting the state
   const likes = (dir, user) => {
@@ -28,7 +29,7 @@ function CardMatch() {
         id: user
       }
       // console.log(likedUserId)
-      API.addLike(loggedUser.id, likedUserId).then(res => {
+      API.addLike(loggedUser._id, likedUserId).then(res => {
         console.log(res);
         setAuthUser(res.data);
       });
@@ -64,6 +65,7 @@ function CardMatch() {
   }, []);
 
 
+
   const childRefs = useMemo(() => Array(userMatch.length).fill(0).map(i => React.createRef()), []);
   // returning empty array
   console.log(childRefs);
@@ -95,6 +97,8 @@ function CardMatch() {
   // Need to randomise users before rendering to Cards
 
   console.log(alreadyRemoved);
+  console.log(userMatch);
+
 
   return (
     <div>
@@ -107,12 +111,12 @@ function CardMatch() {
           <TinderCard
             ref={childRefs[index]}
             className='swipe'
-            key={user._id}
+            key={user.id}
             onSwipe={(dir) => {
-              likes(dir, user._id)
-              swiped(dir, user._id)
+              likes(dir, user.id)
+              swiped(dir, user.id)
             }}
-            onCardLeftScreen={() => outOfFrame(user._id)}>
+            onCardLeftScreen={() => outOfFrame(user.id)}>
             <div style={{ backgroundImage: 'url(' + user.image + ')' }} className='card'>
               <h3>{user.name}</h3>
               <h4>{user.location}</h4>

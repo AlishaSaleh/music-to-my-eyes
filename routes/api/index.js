@@ -7,6 +7,7 @@ const { sanitiseUser } = require("../../utils/sanitiseUser");
 
 
 router.get("/dashboard", authCheck, async (req, res) => {
+    // console.log(req.headers);
 
     const user = await User.findById(req.user.id);
  
@@ -14,7 +15,7 @@ router.get("/dashboard", authCheck, async (req, res) => {
 
 });
 
-router.get("/matches", async (req, res) => {
+router.get("/matches", authCheck, async (req, res) => {
     try {
         const userData = await User.find({});
 
@@ -22,11 +23,13 @@ router.get("/matches", async (req, res) => {
         const sanUsers = userData.map(users => {
            return sanitiseUser(users);
         });
-        console.log(sanUsers)
+        
+
+        // console.log(sanUsers)
 
         // need to remove this user from data - client or serverside?
         // findOne (the currently logged in user) - exclude from the find()
-        return res.json({ users: sanUsers })
+        return res.json({ users: sanUsers, loggedUser: req.user.id })
     } catch (err) {
         res.status(500).json(err);
     }

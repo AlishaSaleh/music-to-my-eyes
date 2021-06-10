@@ -9,14 +9,14 @@ function Profile() {
     useEffect(() => {
         async function fetchData() {
             API.getDash().then(response => {
-                console.log(response.data.user)
+                // console.log(response.data.user)
                 setLogged(response.data.user);
             });
         };
         fetchData()
     }, []);
 
-    console.log(loggedUser)
+    // console.log(loggedUser)
 
     return (
 
