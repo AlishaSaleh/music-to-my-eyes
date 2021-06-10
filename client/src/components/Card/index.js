@@ -115,14 +115,17 @@ function CardMatch() {
             onCardLeftScreen={() => outOfFrame(user._id)}>
             <div style={{ backgroundImage: 'url(' + user.image + ')' }} className='card'>
               <h3>{user.name}</h3>
+              <h4>{user.location}</h4>
+              <h4>{user.gender}</h4>
+              <h4>{user.orientation}</h4>
             </div>
           </TinderCard>
         )}
       </div>
-      <div className='buttons'>
+      {/* <div className='buttons'>
         <button onClick={() => swipe('left')}>Swipe left!</button>
         <button onClick={() => swipe('right')}>Swipe right!</button>
-      </div>
+      </div> */}
       {lastDirection ? <h2 key={lastDirection} className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText'>Swipe a card or press a button to get started!</h2>}
     </div>
   )
