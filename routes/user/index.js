@@ -133,6 +133,7 @@ router.get("/:id/", async (req, res) => {
 router.put("/:id/like/", async (req, res) => {
     try {
         console.log(req.body);
+    
         const likeData = await User.findByIdAndUpdate(
             { _id: req.params.id },
             { $push: { likes: req.body.id } }, // works with id e.g. '60b602cd2c09b7409853a947' <-- format
@@ -178,6 +179,8 @@ router.put("/:id/dislike/", async (req, res) => {
 router.put("/:id/", async (req, res) => {
     try {
         // console.log(req.body);
+        const salt = await bcrypt.genSalt(10);
+        req.body.password = await bcrypt.hash(req.body.password, salt);
         const userData = await User.findByIdAndUpdate(
             { _id: req.params.id },
             // sets all the new info into the database
@@ -193,6 +196,7 @@ router.put("/:id/", async (req, res) => {
         // console.log(req.params.id);
         return res.json(userData)
     } catch (err) {
+        console.log(err);
         res.status(500).json(err);
     }
 });
