@@ -57,7 +57,7 @@ function Profile() {
                                     {/* music */}
                                     <div className="col-span-1 text-center p-5 pt-20 bg-gradient-to-r from-red to-pink rounded-2xl">
                                         <h1 className="text-2xl pb-6">My Music</h1>
-                                        <button type="button" className="transition duration-300 btn-shadow ease-in-out transform hover:scale-110 mx-3 py-2 px-4 rounded border p-4">Add your favourite songs
+                                        <button onClick={API.goToSpotify} type="button" className="transition duration-300 btn-shadow ease-in-out transform hover:scale-110 mx-3 py-2 px-4 rounded border p-4">Add your favourite songs
                                         <img className="pt-2" alt="spotify logo" src="https://drive.google.com/thumbnail?id=1bj86C-TKkcSqVzxLqdoHLqxuDU68OdPm" /></button>
                                     </div>
 
