@@ -160,7 +160,7 @@ router.get("/", authCheck, async (req, res) => {
             return sanitiseUser(users);
         });
 
-       
+
         // const newUsers = sanUsers.filter(({id}) => excluded.find(userId => userId.toString() !== id.toString()))
         // need to remove this user from data - client or serverside?
         // console.log(newUsers)
@@ -196,13 +196,13 @@ router.get("/:id/", async (req, res) => {
 router.put("/:id/like/", authCheck, async (req, res) => {
     try {
         if (req.user.id === req.body.id) {
-            return res.json({ message: "You can't like yourself!"})
+            return res.json({ message: "You can't like yourself!" })
         }
 
         const isLiked = req.user.likes.find(userId => userId === req.body.id);
 
         if (isLiked) {
-            return res.json({ message: "You have already liked this user!"})
+            return res.json({ message: "You have already liked this user!" })
         }
 
         const likeData = await User.findByIdAndUpdate(
@@ -218,14 +218,24 @@ router.put("/:id/like/", authCheck, async (req, res) => {
 
         const likedUser = await User.findById(req.body.id)
         const likeArr = likedUser.likes;
-        const isLikedUser = likeArr.find(userId => 
+        const isLikedUser = likeArr.find(userId =>
             userId.toString() === req.user.id.toString()
         );
         console.log(likedUser.likes);
         console.log(isLikedUser);
 
-        likedUser.update()
-
+        User.updateOne(
+            { _id: req.body.id },
+            { $push: { matches: req.user.id } },
+            { new: true },
+            function (error, success) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log(success);
+                }
+            }
+        );
         // console.log(req.params.id);
         return res.json(likeData)
     } catch (err) {

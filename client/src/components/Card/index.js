@@ -96,7 +96,7 @@ function CardMatch(props) {
 
   // Need to randomise users before rendering to Cards
 
-  console.log(alreadyRemoved);
+  // console.log(alreadyRemoved);
   console.log(userMatch);
 
 
