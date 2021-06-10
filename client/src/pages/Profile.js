@@ -1,7 +1,22 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import API from "../utils/API";
+
 import { isAuth } from '../utils/isAuth';
 
 function Profile() {
+    const [loggedUser, setLogged] = useState()
+
+    useEffect(() => {
+        async function fetchData() {
+            API.getDash().then(response => {
+                console.log(response.data.user)
+                setLogged(response.data.user);
+            });
+        };
+        fetchData()
+    }, []);
+
+    console.log(loggedUser)
 
     return (
 
@@ -59,7 +74,7 @@ function Profile() {
                                 </div>
                                 <div className="text-center mt-12">
                                     <h3 className="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2">
-                                        NAME
+                                        Welcome, {loggedUser}
                   </h3>
                                     <button
                                         className="bg-gradient-to-r from-pink to-purple uppercase text-white font-bold hover:sh adow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
@@ -70,18 +85,18 @@ function Profile() {
                       </button>
                                 </div>
 
-                    <div>
-                        <div className="flex flex-wrap -mx-3 overflow-hidden">
-                            <div className="my-3 px-3 w-1/2 overflow-hidden bg-red rounded-l bg-opacity-50">
-                                <h1>My Music</h1>
-                                <p> User's chosen music will go here</p>
-                            </div>
-                            <div className="my-3 px-3 w-1/2 overflow-hidden bg-red rounded-l bg-opacity-50">
-                                <h1>Messenger</h1>
-                                <p> Matches will show here and then you can message them, will lead to chat</p>
-                            </div>
-                        </div>
-                    </div>
+                                <div>
+                                    <div className="flex flex-wrap -mx-3 overflow-hidden">
+                                        <div className="my-3 px-3 w-1/2 overflow-hidden bg-red rounded-l bg-opacity-50">
+                                            <h1>My Music</h1>
+                                            <p> User's chosen music will go here</p>
+                                        </div>
+                                        <div className="my-3 px-3 w-1/2 overflow-hidden bg-red rounded-l bg-opacity-50">
+                                            <h1>Messenger</h1>
+                                            <p> Matches will show here and then you can message them, will lead to chat</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
