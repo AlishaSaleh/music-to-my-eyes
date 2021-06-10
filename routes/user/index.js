@@ -239,6 +239,18 @@ router.put("/:id/like/", authCheck, async (req, res) => {
                     }
                 }
             );
+            User.updateOne(
+                { _id: isLikedUser },
+                { $push: { matches: req.body.id } },
+                { new: true },
+                function (error, success) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log(success);
+                    }
+                }
+            );
             return res.json(likeData)
         }
 
