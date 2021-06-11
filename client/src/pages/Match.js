@@ -5,26 +5,26 @@ import API from "../utils/API";
 
 function Match() {
 
-    const [loggedUser, setLogged] = useState()
+    // const [loggedUser, setLogged] = useState()
 
-    useEffect(() => {
-        async function fetchData() {
-            API.getMatch().then(response => {
-                console.log(response.data)
-                setLogged(response.data.user);
-            });
-        };
-        fetchData()
-    }, []);
+    // useEffect(() => {
+    //     async function fetchData() {
+    //         API.getMatch().then(response => {
+    //             console.log(response.data)
+    //             setLogged(response.data.user);
+    //         });
+    //     };
+    //     fetchData()
+    // }, []);
 
-    console.log(loggedUser)
+    //console.log(loggedUser)
 
 
     return (
         <div>
-            <div className="bg-image w-full h-auto flex flex-wrap justify-center items-center py-5">
-                <div className="backdrop h-screen bg-white bg-opacity-10 rounded p-3 text-black border border-gray-300 shadow-lg">
-                    <Card userId={loggedUser}/>
+            <div className="w-full">
+                <div className="relative h-screen bg-red-light mx-auto flex flex-col items-center pt-12 sm:pt-24 pb-24">
+                    <Card />
                 </div>
             </div>
         </div>
