@@ -61,7 +61,6 @@ export default function SpotifyDashboard({ code }) {
                     <TrackSearchResult
                         track={track}
                         key={track.uri}
-                    //chooseTrack={chooseTrack}
                     />
                 ))}
             </div>
