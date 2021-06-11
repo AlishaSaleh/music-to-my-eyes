@@ -1,0 +1,27 @@
+.pp {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.pp-btn {
+    height: 67px;
+    width: 67px;
+}
+
+.pp-btn:hover, .no-hov:hover {
+    border-bottom: none;
+}
+
+@media (max-width:768px) {
+.pp-hide {
+    display: none;
+}
+}
+
+@media (min-width:768px) {
+.pp-hide {
+    display: flex;
+}
+}
+
+

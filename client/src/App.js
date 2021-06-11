@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import SignUp from "./pages/SignUp.js";
+// import NoMatch from "./pages/NoMatch";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Home from "./pages/Home";
+import ProfileSettings from "./pages/ProfileSettings.js";
+import Navbar from "./components/Navbar";
+import error404 from "./pages/404";
+import Profile from "./pages/Profile";
+import Login from "./pages/Login";
+import SpotifyHome from "./pages/SpotifyHome"
+import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute.js";
+import Match from "./pages/Match.js";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <Navbar />
+        <Switch>
+          <Route exact path="/signup" component={SignUp} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/" component={Home} />
+          <PrivateRoute exact path="/profile-settings" component={ProfileSettings} />
+          <PrivateRoute exact path="/dashboard" component={Profile} /> 
+          <PrivateRoute exact path="/match" component={Match} />
+          <PrivateRoute exact path="/spotify-home" component={SpotifyHome} />
+          <Route component={error404} />
+         
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
