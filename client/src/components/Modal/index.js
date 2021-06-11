@@ -24,8 +24,6 @@ export default function Modal(props) {
       .then(resp => resp.json())
       .then(data => {
         setUrl(data.url)
-        console.log(data);
-        setUserImage(data);
       })
       .catch(err => console.log(err))
   }
@@ -33,22 +31,28 @@ export default function Modal(props) {
   // Save Button    
   function handleSubmit(e) {
     uploadImage();
+    debugger;
+    setUserImage(url);
     e.preventDefault();
     setIsButtonLoading(true);
     setShowModal(false);
   }
 
   function setUserImage(data) {
-    debugger;
-    console.log(data);
-    var image = {image: data.url};
+    if(window.localStorage.getItem('user') !== null) {
+    var image = {image: data};
     var id = props.user.id;
-    console.log(image, id);
     API.updateUser(id, image);
     const user = JSON.parse(localStorage.getItem('user'));
-    user.image = data.url;
+    user.image = data;
     localStorage.setItem('user', JSON.stringify(user));
     window.location.reload();
+    }
+    else {
+    var image = {image: data};
+    localStorage.setItem('tempImage', JSON.stringify(image));
+    window.location.reload();
+    }
 
   }
 
@@ -63,8 +67,8 @@ export default function Modal(props) {
   });
 
   function openTheModal() {
-    uploadImage();
     setShowPreview(true);
+    uploadImage();
   }
 
   function closeTheModal() {
