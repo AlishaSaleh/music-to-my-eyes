@@ -11,15 +11,20 @@ const validateRegisterInput = require("../../validation/signup");
 const validateLoginInput = require("../../validation/login");
 const { sanitiseUser } = require('../../utils/sanitiseUser');
 const { authCheck } = require('../../middleware/authCheck');
+const ageValidation = require('../../validation/ageValidation');
 
 // user/[route]
 router.post("/signup", async (req, res) => {
 
     // Form validation
     const { errors, isValid } = validateRegisterInput(req.body);
+    const notAdult = ageValidation(req.body.dob);
     // Check validation
     if (!isValid) {
         return res.status(400).json(errors);
+    }
+    if (notAdult) {
+        return res.status(404).json({ message: "You must be over 18 to join!" }) 
     }
 
     // Check if username and password
@@ -87,59 +92,6 @@ router.post("/login", async (req, res) => {
     const token = jwt.sign({ id: user.id }, config.secret, { expiresIn: "24h" });
     res.json({ user: sanitiseUser(user), token })
 
-});
-
-
-router.put("/user/+id", async (req, res) => {
-
-
-    const user = await User.findOne({
-        where: {
-            id: req.session.user_id,
-        },
-    });
-
-    if (req.body.username == "" | req.body.username == userCurrent.username) {
-        req.body.username = userCurrent.username;
-
-    }
-
-    if (req.body.role_id == "" | req.body.role_id == userCurrent.role_id) {
-        req.body.role_id = userCurrent.role_id;
-
-    }
-
-
-    if (req.body.picture == '' | req.body.picture == userCurrent.picture) {
-        req.body.picture = userCurrent.picture;
-
-    }
-
-    if (req.body.email == '' | req.body.email == userCurrent.email) {
-        req.body.email = userCurrent.email;
-    }
-
-    if (req.body.password == '' | req.body.password == userCurrent.password) {
-        req.body.password = userCurrent.password;
-
-    }
-    else {
-        req.body.password = await bcrypt.hash(req.body.password, 10);
-    }
-
-    const thisUser = await User.updateOne(req.body, {
-        where: {
-            _id: req.params.id,
-        },
-    });
-    console.log(thisUser);
-
-    if (!thisUser) {
-        res.status(404).json({
-            message: 'No user found with this id!'
-        });
-        return;
-    }
 });
 
 // Testing Auth in Postman
@@ -287,6 +239,10 @@ router.put("/:id/dislike/", async (req, res) => {
 router.put("/:id/", async (req, res) => {
     try {
         // console.log(req.body);
+        if(req.body.password) {
+        const salt = await bcrypt.genSalt(10);
+        req.body.password = await bcrypt.hash(req.body.password, salt);
+        }
         const userData = await User.findByIdAndUpdate(
             { _id: req.params.id },
             // sets all the new info into the database
@@ -302,6 +258,7 @@ router.put("/:id/", async (req, res) => {
         // console.log(req.params.id);
         return res.json(userData)
     } catch (err) {
+        console.log(err);
         res.status(500).json(err);
     }
 });

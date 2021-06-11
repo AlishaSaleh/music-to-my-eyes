@@ -1,9 +1,26 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import API from "../utils/API";
 import setAuthToken from "../utils/setAuthToken";
 import setAuthUser from "../utils/setAuthUser";
+import ProfilePic from "../components/ProfilePic";
+import Modal from "../components/Modal";
 
 function SignUp() {
+    useEffect(() => {
+    
+        window.addEventListener('storage', () => {
+          // When local storage changes, dump the list to
+          // the console.
+          setImage(JSON.parse(localStorage.getItem('tempImage')));   
+        });
+        
+        //    var save = document.getElementsByClassName("save")
+            
+        //     save.addEventListener("click",  function(){
+        //         setImage(JSON.parse(localStorage.getItem('tempImage')));   
+        //   });
+           
+        }, [])
 
     const [errorState, setErrorState] = useState([]);
 
@@ -17,6 +34,13 @@ function SignUp() {
     const passwordRef = useRef();
     const password2Ref = useRef();
     const dobRef = useRef();
+    const [nameState, setName] = useState("");
+    const [imageState, setImage] = useState(`https://ui-avatars.com/api/?color=f54f4f&name=${nameState}`);
+
+    // if(window.location.reload) {
+    //     // setImage(`https://ui-avatars.com/api/?color=f54f4f&name=${nameState}`)
+    //     localStorage.removeItem('tempImage');
+    // }
 
     const submitForm = (e) => {
         e.preventDefault();
@@ -31,8 +55,7 @@ function SignUp() {
             gender: genderState,
             location: locationState,
             orientation: orientationState,
-            image: `https://ui-avatars.com/api/?color=f54f4f&name=${nameRef.current.value}`,
-
+            image: `${window.localStorage.getItem('tempImage') === null ? `https://ui-avatars.com/api/?color=f54f4f&name=${nameState}` : JSON.parse(localStorage.getItem('tempImage'))}`,
         };
         API.createUser(newUser)
             .then(response => {
@@ -69,11 +92,21 @@ function SignUp() {
                             </div>
                         ))}
 
+                         <div className="w-full flex justify-center neg-mb-50">
+                        <div className="mt-4 mb-15 flex items-center">
+                            {<ProfilePic src={imageState} />}
+                            {<Modal name={nameState} />}
+                        </div>
+                    </div>
+
+
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2" for="name">
                                 Name
                         </label>
-                            <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="userName" type="text" placeholder="Kat Midden" aria-label="name" ref={nameRef} />
+
+                            <input onChange={e => setName(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="userName" type="text" placeholder="Kat Midden" aria-label="name" ref={nameRef} />
+
                         </div>
 
                         <div className="mb-4">
@@ -82,7 +115,6 @@ function SignUp() {
                         </label>
                             <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="userEmail" type="email" placeholder="name@email.com" ref={emailRef} />
                         </div>
-
 
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2" for="password">
@@ -99,7 +131,6 @@ function SignUp() {
                             <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="retypePassword" type="password" placeholder="*******" ref={password2Ref} />
                         </div>
 
-
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2" for="dob">
                                 Date of Birth
@@ -107,12 +138,13 @@ function SignUp() {
                             <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="dob" type="date" ref={dobRef} />
                         </div>
 
-
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2">
                                 Please select your country
                         </label>
-                            <select nChange={e => setLocation(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="userLocation">
+
+                           <select onChange={e => setLocation(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="userLocation">
+
                                 <option value="" disabled selected hidden>Location</option>
                                 <option value="Afghanistan">Afghanistan</option>
                                 <option value="Åland Islands">Åland Islands</option>
@@ -360,7 +392,6 @@ function SignUp() {
                                 <option value="Zimbabwe">Zimbabwe</option>
                             </select>
                         </div>
-
 
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2" for="userGender">
