@@ -2,36 +2,28 @@ import React, { useState, useMemo, useEffect } from 'react';
 import TinderCard from 'react-tinder-card';
 import "./index.css";
 import API from "../../utils/API";
-import setAuthUser from '../../utils/setAuthUser';
+//import setAuthUser from '../../utils/setAuthUser';
 
 // holds the people already shown to the user to avoid repetition 
 const alreadyRemoved = [];
 // const liked = [];
 
-function CardMatch(props) {
-  // console.log(props);
+function CardMatch() {
   const [userMatch, setuserMatch] = useState([])
   const [lastDirection, setLastDirection] = useState()
-  // 1: set likedUsers from the 'right' swipes
-  // const [likedUsers, setLikes] = useState([]);
   const loggedUser = JSON.parse(localStorage.getItem("user"));
-  console.log(loggedUser._id)
+  //console.log(loggedUser._id)
 
   // setting the state
   const likes = (dir, user) => {
     if (dir === "right") {
-      // console.log(user);
-      // liked.push(user);
       console.log('user liked!')
-      // console.log('state: ', likedUsers);
-      // console.log('array: ', liked);
       const likedUserId = {
         id: user
       }
-      // console.log(likedUserId)
-      API.addLike(loggedUser._id, likedUserId).then(res => {
+      API.addLike(likedUserId).then(res => {
         console.log(res);
-        setAuthUser(res.data);
+        //setAuthUser(res.data);
       });
     } else {
       console.log('user disliked!');
@@ -42,10 +34,6 @@ function CardMatch(props) {
 
 
   let userMatchState = userMatch;
-
-  const loggedUserLikes = JSON.parse(localStorage.getItem("user"));
-
-  console.log("Currently likes:", loggedUserLikes.likes)
 
   useEffect(() => {
     async function fetchData() {

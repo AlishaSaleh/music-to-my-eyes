@@ -49,8 +49,8 @@ export default {
         document.location.replace('/login');
     },
     // Update Likes
-    addLike: function (id, likeData) {
-        return axios.put(`/user/${id}/like`, likeData, {
+    addLike: function (likeData) {
+        return axios.put(`/user/like`, likeData, {
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem("access_token")}`
             },
