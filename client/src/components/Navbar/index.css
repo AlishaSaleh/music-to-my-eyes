@@ -1,0 +1,12 @@
+
+@media (max-width:768px) {
+    .show-text {
+        display: flex;
+    }
+    }
+
+@media (min-width:768px) {
+    .show-text {
+        display: none;
+    }
+    }
