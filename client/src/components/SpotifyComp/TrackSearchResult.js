@@ -6,6 +6,8 @@ export default function TrackSearchResult({ track}) {
     e.preventDefault();
     console.log({track})
     console.log('The div was clicked.');
+    const trackString = `${track.title} - ${track.artist}`
+    console.log(trackString)
   }
 
   return (
