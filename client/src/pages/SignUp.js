@@ -102,7 +102,7 @@ function SignUp() {
                             <label className="block text-gray-700 text-sm font-bold mb-2" for="name">
                                 Name
                         </label>
-                            <input ref={nameRef} onChange={e => setName(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="userName" type="text" placeholder="Kat Midden" aria-label="name" ref={nameRef} />
+                            <input onChange={e => setName(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="userName" type="text" placeholder="Kat Midden" aria-label="name" ref={nameRef} />
                         </div>
 
                         <div className="mb-4">

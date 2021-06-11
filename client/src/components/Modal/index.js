@@ -31,7 +31,6 @@ export default function Modal(props) {
   }
 
   function checkPreview(data) {
-    debugger;
     if(buttonClicked === false) {
       setShowPreview(true);
       if(data !== undefined) {
@@ -87,7 +86,6 @@ export default function Modal(props) {
   });
 
   function openTheModal() {
-    debugger;
     buttonClicked = true;
     setShowPreview(true);
     uploadImage();
