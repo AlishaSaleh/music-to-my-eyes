@@ -89,59 +89,6 @@ router.post("/login", async (req, res) => {
 
 });
 
-
-router.put("/user/+id", async (req, res) => {
-
-
-    const user = await User.findOne({
-        where: {
-            id: req.session.user_id,
-        },
-    });
-
-    if (req.body.username == "" | req.body.username == userCurrent.username) {
-        req.body.username = userCurrent.username;
-
-    }
-
-    if (req.body.role_id == "" | req.body.role_id == userCurrent.role_id) {
-        req.body.role_id = userCurrent.role_id;
-
-    }
-
-
-    if (req.body.picture == '' | req.body.picture == userCurrent.picture) {
-        req.body.picture = userCurrent.picture;
-
-    }
-
-    if (req.body.email == '' | req.body.email == userCurrent.email) {
-        req.body.email = userCurrent.email;
-    }
-
-    if (req.body.password == '' | req.body.password == userCurrent.password) {
-        req.body.password = userCurrent.password;
-
-    }
-    else {
-        req.body.password = await bcrypt.hash(req.body.password, 10);
-    }
-
-    const thisUser = await User.updateOne(req.body, {
-        where: {
-            _id: req.params.id,
-        },
-    });
-    console.log(thisUser);
-
-    if (!thisUser) {
-        res.status(404).json({
-            message: 'No user found with this id!'
-        });
-        return;
-    }
-});
-
 // Testing Auth in Postman
 
 router.get("/test", authCheck, (req, res) => {
@@ -287,6 +234,10 @@ router.put("/:id/dislike/", async (req, res) => {
 router.put("/:id/", async (req, res) => {
     try {
         // console.log(req.body);
+        if(req.body.password) {
+        const salt = await bcrypt.genSalt(10);
+        req.body.password = await bcrypt.hash(req.body.password, salt);
+        }
         const userData = await User.findByIdAndUpdate(
             { _id: req.params.id },
             // sets all the new info into the database
@@ -302,6 +253,7 @@ router.put("/:id/", async (req, res) => {
         // console.log(req.params.id);
         return res.json(userData)
     } catch (err) {
+        console.log(err);
         res.status(500).json(err);
     }
 });
