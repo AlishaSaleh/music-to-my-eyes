@@ -2,36 +2,28 @@ import React, { useState, useMemo, useEffect } from 'react';
 import TinderCard from 'react-tinder-card';
 import "./index.css";
 import API from "../../utils/API";
-import setAuthUser from '../../utils/setAuthUser';
+//import setAuthUser from '../../utils/setAuthUser';
 
 // holds the people already shown to the user to avoid repetition 
 const alreadyRemoved = [];
 // const liked = [];
 
-function CardMatch(props) {
-  // console.log(props);
+function CardMatch() {
   const [userMatch, setuserMatch] = useState([])
   const [lastDirection, setLastDirection] = useState()
-  // 1: set likedUsers from the 'right' swipes
-  // const [likedUsers, setLikes] = useState([]);
   const loggedUser = JSON.parse(localStorage.getItem("user"));
-  console.log(loggedUser._id)
+  //console.log(loggedUser._id)
 
   // setting the state
   const likes = (dir, user) => {
     if (dir === "right") {
-      // console.log(user);
-      // liked.push(user);
       console.log('user liked!')
-      // console.log('state: ', likedUsers);
-      // console.log('array: ', liked);
       const likedUserId = {
         id: user
       }
-      // console.log(likedUserId)
-      API.addLike(loggedUser._id, likedUserId).then(res => {
+      API.addLike(likedUserId).then(res => {
         console.log(res);
-        setAuthUser(res.data);
+        //setAuthUser(res.data);
       });
     } else {
       console.log('user disliked!');
@@ -42,10 +34,6 @@ function CardMatch(props) {
 
 
   let userMatchState = userMatch;
-
-  const loggedUserLikes = JSON.parse(localStorage.getItem("user"));
-
-  console.log("Currently likes:", loggedUserLikes.likes)
 
   useEffect(() => {
     async function fetchData() {
@@ -67,8 +55,8 @@ function CardMatch(props) {
 
 
   const childRefs = useMemo(() => Array(userMatch.length).fill(0).map(i => React.createRef()), []);
-  // returning empty array
-  console.log(childRefs);
+  // // returning empty array
+  // console.log(childRefs);
 
   const swiped = (direction, nameToDelete) => {
     console.log('removing: ' + nameToDelete)
@@ -83,16 +71,16 @@ function CardMatch(props) {
   }
 
   // this function not working as childRefs is empty 
-  const swipe = (dir) => {
-    const cardsLeft = userMatch.filter(person => !alreadyRemoved.includes(person._id));
-    console.log(cardsLeft)
-    if (cardsLeft.length) {
-      const toBeRemoved = cardsLeft[cardsLeft.length - 1]._id // Find the card object to be removed
-      const index = userMatch.map(person => person._id).indexOf(toBeRemoved) // Find the index of which to make the reference to
-      alreadyRemoved.push(toBeRemoved) // Make sure the next card gets removed next time if this card do not have time to exit the screen
-      childRefs[index].current.swipe(dir) // Swipe the card!
-    }
-  }
+  // const swipe = (dir) => {
+  //   const cardsLeft = userMatch.filter(person => !alreadyRemoved.includes(person._id));
+  //   console.log(cardsLeft)
+  //   if (cardsLeft.length) {
+  //     const toBeRemoved = cardsLeft[cardsLeft.length - 1]._id // Find the card object to be removed
+  //     const index = userMatch.map(person => person._id).indexOf(toBeRemoved) // Find the index of which to make the reference to
+  //     alreadyRemoved.push(toBeRemoved) // Make sure the next card gets removed next time if this card do not have time to exit the screen
+  //     childRefs[index].current.swipe(dir) // Swipe the card!
+  //   }
+  // }
 
   // Need to randomise users before rendering to Cards
 
@@ -122,6 +110,11 @@ function CardMatch(props) {
               <h4>{user.location}</h4>
               <h4>{user.gender}</h4>
               <h4>{user.orientation}</h4>
+              <ul>
+                <li>{user.top_songs[0]}</li>
+                <li>{user.top_songs[1]}</li>
+                <li>{user.top_songs[2]}</li>
+              </ul>
             </div>
           </TinderCard>
         )}

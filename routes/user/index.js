@@ -193,7 +193,7 @@ router.get("/:id/", async (req, res) => {
 });
 
 // Update User with their likes --> works in Postman
-router.put("/:id/like/", authCheck, async (req, res) => {
+router.put("/like/", authCheck, async (req, res) => {
     try {
         if (req.user.id === req.body.id) {
             return res.json({ message: "You can't like yourself!" })
@@ -207,7 +207,7 @@ router.put("/:id/like/", authCheck, async (req, res) => {
 
         const likeData = await User.findByIdAndUpdate(
             { _id: req.user.id },
-            { $push: { likes: req.body.id } }, // works with id e.g. '60b602cd2c09b7409853a947' <-- format
+            { $push: { likes: req.body.id } }, 
             { new: true }
         );
 
@@ -254,8 +254,6 @@ router.put("/:id/like/", authCheck, async (req, res) => {
             return res.json(likeData)
         }
 
-       
-        // console.log(req.params.id);
  
     } catch (err) {
         res.status(500).json(err);
