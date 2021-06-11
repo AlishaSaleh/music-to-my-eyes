@@ -59,9 +59,15 @@ function SignUp() {
             <div className="w-full">
                 <div className="relative h-auto bg-red-light mx-auto flex flex-col items-center pt-12 sm:pt-24 pb-24">
 
-                    <form className="relative bg-white shadow-md w-full md:w-1/2 rounded px-8 pt-6 pb-8 mb-4" >
+                    <form onSubmit={e => submitForm(e)} className="relative bg-white shadow-md w-full md:w-1/2 rounded px-8 pt-6 pb-8 mb-4" >
                         <h1 className="flex justify-center text-2xl font-bold">Sign Up</h1>
                         <p className="flex justify-center">If you already have an account, login<a className="mx-1" href="/login"> here</a>!</p>
+
+                        {errorState.map(error => (
+                            <div class="bg-red border text-white text-s px-2 py-1 rounded relative" role="alert">
+                                <span class="block sm:inline">{error}</span>
+                            </div>
+                        ))}
 
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2" for="name">
@@ -94,7 +100,7 @@ function SignUp() {
                             <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="retypePassword" type="password" placeholder="*******" ref={password2Ref} />
                         </div>
 
-                        
+
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2" for="dob">
                                 Date of Birth
@@ -102,7 +108,7 @@ function SignUp() {
                             <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="dob" type="date" ref={dobRef} />
                         </div>
 
-                        
+
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2">
                                 Please select your country
@@ -357,7 +363,7 @@ function SignUp() {
                         </div>
 
 
-                        
+
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2" for="userGender">
                                 Please select your gender
@@ -370,7 +376,7 @@ function SignUp() {
                             </select>
                         </div>
 
-                        
+
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2" for="userOrientation">
                                 Who are you interested in seeing?
