@@ -1,7 +1,9 @@
-import React, { useRef } from "react"
+import React, { useRef, useState } from "react"
 import API from "../../utils/API"
 
 export default function TrackSearchResult({ track }) {
+
+  const [alertState, setAlert] = useState([]);
 
   const stringTracks = `${track.title} - ${track.artist}`
   const trackDiv = useRef()
@@ -13,9 +15,20 @@ export default function TrackSearchResult({ track }) {
     console.log(divElement)
     API.saveSongs(divElement).then(res => {
       console.log(res);
+      const clickMe = Object.values(divElement)
+      setAlert(alertState => [...alertState, clickMe])
     });
+    console.log(alertState);
   }
+ 
+
   return (
+    <>
+    {alertState.map(alert => (
+      <div class="bg-red border text-white text-s px-2 py-1 rounded relative" role="alert">
+          <span class="block sm:inline">You have added {alert} to your top songs!</span>
+      </div>
+  ))}
     <button
       value={stringTracks}
       ref={trackDiv}
@@ -29,5 +42,6 @@ export default function TrackSearchResult({ track }) {
         <div className="text-muted">{track.artist}</div>
       </div>
     </button>
+    </>
   )
 }
