@@ -68,6 +68,12 @@ export default {
     goToSpotify: function () {
         (document.location.replace('/spotify-home'));
     },
+    goToMatch: function () {
+        (document.location.replace('/match'));
+    },
+    goToSettings: function () {
+        (document.location.replace('/profile-settings'));
+    },
     saveSongs: function (songData) {
         return axios.put(`/api/addsongs`, songData, {
             headers: {

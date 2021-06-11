@@ -83,6 +83,7 @@ function Profile() {
                                     </h3>
 
                                     <button
+                                    onClick={API.goToSettings}
                                         className="bg-gradient-to-r from-pink to-purple uppercase text-white font-bold hover:sh adow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
                                         type="button"
                                         style={{ transition: "all .15s ease" }}>
@@ -108,6 +109,8 @@ function Profile() {
                                     <div className="col-span-1 text-center p-5 pt-20 bg-gradient-to-l from-red to-pink rounded-2xl">
                                         <h1 className="text-2xl">My Matches</h1>
                                         <p>It's time to find your playlist partner! </p>
+                                        <button onClick={API.goToMatch} type="button" className="transition duration-300 btn-shadow ease-in-out transform hover:scale-110 mx-3 my-3 py-2 px-4 rounded border p-4">Click here to match!
+                                        <img style={{ height: 60, display: "block" }} className="pt-2 m-auto" alt="music to my eyes logo" src="https://i.imgur.com/d93GrCW.png" /></button>
                                         <ul>
                                             {matchName.map(match => (
                                                 <li>{match}</li>
