@@ -55,8 +55,8 @@ function CardMatch() {
 
 
   const childRefs = useMemo(() => Array(userMatch.length).fill(0).map(i => React.createRef()), []);
-  // returning empty array
-  console.log(childRefs);
+  // // returning empty array
+  // console.log(childRefs);
 
   const swiped = (direction, nameToDelete) => {
     console.log('removing: ' + nameToDelete)
@@ -71,16 +71,16 @@ function CardMatch() {
   }
 
   // this function not working as childRefs is empty 
-  const swipe = (dir) => {
-    const cardsLeft = userMatch.filter(person => !alreadyRemoved.includes(person._id));
-    console.log(cardsLeft)
-    if (cardsLeft.length) {
-      const toBeRemoved = cardsLeft[cardsLeft.length - 1]._id // Find the card object to be removed
-      const index = userMatch.map(person => person._id).indexOf(toBeRemoved) // Find the index of which to make the reference to
-      alreadyRemoved.push(toBeRemoved) // Make sure the next card gets removed next time if this card do not have time to exit the screen
-      childRefs[index].current.swipe(dir) // Swipe the card!
-    }
-  }
+  // const swipe = (dir) => {
+  //   const cardsLeft = userMatch.filter(person => !alreadyRemoved.includes(person._id));
+  //   console.log(cardsLeft)
+  //   if (cardsLeft.length) {
+  //     const toBeRemoved = cardsLeft[cardsLeft.length - 1]._id // Find the card object to be removed
+  //     const index = userMatch.map(person => person._id).indexOf(toBeRemoved) // Find the index of which to make the reference to
+  //     alreadyRemoved.push(toBeRemoved) // Make sure the next card gets removed next time if this card do not have time to exit the screen
+  //     childRefs[index].current.swipe(dir) // Swipe the card!
+  //   }
+  // }
 
   // Need to randomise users before rendering to Cards
 
@@ -110,6 +110,11 @@ function CardMatch() {
               <h4>{user.location}</h4>
               <h4>{user.gender}</h4>
               <h4>{user.orientation}</h4>
+              <ul>
+                <li>{user.top_songs[0]}</li>
+                <li>{user.top_songs[1]}</li>
+                <li>{user.top_songs[2]}</li>
+              </ul>
             </div>
           </TinderCard>
         )}
