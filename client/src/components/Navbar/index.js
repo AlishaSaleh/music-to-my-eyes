@@ -10,7 +10,7 @@ function Navbar() {
         <nav className="w-full sticky top-0 z-50 bg-white">
             <div className="mx-auto px-3 flex items-center justify-between nav">
                 <div className="flex items-center">
-                    {window.localStorage.length > 1 ? <a href="/dashboard" className="a-logo"><img alt="mtme logo" src="https://drive.google.com/thumbnail?id=1wrKHE8yDrIQ7GlOzDzb_1PvTbqPo7is7" className="object-scale-down h-10 w-10" />
+                    {window.localStorage.getItem('user') !== null ? <a href="/dashboard" className="a-logo"><img alt="mtme logo" src="https://drive.google.com/thumbnail?id=1wrKHE8yDrIQ7GlOzDzb_1PvTbqPo7is7" className="object-scale-down h-10 w-10" />
                         <p className="ml-2 lg:ml-4 text-base lg:text-2xl font-bold text-gray-800 logo"><span className="text-red" >Music</span> To My <span className="text-red" >Eyes</span></p>
                     </a> :
                         <a href="/" className="a-logo"><img alt="mtme logo" src="https://drive.google.com/thumbnail?id=1wrKHE8yDrIQ7GlOzDzb_1PvTbqPo7is7" className="object-scale-down h-10 w-10" />
@@ -33,7 +33,7 @@ function Navbar() {
                                 <line x1={6} y1={6} x2={18} y2={18} />
                             </svg>
                         </div>
-                        {window.localStorage.length < 1 ?
+                        {window.localStorage.getItem('user') === null ?
                             <ul className="flex text-3xl md:text-base items-center py-8 md:flex flex-col md:flex-row justify-center fixed md:relative top-0 bottom-0 left-0 right-0 bg-white z-20">
                                 <li className="text-gray-600 hover:text-gray-800 cursor-pointer md:ml-10 pt-10 md:pt-0">
                                     <a href="/login">Login</a>

@@ -51,7 +51,7 @@ export function SaveButton({ isLoading, children, ...props }) {
   return (
     <button
       {...props}
-      className="button inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red"
+      className="button save inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red"
       ref={ref}
       type="submit"
       style={

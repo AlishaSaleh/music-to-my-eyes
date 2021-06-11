@@ -7,6 +7,7 @@ import API from "../../utils/API";
 export default function Modal(props) {
   const [showPreview, setShowPreview] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [buttonClicked, setButtonClicked] = useState();
   //Cloudinary Info
   const [image, setImage] = useState("");
   const imageRef = useRef();
@@ -23,16 +24,24 @@ export default function Modal(props) {
     })
       .then(resp => resp.json())
       .then(data => {
+        debugger;
         setUrl(data.url)
+        checkPreview(data.url);
       })
       .catch(err => console.log(err))
+  }
+
+  function checkPreview(data) {
+    if(buttonClicked !== "Preview") {
+      setShowPreview(true);
+      setUserImage(data);
+      setButtonClicked("");
+    }
   }
 
   // Save Button    
   function handleSubmit(e) {
     uploadImage();
-    debugger;
-    setUserImage(url);
     e.preventDefault();
     setIsButtonLoading(true);
     setShowModal(false);
@@ -49,9 +58,8 @@ export default function Modal(props) {
     window.location.reload();
     }
     else {
-    var image = {image: data};
-    localStorage.setItem('tempImage', JSON.stringify(image));
-    window.location.reload();
+    localStorage.setItem('tempImage', JSON.stringify(data));
+    window.document.getElementById('pp-img').src = data;
     }
 
   }
@@ -67,6 +75,8 @@ export default function Modal(props) {
   });
 
   function openTheModal() {
+    debugger;
+    setButtonClicked("Preview");
     setShowPreview(true);
     uploadImage();
   }
