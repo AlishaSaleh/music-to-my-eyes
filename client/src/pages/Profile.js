@@ -8,6 +8,7 @@ function Profile() {
     const [loggedMatches, setMatches] = useState([]);
     const [loggedImage, setImage] = useState([]);
     const [matchName, setMatchName] = useState([]);
+    const [songName, setSongName] = useState([]);
 
 
     useEffect(() => {
@@ -17,7 +18,7 @@ function Profile() {
                 setName(response.data.name);
                 setMatches(response.data.matches);
                 setImage(response.data.image);
-
+                setSongName(response.data.top_songs)
             });
         };
         fetchData()
@@ -96,6 +97,11 @@ function Profile() {
                                         <h1 className="text-2xl pb-6">My Music</h1>
                                         <button onClick={API.goToSpotify} type="button" className="transition duration-300 btn-shadow ease-in-out transform hover:scale-110 mx-3 py-2 px-4 rounded border p-4">Add your favourite songs
                                         <img className="pt-2" alt="spotify logo" src="https://drive.google.com/thumbnail?id=1bj86C-TKkcSqVzxLqdoHLqxuDU68OdPm" /></button>
+                                        <ul>
+                                            {songName.map(song => (
+                                                <li>{song}</li>
+                                            ))}
+                                        </ul>
                                     </div>
 
                                     {/* matches */}

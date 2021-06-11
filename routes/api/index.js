@@ -35,13 +35,13 @@ router.get("/matches", authCheck, async (req, res) => {
     }
 });
 
-router.put("/:id/addsongs/", authCheck, async (req, res) => {
+router.put("/addsongs/", authCheck, async (req, res) => {
     try {
 
          const songs = req.body
          console.log(songs);
         const songData = await User.findByIdAndUpdate(
-            { _id: req.params.id },
+            { _id: req.user.id },
             { $push: { top_songs: songs.song } }, // works with id e.g. '60b602cd2c09b7409853a947' <-- format
             { new: true }
         );
