@@ -1,10 +1,22 @@
-import React, { useEffect } from 'react'
-import { isAuth } from '../utils/isAuth';
-import HeroBg from "../components/HeroBg"
+import React, { useEffect, useState } from 'react'
 import API from "../utils/API";
+import HeroBg from "../components/HeroBg"
 
 function Profile() {
-    { API.getDash().then(response => console.log(response)) }
+  
+    const [loggedUser, setLogged] = useState()
+
+    useEffect(() => {
+        async function fetchData() {
+            API.getDash().then(response => {
+                // console.log(response.data.user)
+                setLogged(response.data.user);
+            });
+        };
+        fetchData()
+    }, []);
+
+    // console.log(loggedUser)
     return (
 
         <div>
@@ -42,8 +54,11 @@ function Profile() {
                                 </div>
                                 <div className="text-center mt-12">
                                     <h3 className="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2">
-                                        NAME
-                                    </h3>
+
+                                        Welcome, {loggedUser}
+                  </h3>
+
+
                                     <button
                                         className="bg-gradient-to-r from-pink to-purple uppercase text-white font-bold hover:sh adow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
                                         type="button"
@@ -57,7 +72,7 @@ function Profile() {
                                     {/* music */}
                                     <div className="col-span-1 text-center p-5 pt-20 bg-gradient-to-r from-red to-pink rounded-2xl">
                                         <h1 className="text-2xl pb-6">My Music</h1>
-                                        <button type="button" className="transition duration-300 btn-shadow ease-in-out transform hover:scale-110 mx-3 py-2 px-4 rounded border p-4">Add your favourite songs
+                                        <button onClick={API.goToSpotify} type="button" className="transition duration-300 btn-shadow ease-in-out transform hover:scale-110 mx-3 py-2 px-4 rounded border p-4">Add your favourite songs
                                         <img className="pt-2" alt="spotify logo" src="https://drive.google.com/thumbnail?id=1bj86C-TKkcSqVzxLqdoHLqxuDU68OdPm" /></button>
                                     </div>
 
@@ -69,7 +84,6 @@ function Profile() {
                                     </div>
 
                                 </div>
-
                             </div>
                         </div>
                     </div>
