@@ -1,9 +1,26 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import API from "../utils/API";
 import setAuthToken from "../utils/setAuthToken";
 import setAuthUser from "../utils/setAuthUser";
+import ProfilePic from "../components/ProfilePic";
+import Modal from "../components/Modal";
 
 function SignUp() {
+    useEffect(() => {
+    
+        window.addEventListener('storage', () => {
+          // When local storage changes, dump the list to
+          // the console.
+          setImage(JSON.parse(localStorage.getItem('tempImage')));   
+        });
+        
+        //    var save = document.getElementsByClassName("save")
+            
+        //     save.addEventListener("click",  function(){
+        //         setImage(JSON.parse(localStorage.getItem('tempImage')));   
+        //   });
+           
+        }, [])
 
     const [errorState, setErrorState] = useState([]);
 
@@ -17,6 +34,12 @@ function SignUp() {
     const passwordRef = useRef();
     const password2Ref = useRef();
     const dobRef = useRef();
+    const [nameState, setName] = useState("");
+    const [imageState, setImage] = useState(`https://ui-avatars.com/api/?color=f54f4f&name=${nameState}`);
+
+    if(window.location.reload) {
+        localStorage.removeItem('tempImage');
+    }
 
     const submitForm = (e) => {
         e.preventDefault();
@@ -31,26 +54,25 @@ function SignUp() {
             gender: genderState,
             location: locationState,
             orientation: orientationState,
-            image: `https://ui-avatars.com/api/?color=f54f4f&name=${nameRef.current.value}`,
-
+            image: `${window.localStorage.getItem('tempImage') === null ? `https://ui-avatars.com/api/?color=f54f4f&name=${nameState}` : JSON.parse(localStorage.getItem('tempImage'))}`,
         };
         API.createUser(newUser)
-        .then(response => {
-            console.log(response);
-            if (response.status === 200) {
-                setAuthToken(response.data.token);
-                setAuthUser(response.data.user);
-                window.location.replace("/dashboard");
-                // returning on localhost:3000 instead of 3001
-                //API.getDash().then(response => console.log(response));
-            } 
-        }).catch(error => {
-            //console.log(error.response.data);4
-            const errors = Object.values(error.response.data);
-            console.log(errors)
-            setErrorState(errors)
+            .then(response => {
+                console.log(response);
+                if (response.status === 200) {
+                    setAuthToken(response.data.token);
+                    setAuthUser(response.data.user);
+                    window.location.replace("/dashboard");
+                    // returning on localhost:3000 instead of 3001
+                    //API.getDash().then(response => console.log(response));
+                }
+            }).catch(error => {
+                //console.log(error.response.data);4
+                const errors = Object.values(error.response.data);
+                console.log(errors)
+                setErrorState(errors)
 
-        })
+            })
 
     }
 
@@ -68,8 +90,14 @@ function SignUp() {
                 ))}
 
                 <div className="mb-3">
+                    <div className="w-full flex justify-center neg-mb-50">
+                        <div className="mt-1 flex items-center">
+                            {<ProfilePic src={imageState} />}
+                            <Modal ></Modal>
+                        </div>
+                    </div>
                     <label for="name" className="form-label">Name</label>
-                    <input ref={nameRef} type="text" className="form-control" placeholder="Kat Midden" aria-label="name" id="userName" />
+                    <input ref={nameRef} onChange={e => setName(e.target.value)} type="text" className="form-control" placeholder="Kat Midden" aria-label="name" id="userName" />
                     <label for="emailAddress" className="form-label">Email Address</label>
                     <input ref={emailRef} type="email" className="form-control mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" id="userEmail"
                         placeholder="name@example.com" />
@@ -82,9 +110,9 @@ function SignUp() {
                     <label for="dob" className="form-label">Date of Birth</label>
                     <input ref={dobRef} type="date" className="form-select mt-1 block w-full py-2 px-3 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="01-01-2001" aria-label="date" id="dob" />
                     <div className="input-group mb-3">
-                    <label className="form-label" for="userLocation"> Please select your country</label>
-                    <select onChange={e => setLocation(e.target.value)} className="form-select mt-1 block w-full py-2 px-3 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" id="userLocation">
-                    <option value="" disabled selected hidden>Location</option>
+                        <label className="form-label" for="userLocation"> Please select your country</label>
+                        <select onChange={e => setLocation(e.target.value)} className="form-select mt-1 block w-full py-2 px-3 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" id="userLocation">
+                            <option value="" disabled selected hidden>Location</option>
                             <option value="Afghanistan">Afghanistan</option>
                             <option value="Åland Islands">Åland Islands</option>
                             <option value="Albania">Albania</option>
