@@ -48,21 +48,23 @@ export default function SpotifyDashboard({ code }) {
     }, [songSearch, accessToken])
     return (
         <Container>
+        <h3 className="my-2">Please select 3 of your favourite songs from the search results</h3>
             <Form.Control
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-2"
                 type="search"
                 placeholder="Search Songs or Artists"
                 value={songSearch}
                 onChange={e => setSongSearch(e.target.value)}
             />
             <div className="flex-grow-1 my-2" style={{ overflowY: "auto" }}>
-        {searchResults.map(track => (
-          <TrackSearchResult
-            track={track}
-            key={track.uri}
-            //chooseTrack={chooseTrack}
-          />
-        ))}
-      </div>
+                {searchResults.map(track => (
+                    <TrackSearchResult
+                        track={track}
+                        key={track.uri}
+                    //chooseTrack={chooseTrack}
+                    />
+                ))}
+            </div>
         </Container>
     )
 }

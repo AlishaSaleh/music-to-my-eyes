@@ -90,27 +90,29 @@ function CardMatch() {
 
   return (
     <div>
-      <h1>{loggedUser.name}, are they the music to your eyes?</h1>
-      <br />
-      <br />
-      <br />
-      <div className='cardContainer'>
+      <div>
+      <h1 className="text-2xl">{loggedUser.name}, are they the music to your eyes?</h1>
+      <div className="relative space-y-10">
+      {lastDirection ? <h2 key={lastDirection} className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText'>Swipe a card or press a button to get started!</h2>}
+      </div>
+      </div>
         {userMatch.map((user, index) =>
           <TinderCard
             ref={childRefs[index]}
-            className='swipe'
+            className='swipe relative bg-white bg-no-repeat bg-auto shadow-md md:w-1/2 w-full rounded px-8 pt-6 pb-8 mb-4'
             key={user.id}
             onSwipe={(dir) => {
               likes(dir, user.id)
               swiped(dir, user.id)
             }}
             onCardLeftScreen={() => outOfFrame(user.id)}>
-            <div style={{ backgroundImage: 'url(' + user.image + ')' }} className='card'>
-              <h3>{user.name}</h3>
-              <h4>{user.location}</h4>
-              <h4>{user.gender}</h4>
-              <h4>{user.orientation}</h4>
+            <div className="">
+              <img src={user.image} className="w-full"></img>
+              <h2>{user.name}</h2>
+              <h4>{user.gender} | {user.location} | {user.orientation}</h4>
+              <br/>
               <ul>
+                <h4 className="font-bold">Top Songs:</h4>
                 <li>{user.top_songs[0]}</li>
                 <li>{user.top_songs[1]}</li>
                 <li>{user.top_songs[2]}</li>
@@ -118,12 +120,6 @@ function CardMatch() {
             </div>
           </TinderCard>
         )}
-      </div>
-      {/* <div className='buttons'>
-        <button onClick={() => swipe('left')}>Swipe left!</button>
-        <button onClick={() => swipe('right')}>Swipe right!</button>
-      </div> */}
-      {lastDirection ? <h2 key={lastDirection} className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText'>Swipe a card or press a button to get started!</h2>}
     </div>
   )
 }

@@ -19,7 +19,7 @@ export default function TrackSearchResult({ track }) {
     <button
       value={stringTracks}
       ref={trackDiv}
-      className="d-flex m-2 align-items-center"
+      className="d-flex m-2 text-left"
       style={{ cursor: "pointer" }}
       onClick={handleClick}
     >
