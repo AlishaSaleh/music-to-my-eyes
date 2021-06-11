@@ -163,7 +163,7 @@ export function UserSettingsForm() {
               <div className="w-full flex justify-center neg-mb-50">
                 <div className="mt-1 flex items-center">
                   {<ProfilePic src={user.image} />}
-                  <Modal user={user}></Modal>
+                  <Modal user={user} name={user.name}></Modal>
                 </div>
               </div>
               <div className="xl:px-5 shadow sm:rounded-md bg-white sm:overflow-hidden pt-5">

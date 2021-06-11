@@ -92,9 +92,9 @@ function SignUp() {
                             </div>
                         ))}
                          <div className="w-full flex justify-center neg-mb-50">
-                        <div className="mt-1 flex items-center">
+                        <div className="mt-4 mb-15 flex items-center">
                             {<ProfilePic src={imageState} />}
-                            <Modal ></Modal>
+                            {<Modal name={nameState} />}
                         </div>
                     </div>
 
