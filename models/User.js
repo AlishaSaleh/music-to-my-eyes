@@ -40,9 +40,11 @@ const userSchema = new Schema({
     location: {
         type: String
     },
-    top_songs: {
-        type: [String],
-    },
+    top_songs: [
+        {
+            type: String,
+        },
+    ],
      // will need front-end validation to limit to 3 items in array
     // add required: true later on?
     image: {

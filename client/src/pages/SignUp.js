@@ -105,7 +105,6 @@ function SignUp() {
                             <input ref={nameRef} onChange={e => setName(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="userName" type="text" placeholder="Kat Midden" aria-label="name" ref={nameRef} />
                         </div>
 
-
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2" for="emailAddress">
                                 Email Address
@@ -128,7 +127,7 @@ function SignUp() {
                         </label>
                             <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="retypePassword" type="password" placeholder="*******" ref={password2Ref} />
                         </div>
-
+                </div>
 
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2" for="dob">

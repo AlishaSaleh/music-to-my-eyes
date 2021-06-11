@@ -50,8 +50,8 @@ export default {
         document.location.replace('/login');
     },
     // Update Likes
-    addLike: function (id, likeData) {
-        return axios.put(`/user/${id}/like`, likeData, {
+    addLike: function (likeData) {
+        return axios.put(`/user/like`, likeData, {
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem("access_token")}`
             },
@@ -67,5 +67,12 @@ export default {
     // Takes user to Spotify landing page from
     goToSpotify: function () {
         (document.location.replace('/spotify-home'));
+    },
+    saveSongs: function (songData) {
+        return axios.put(`/api/addsongs`, songData, {
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("access_token")}`
+            },
+        });
     },
 };

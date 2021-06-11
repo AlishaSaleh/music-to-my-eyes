@@ -3,20 +3,43 @@ import API from "../utils/API";
 import HeroBg from "../components/HeroBg"
 
 function Profile() {
-  
-    const [loggedUser, setLogged] = useState()
+
+    const [loggedName, setName] = useState();
+    const [loggedMatches, setMatches] = useState([]);
+    const [loggedImage, setImage] = useState([]);
+    const [matchName, setMatchName] = useState([]);
+    const [songName, setSongName] = useState([]);
+
 
     useEffect(() => {
         async function fetchData() {
             API.getDash().then(response => {
-                // console.log(response.data.user)
-                setLogged(response.data.user);
+                //console.log(response.data)
+                setName(response.data.name);
+                setMatches(response.data.matches);
+                setImage(response.data.image);
+                setSongName(response.data.top_songs)
             });
         };
         fetchData()
     }, []);
 
-    // console.log(loggedUser)
+    useEffect(() => {
+        async function fetchMatch() {
+            loggedMatches.map(matchId => API.getUser(matchId).then(response => {
+             //console.log(response.data.name);
+             setMatchName(matchName => [...matchName, response.data.name]);
+             //console.log(matchName);
+
+            }));
+            
+        };
+        fetchMatch()
+    }, [loggedMatches]);
+
+    //console.log(matchName);
+
+  
     return (
 
         <div>
@@ -43,21 +66,21 @@ function Profile() {
                                     <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
                                         <div className="relative">
                                             {/* profile picture */}
-                                            {/* <img
-                        alt="..."
-                        src={require(user.image).default}
-                        className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16"
-                        style={{ maxWidth: "150px" }}
-                      /> */}
+                                            <img
+                                                alt="..."
+                                                src={loggedImage}
+                                                className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16"
+                                                style={{ maxWidth: "150px" }}
+                                            />
                                         </div>
                                     </div>
                                 </div>
                                 <div className="text-center mt-12">
                                     <h3 className="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2">
 
-                                        Welcome, {loggedUser}
-                  </h3>
+                                        Welcome, {loggedName}
 
+                                    </h3>
 
                                     <button
                                         className="bg-gradient-to-r from-pink to-purple uppercase text-white font-bold hover:sh adow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
@@ -74,12 +97,22 @@ function Profile() {
                                         <h1 className="text-2xl pb-6">My Music</h1>
                                         <button onClick={API.goToSpotify} type="button" className="transition duration-300 btn-shadow ease-in-out transform hover:scale-110 mx-3 py-2 px-4 rounded border p-4">Add your favourite songs
                                         <img className="pt-2" alt="spotify logo" src="https://drive.google.com/thumbnail?id=1bj86C-TKkcSqVzxLqdoHLqxuDU68OdPm" /></button>
+                                        <ul>
+                                            {songName.map(song => (
+                                                <li>{song}</li>
+                                            ))}
+                                        </ul>
                                     </div>
 
                                     {/* matches */}
                                     <div className="col-span-1 text-center p-5 pt-20 bg-gradient-to-l from-red to-pink rounded-2xl">
                                         <h1 className="text-2xl">My Matches</h1>
                                         <p>It's time to find your playlist partner! </p>
+                                        <ul>
+                                            {matchName.map(match => (
+                                                <li>{match}</li>
+                                            ))}
+                                        </ul>
 
                                     </div>
 
