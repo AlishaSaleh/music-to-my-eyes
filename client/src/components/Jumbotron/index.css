@@ -4,8 +4,8 @@
 }
 
 .gradient-1 {
-    background: rgb(245,79,79);
-    background: linear-gradient(0deg, rgba(245,79,79,1) 0%, rgba(253,187,45,1) 100%);
+    background: rgb(246,112,187);
+    background: linear-gradient(0deg, rgba(246,112,187,1) 0%, rgba(205,174,248,1) 100%);
 }
 
 .header-txt {
