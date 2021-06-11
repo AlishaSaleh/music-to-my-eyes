@@ -11,15 +11,20 @@ const validateRegisterInput = require("../../validation/signup");
 const validateLoginInput = require("../../validation/login");
 const { sanitiseUser } = require('../../utils/sanitiseUser');
 const { authCheck } = require('../../middleware/authCheck');
+const ageValidation = require('../../validation/ageValidation');
 
 // user/[route]
 router.post("/signup", async (req, res) => {
 
     // Form validation
     const { errors, isValid } = validateRegisterInput(req.body);
+    const notAdult = ageValidation(req.body.dob);
     // Check validation
     if (!isValid) {
         return res.status(400).json(errors);
+    }
+    if (notAdult) {
+        return res.status(404).json({ message: "You must be over 18 to join!" }) 
     }
 
     // Check if username and password

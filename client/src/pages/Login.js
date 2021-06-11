@@ -5,10 +5,8 @@ import setAuthUser from "../utils/setAuthUser";
 
 function Login() {
 
-    // const [logUser, setLogin] = useState({
-    //     email: "",
-    //     password: "",
-    // });
+    const [errorState, setErrorState] = useState([]);
+
 
     const emailRef = useRef();
     const passwordRef = useRef();
@@ -29,32 +27,19 @@ function Login() {
                 API.getDash()
                 //.then(response => console.log(response));
             }
-        });
+        }).catch(error => {
+            //console.log(error.response.data);
+            const errors = Object.values(error.response.data);
+            console.log(errors)
+            setErrorState(errors)
+        })
+
     }
 
 
 
     return (
 
-
-        // <div className="row" >
-        //     <form onSubmit={e => submitLogin(e)} className="col-md-6 offset-md-3 bodyPad">
-
-        //         <h1>Login</h1>
-        //         <p>Please sign up below:</p>
-
-        //         <div className="mb-3">
-
-        //             <label for="email" className="form-label">Email Address</label>
-        //             <input type="email" className="form-control" id="email"
-        //                 placeholder="name@example.com" ref={emailRef} />
-
-        //             <label for="password" className="form-label">Password</label>
-        //             <input type="password" className="form-control" id="password" ref={passwordRef} />
-        //             <button className="btn btn-primary" type="submit">Login</button>
-        //         </div>
-        //     </form>
-        // </div>
 
         <div>
             <div className="w-full">
@@ -63,6 +48,9 @@ function Login() {
                     <form className="relative bg-white shadow-md w-full md:w-1/2 rounded px-8 pt-6 pb-8 mb-4" onSubmit={e => submitLogin(e)} >
                         <h1 className="flex justify-center text-2xl font-bold">Login</h1>
                         <p className="flex justify-center">If you don't have an account yet, sign up <a className="mx-1" href="/signup">  here</a>!</p>
+                   {errorState.map(error => (
+                   <div className="bg-red border text-white text-s px-2 py-1 rounded relative" role="alert">
+                   <span className="block sm:inline">{error}</span></div>))}
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2" for="email">
                                 Email
