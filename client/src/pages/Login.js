@@ -5,10 +5,8 @@ import setAuthUser from "../utils/setAuthUser";
 
 function Login() {
 
-    // const [logUser, setLogin] = useState({
-    //     email: "",
-    //     password: "",
-    // });
+    const [errorState, setErrorState] = useState([]);
+
 
     const emailRef = useRef();
     const passwordRef = useRef();
@@ -29,7 +27,13 @@ function Login() {
                 API.getDash()
                 //.then(response => console.log(response));
             }
-        });
+        }).catch(error => {
+            //console.log(error.response.data);
+            const errors = Object.values(error.response.data);
+            console.log(errors)
+            setErrorState(errors)
+        })
+
     }
 
 
@@ -42,6 +46,10 @@ function Login() {
 
                 <h1>Login</h1>
                 <p>Please sign up below:</p>
+               
+               {errorState.map(error => (
+                   <div className="bg-red border text-white text-s px-2 py-1 rounded relative" role="alert">
+                   <span className="block sm:inline">{error}</span></div>))}
 
                 <div className="mb-3">
 
