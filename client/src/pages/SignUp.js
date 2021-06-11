@@ -370,6 +370,7 @@ function SignUp() {
                                 <option value="" disabled selected hidden>Gender</option>
                                 <option value="Female">Female</option>
                                 <option value="Male">Male</option>
+                                <option value="Non-Binary">Non-Binary</option>
                                 <option value="Other">Other/Prefer not to say</option>
                             </select>
                         </div>

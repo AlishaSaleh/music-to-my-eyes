@@ -1,15 +1,24 @@
-import React from "react"
+import React, { useRef } from "react"
+import API from "../../utils/API"
 
-export default function TrackSearchResult({ track}) {
+export default function TrackSearchResult({ track }) {
 
-  function handleClick(e) {
-    e.preventDefault();
-    console.log({track})
-    console.log('The div was clicked.');
+  const stringTracks = `${track.title} - ${track.artist}`
+  const trackDiv = useRef()
+
+  function handleClick() {
+    const divElement = {
+      song: trackDiv.current.value
+    }
+    console.log(divElement)
+    API.saveSongs(divElement).then(res => {
+      console.log(res);
+    });
   }
-
   return (
-    <div
+    <button
+      value={stringTracks}
+      ref={trackDiv}
       className="d-flex m-2 align-items-center"
       style={{ cursor: "pointer" }}
       onClick={handleClick}
@@ -19,15 +28,6 @@ export default function TrackSearchResult({ track}) {
         <div>{track.title}</div>
         <div className="text-muted">{track.artist}</div>
       </div>
-    </div>
+    </button>
   )
 }
-
-// const saveTrack = () => {
-//   const savedTrackArr = []
-//   const q = ""
-//   localStorage.setItem("trackInfo", JSON.stringify(q));
-
-//   savedTrackArr.push(q);
-//   localStorage.setItem("savedTrackInfo", JSON.stringify(savedTrackArr));
-// }
