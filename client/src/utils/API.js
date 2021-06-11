@@ -67,4 +67,11 @@ export default {
     goToSpotify: function () {
         (document.location.replace('/spotify-home'));
     },
+    saveSongs: function (id, songData) {
+        return axios.put(`/api/${id}/addsongs`, songData, {
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("access_token")}`
+            },
+        });
+    },
 };

@@ -1,17 +1,29 @@
-import React from "react"
+import React, { useRef } from "react"
+import API from "../../utils/API"
+import setAuthUser from "../../utils/setAuthUser"
 
-export default function TrackSearchResult({ track}) {
+export default function TrackSearchResult({ track }) {
 
-  function handleClick(e) {
-    e.preventDefault();
-    console.log({track})
-    console.log('The div was clicked.');
-    const trackString = `${track.title} - ${track.artist}`
-    console.log(trackString)
+  const stringTracks = `${track.title} - ${track.artist}`
+  const trackDiv = useRef()
+
+  const loggedUser = JSON.parse(localStorage.getItem("user"));
+  console.log(loggedUser._id)
+
+  function handleClick() {
+    const divElement = {
+      song: trackDiv.current.value
+    }
+    console.log(divElement)
+    API.saveSongs(loggedUser._id, divElement).then(res => {
+      console.log(res);
+      setAuthUser(res.data);
+    });
   }
-
   return (
-    <div
+    <button
+      value={stringTracks}
+      ref={trackDiv}
       className="d-flex m-2 align-items-center"
       style={{ cursor: "pointer" }}
       onClick={handleClick}
@@ -21,15 +33,6 @@ export default function TrackSearchResult({ track}) {
         <div>{track.title}</div>
         <div className="text-muted">{track.artist}</div>
       </div>
-    </div>
+    </button>
   )
 }
-
-// const saveTrack = () => {
-//   const savedTrackArr = []
-//   const q = ""
-//   localStorage.setItem("trackInfo", JSON.stringify(q));
-
-//   savedTrackArr.push(q);
-//   localStorage.setItem("savedTrackInfo", JSON.stringify(savedTrackArr));
-// }

@@ -35,5 +35,28 @@ router.get("/matches", authCheck, async (req, res) => {
     }
 });
 
+router.put("/:id/addsongs/", authCheck, async (req, res) => {
+    try {
+
+         const songs = req.body
+         console.log(songs);
+        const songData = await User.findByIdAndUpdate(
+            { _id: req.params.id },
+            { $push: { top_songs: songs.song } }, // works with id e.g. '60b602cd2c09b7409853a947' <-- format
+            { new: true }
+        );
+
+        if (!songData) {
+            res.status(404).json({ message: 'No user found with this id!' });
+            return;
+        }
+
+        // console.log(req.params.id);
+        return res.json(songData)
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
 
 module.exports = router;
