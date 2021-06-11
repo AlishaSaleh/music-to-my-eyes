@@ -7,6 +7,7 @@ function Profile() {
     const [loggedName, setName] = useState();
     const [loggedMatches, setMatches] = useState([]);
     const [loggedImage, setImage] = useState([]);
+    const [matchName, setMatchName] = useState([]);
 
 
     useEffect(() => {
@@ -28,9 +29,8 @@ function Profile() {
         async function fetchMatch() {
             loggedMatches.map(matchId => API.getUser(matchId).then(response => {
              console.log(response.data.name);
-             matchArr.push(response.data.name);
-             console.log(matchArr);
-             return matchArr
+             setMatchName(matchName => [...matchName, response.data.name]);
+             console.log(matchName);
 
             }));
             
@@ -39,7 +39,9 @@ function Profile() {
     }, [loggedMatches]);
 
 
-    console.log(matchArr);
+
+
+    console.log(matchName);
 
     // const matchArr = loggedUser.matches;
     return (
@@ -106,7 +108,7 @@ function Profile() {
                                         <h1 className="text-2xl">My Matches</h1>
                                         <p>It's time to find your playlist partner! </p>
                                         <ul>
-                                            {loggedMatches.map(match => (
+                                            {matchName.map(match => (
                                                 <li>{match}</li>
                                             ))}
                                         </ul>
