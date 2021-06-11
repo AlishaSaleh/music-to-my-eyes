@@ -96,15 +96,25 @@ router.get("/test", authCheck, (req, res) => {
 })
 
 // [user]/ -- GET all users for Match page
-router.get("/", async (req, res) => {
+router.get("/", authCheck, async (req, res) => {
     try {
         //const { user } = req.headers;
-        const userData = await User.find({});
         // console.log(req.headers);
-        // need to remove password before returning
+        const excluded = [req.user.id, ...req.user.likes]
+        const userData = await User.find({ _id: { $nin: excluded } });
+        // remove password before returning
+        const sanUsers = userData.map(users => {
+            return sanitiseUser(users);
+        });
+
+
+        // const newUsers = sanUsers.filter(({id}) => excluded.find(userId => userId.toString() !== id.toString()))
         // need to remove this user from data - client or serverside?
+        // console.log(newUsers)
+        // console.log(excluded)
+
         // findOne (the currently logged in user) - exclude from the find()
-        return res.json({ users: userData })
+        return res.json({ users: sanUsers })
     } catch (err) {
         res.status(500).json(err);
     }
@@ -121,7 +131,7 @@ router.get("/:id/", async (req, res) => {
             res.status(404).json({ message: 'No user found with this id!' });
             return;
         }
-        
+
         // console.log(req.params.id);
         return res.json(userData)
     } catch (err) {
@@ -130,12 +140,20 @@ router.get("/:id/", async (req, res) => {
 });
 
 // Update User with their likes --> works in Postman
-router.put("/:id/like/", async (req, res) => {
+router.put("/:id/like/", authCheck, async (req, res) => {
     try {
-        console.log(req.body);
-    
+        if (req.user.id === req.body.id) {
+            return res.json({ message: "You can't like yourself!" })
+        }
+
+        const isLiked = req.user.likes.find(userId => userId === req.body.id);
+
+        if (isLiked) {
+            return res.json({ message: "You have already liked this user!" })
+        }
+
         const likeData = await User.findByIdAndUpdate(
-            { _id: req.params.id },
+            { _id: req.user.id },
             { $push: { likes: req.body.id } }, // works with id e.g. '60b602cd2c09b7409853a947' <-- format
             { new: true }
         );
@@ -145,8 +163,47 @@ router.put("/:id/like/", async (req, res) => {
             return;
         }
 
-        console.log(req.params.id);
-        return res.json(likeData)
+        const likedUser = await User.findById(req.body.id)
+        const likeArr = likedUser.likes;
+        const isLikedUser = likeArr.find(userId =>
+            userId.toString() === req.user.id.toString()
+        );
+        console.log(likedUser.likes);
+        console.log(isLikedUser);
+
+        if (!isLikedUser) {
+            return res.json(likeData)
+        } else {
+            User.updateOne(
+                { _id: req.body.id },
+                { $push: { matches: isLikedUser } },
+                { new: true },
+                function (error, success) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log(success);
+                    }
+                }
+            );
+            User.updateOne(
+                { _id: isLikedUser },
+                { $push: { matches: req.body.id } },
+                { new: true },
+                function (error, success) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log(success);
+                    }
+                }
+            );
+            return res.json(likeData)
+        }
+
+       
+        // console.log(req.params.id);
+ 
     } catch (err) {
         res.status(500).json(err);
     }
@@ -162,7 +219,7 @@ router.put("/:id/dislike/", async (req, res) => {
             { $push: { dislikes: req.body } }, // works with id e.g. '60b602cd2c09b7409853a947' <-- format
             { new: true }
         );
-             
+
         if (!likeData) {
             res.status(404).json({ message: 'No user found with this id!' });
             return;
@@ -186,7 +243,7 @@ router.put("/:id/", async (req, res) => {
         const userData = await User.findByIdAndUpdate(
             { _id: req.params.id },
             // sets all the new info into the database
-            { $set: req.body }, 
+            { $set: req.body },
             { new: true }
         );
 
