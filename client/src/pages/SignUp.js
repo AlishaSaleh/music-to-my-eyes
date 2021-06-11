@@ -91,6 +91,7 @@ function SignUp() {
                                 <span class="block sm:inline">{error}</span>
                             </div>
                         ))}
+
                          <div className="w-full flex justify-center neg-mb-50">
                         <div className="mt-4 mb-15 flex items-center">
                             {<ProfilePic src={imageState} />}
@@ -98,11 +99,14 @@ function SignUp() {
                         </div>
                     </div>
 
+
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2" for="name">
                                 Name
                         </label>
-                            <input ref={nameRef} onChange={e => setName(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="userName" type="text" placeholder="Kat Midden" aria-label="name" ref={nameRef} />
+
+                            <input onChange={e => setName(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="userName" type="text" placeholder="Kat Midden" aria-label="name" ref={nameRef} />
+
                         </div>
 
                         <div className="mb-4">
@@ -111,7 +115,6 @@ function SignUp() {
                         </label>
                             <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="userEmail" type="email" placeholder="name@email.com" ref={emailRef} />
                         </div>
-
 
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2" for="password">
@@ -135,12 +138,13 @@ function SignUp() {
                             <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="dob" type="date" ref={dobRef} />
                         </div>
 
-
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2">
                                 Please select your country
                         </label>
-                            <select onChange={e => setLocation(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="userLocation">
+
+                           <select onChange={e => setLocation(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="userLocation">
+
                                 <option value="" disabled selected hidden>Location</option>
                                 <option value="Afghanistan">Afghanistan</option>
                                 <option value="Åland Islands">Åland Islands</option>
@@ -389,8 +393,6 @@ function SignUp() {
                             </select>
                         </div>
 
-
-
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2" for="userGender">
                                 Please select your gender
@@ -399,6 +401,7 @@ function SignUp() {
                                 <option value="" disabled selected hidden>Gender</option>
                                 <option value="Female">Female</option>
                                 <option value="Male">Male</option>
+                                <option value="Non-Binary">Non-Binary</option>
                                 <option value="Other">Other/Prefer not to say</option>
                             </select>
                         </div>

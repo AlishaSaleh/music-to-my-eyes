@@ -37,9 +37,7 @@ function Login() {
     }
 
 
-
     return (
-
 
         <div>
             <div className="w-full">
@@ -48,9 +46,11 @@ function Login() {
                     <form className="relative bg-white shadow-md w-full md:w-1/2 rounded px-8 pt-6 pb-8 mb-4" onSubmit={e => submitLogin(e)} >
                         <h1 className="flex justify-center text-2xl font-bold">Login</h1>
                         <p className="flex justify-center">If you don't have an account yet, sign up <a className="mx-1" href="/signup">  here</a>!</p>
+
                    {errorState.map(error => (
                    <div className="bg-red border text-white text-s px-2 py-1 rounded relative" role="alert">
                    <span className="block sm:inline">{error}</span></div>))}
+
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2" for="email">
                                 Email
