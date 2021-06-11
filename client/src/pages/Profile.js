@@ -4,19 +4,19 @@ import HeroBg from "../components/HeroBg"
 
 function Profile() {
   
-    const [loggedUser, setLogged] = useState()
+    const [loggedUser, setLogged] = useState({})
 
     useEffect(() => {
         async function fetchData() {
             API.getDash().then(response => {
-                // console.log(response.data.user)
-                setLogged(response.data.user);
+                console.log(response.data)
+                setLogged(response.data);
             });
         };
         fetchData()
     }, []);
 
-    // console.log(loggedUser)
+    console.log(loggedUser)
     return (
 
         <div>
@@ -55,7 +55,7 @@ function Profile() {
                                 <div className="text-center mt-12">
                                     <h3 className="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2">
 
-                                        Welcome, {loggedUser}
+                                        Welcome, {loggedUser.name}
                   </h3>
 
 
