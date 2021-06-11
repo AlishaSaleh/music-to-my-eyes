@@ -60,7 +60,7 @@ const Dropdown = ({ color }) => {
               </a>
               <div className="h-0 my-2 border border-solid border-t-0 border-blueGray-800 opacity-25" />
               <a
-                href="/logout"
+                href="/"
                 className={
                   "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent no-hov" +
                   (color === "white" ? " text-blueGray-700" : "text-white")
