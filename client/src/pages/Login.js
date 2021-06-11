@@ -59,7 +59,10 @@ function Login() {
         <div>
             <div className="w-full">
                 <div className="relative h-screen bg-red-light mx-auto flex flex-col items-center pt-12 sm:pt-24 pb-24">
-                    <form className="relative bg-white shadow-md w-full md:w-1/2 rounded px-8 pt-6 pb-8 mb-4">
+                    
+                    <form className="relative bg-white shadow-md w-full md:w-1/2 rounded px-8 pt-6 pb-8 mb-4" onSubmit={e => submitLogin(e)} >
+                        <h1 className="flex justify-center text-2xl font-bold">Login</h1>
+                        <p className="flex justify-center">If you don't have an account yet, sign up <a className="mx-1" href="/signup">  here</a>!</p>
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2" for="email">
                                 Email
@@ -77,8 +80,6 @@ function Login() {
                         </div>
                     </form>
                 </div>
-
-
             </div>
         </div>
 
