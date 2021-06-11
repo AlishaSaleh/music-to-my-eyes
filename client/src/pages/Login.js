@@ -37,23 +37,50 @@ function Login() {
     return (
 
 
-        <div className="row" >
-            <form onSubmit={e => submitLogin(e)} className="col-md-6 offset-md-3 bodyPad">
+        // <div className="row" >
+        //     <form onSubmit={e => submitLogin(e)} className="col-md-6 offset-md-3 bodyPad">
 
-                <h1>Login</h1>
-                <p>Please sign up below:</p>
+        //         <h1>Login</h1>
+        //         <p>Please sign up below:</p>
 
-                <div className="mb-3">
+        //         <div className="mb-3">
 
-                    <label for="email" className="form-label">Email Address</label>
-                    <input type="email" className="form-control" id="email"
-                        placeholder="name@example.com" ref={emailRef} />
+        //             <label for="email" className="form-label">Email Address</label>
+        //             <input type="email" className="form-control" id="email"
+        //                 placeholder="name@example.com" ref={emailRef} />
 
-                    <label for="password" className="form-label">Password</label>
-                    <input type="password" className="form-control" id="password" ref={passwordRef} />
-                    <button className="btn btn-primary" type="submit">Login</button>
+        //             <label for="password" className="form-label">Password</label>
+        //             <input type="password" className="form-control" id="password" ref={passwordRef} />
+        //             <button className="btn btn-primary" type="submit">Login</button>
+        //         </div>
+        //     </form>
+        // </div>
+
+        <div>
+            <div className="w-full">
+                <div className="relative h-screen bg-red-light mx-auto flex flex-col items-center pt-12 sm:pt-24 pb-24">
+                    
+                    <form className="relative bg-white shadow-md w-full md:w-1/2 rounded px-8 pt-6 pb-8 mb-4" onSubmit={e => submitLogin(e)} >
+                        <h1 className="flex justify-center text-2xl font-bold">Login</h1>
+                        <p className="flex justify-center">If you don't have an account yet, sign up <a className="mx-1" href="/signup">  here</a>!</p>
+                        <div className="mb-4">
+                            <label className="block text-gray-700 text-sm font-bold mb-2" for="email">
+                                Email
+                        </label>
+                            <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="name@email.com" ref={emailRef} />
+                        </div>
+                        <div className="mb-4">
+                            <label className="block text-gray-700 text-sm font-bold mb-2" for="password">
+                                Password
+                        </label>
+                            <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="*******" ref={passwordRef} />
+                        </div>
+                        <div className="flex justify-center">
+                            <button className="bg-white transition duration-300 btn-shadow ease-in-out font-bold transform hover:scale-110 mx-3 py-2 px-4 rounded border" type="submit">Login</button>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
 
     );
