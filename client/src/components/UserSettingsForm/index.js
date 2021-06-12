@@ -4,6 +4,7 @@ import "./index.css";
 import Loader from "../Loader";
 import { useSpring, animated } from 'react-spring';
 import Modal from "../Modal";
+import DeleteModal from "../DeleteModal";
 import API from "../../utils/API"
 
 export function SaveButton({ isLoading, children, ...props }) {
@@ -77,14 +78,12 @@ export function SaveButton({ isLoading, children, ...props }) {
 export function UserSettingsForm() {
 
   const user = JSON.parse(localStorage.getItem('user'));
-  console.log(user);
 
   const [genderState, setGender] = useState(user.gender)
   const [locationState, setLocation] = useState(user.location)
   const [orientationState, setOrientation] = useState(user.orientation)
   const [nameState, setName] = useState(user.name);
   const [emailState, setEmail] = useState(user.email);
-  const [passwordState, setPassword] = useState(user.password);
 
 
   const nameRef = useRef();
@@ -111,19 +110,14 @@ export function UserSettingsForm() {
   const userLocal = JSON.parse(localStorage.getItem('user'));
 
   const submitForm = (e) => {
-    console.log("here")
     e.preventDefault();
     var updateUser = {};
-    console.log(passwordRef.current.value);
-    //console.log(genderState);
-    //console.log(nameRef.current.value, emailRef.current.value, passwordRef.current.value);
+  
     if (passwordRef.current.value.length > 0) {
       updateUser = {
         name: nameRef.current.value,
         email: emailRef.current.value,
         password: passwordRef.current.value,
-        // password2: password2Ref.current.value,
-        // dob: dobRef.current.value,
         image: userLocal.image,
         gender: genderState,
         location: locationState,
@@ -135,8 +129,6 @@ export function UserSettingsForm() {
       updateUser = {
         name: nameRef.current.value,
         email: emailRef.current.value,
-        // password2: password2Ref.current.value,
-        // dob: dobRef.current.value,
         image: userLocal.image,
         gender: genderState,
         location: locationState,
@@ -157,7 +149,6 @@ export function UserSettingsForm() {
     <>
       <div>
         <div className="md:grid md:grid-cols-6 md:gap-6 2xl:grid-cols-7 neg-mt relative mb-5">
-          {/* <div className="col-span-1"></div> */}
           <div className="col-start-1 md:col-start-2 2xl:col-start-3 mt-5 md:mt-0 col-span-4 md:col-span-4 2xl:col-span-3">
             <form onSubmit={e => submitForm(e)}>
               <div className="w-full flex justify-center neg-mb-50">
@@ -177,7 +168,7 @@ export function UserSettingsForm() {
                       </div>
                     </div>
                     <div className="col-span-12 md:col-span-2 xl:col-span-2">
-                      <label for="name" className="form-label block text-sm font-medium text-gray-700">Name</label>
+                      <label htmlFor="name" className="form-label block text-sm font-medium text-gray-700">Name</label>
                       <input ref={nameRef} value={nameState} onChange={e => setName(e.target.value)} type="text" className="form-control mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Kat Midden" aria-label="name" id="userName" />
                     </div>
                     <div className="col-span-12 md:col-span-9 xl:col-span-9">
@@ -190,7 +181,6 @@ export function UserSettingsForm() {
                         name="gender"
                         autoComplete="gender"
                         value={genderState}
-                        // value={user.gender}
                         className="mt-1 block w-full py-2 px-3 border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       >
                         <option value="Female">Female</option>
@@ -212,8 +202,7 @@ export function UserSettingsForm() {
                       />
                     </div>
                     <div className="col-span-12 md:col-span-2 xl:col-span-2 xl:col-start-1">
-                      {/* <div className="input-group mb-3"> */}
-                      <label className="form-label block text-sm font-medium text-gray-700" for="userLocation">Country</label>
+                      <label className="form-label block text-sm font-medium text-gray-700" htmlFor="userLocation">Country</label>
                       <select value={locationState} onChange={e => setLocation(e.target.value)} className="form-select mt-1 block w-full py-2 px-3 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" id="userLocation">
                         <option value="Afghanistan">Afghanistan</option>
                         <option value="Åland Islands">Åland Islands</option>
@@ -444,7 +433,7 @@ export function UserSettingsForm() {
                         <option value="Uganda">Uganda</option>
                         <option value="Ukraine">Ukraine</option>
                         <option value="United Arab Emirates">United Arab Emirates</option>
-                        <option value="United Kingdom" disabled selected hidden>United Kingdom</option>
+                        <option value="United Kingdom">United Kingdom</option>
                         <option value="United States">United States</option>
                         <option value="United States Minor Outlying Islands">United States Minor Outlying Islands</option>
                         <option value="Uruguay">Uruguay</option>
@@ -462,9 +451,9 @@ export function UserSettingsForm() {
                       </select>
                     </div>
                     <div className="col-span-12 md:col-span-9 xl:col-span-9">
-                      <label className="form-label block text-sm font-medium text-gray-700" for="userOrientation"> Sexual Orientation</label>
+                      <label className="form-label block text-sm font-medium text-gray-700" htmlFor="userOrientation"> Sexual Orientation</label>
                       <select value={orientationState} onChange={e => setOrientation(e.target.value)} className="form-select mt-1 block w-full py-2 px-3 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" id="userOrientation">
-                        <option value="" disabled selected hidden></option>
+                        <option value="" disabled hidden></option>
                         <option value="Straight">Heterosexual</option>
                         <option value="Gay/Lesbian">Gay/Lesbian</option>
                         <option value="Bisexual">Bisexual</option>
@@ -473,15 +462,16 @@ export function UserSettingsForm() {
                     </div>
                     <hr className="m-5 col-span-12"></hr>
                     <div className="col-span-12 md:col-span-2 xl:col-span-2">
-                      <label for="emailAddress" className="form-label block text-sm font-medium text-gray-700">Email Address</label>
+                      <label htmlFor="emailAddress" className="form-label block text-sm font-medium text-gray-700">Email Address</label>
                       <input value={emailState} onChange={e => setEmail(e.target.value)} ref={emailRef} type="email" className="form-control mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" id="userEmail"
                         placeholder="name@example.com" />
                     </div>
                     <div className="col-span-12 md:col-span-9 xl:col-span-9">
-                      <label for="password" className="form-label block text-sm font-medium text-gray-700">Password</label>
-                      <input onChange={e => setPassword(e.target.value)} ref={passwordRef} type="password" className="form-control mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" id="firstPassword"
+                      <label htmlFor="password" className="form-label block text-sm font-medium text-gray-700">Password</label>
+                      <input ref={passwordRef} type="password" className="form-control mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" id="firstPassword"
                       />
                     </div>
+                  <DeleteModal />
                   </div>
                 </div>
 

@@ -9,16 +9,8 @@ function SignUp() {
     useEffect(() => {
     
         window.addEventListener('storage', () => {
-          // When local storage changes, dump the list to
-          // the console.
           setImage(JSON.parse(localStorage.getItem('tempImage')));   
         });
-        
-        //    var save = document.getElementsByClassName("save")
-            
-        //     save.addEventListener("click",  function(){
-        //         setImage(JSON.parse(localStorage.getItem('tempImage')));   
-        //   });
            
         }, [])
 
@@ -37,15 +29,8 @@ function SignUp() {
     const [nameState, setName] = useState("");
     const [imageState, setImage] = useState(`https://ui-avatars.com/api/?color=f54f4f&name=${nameState}`);
 
-    // if(window.location.reload) {
-    //     // setImage(`https://ui-avatars.com/api/?color=f54f4f&name=${nameState}`)
-    //     localStorage.removeItem('tempImage');
-    // }
-
     const submitForm = (e) => {
         e.preventDefault();
-        //console.log(genderState);
-        //console.log(nameRef.current.value, emailRef.current.value, passwordRef.current.value);
         const newUser = {
             name: nameRef.current.value,
             email: emailRef.current.value,
@@ -64,11 +49,8 @@ function SignUp() {
                     setAuthToken(response.data.token);
                     setAuthUser(response.data.user);
                     window.location.replace("/dashboard");
-                    // returning on localhost:3000 instead of 3001
-                    //API.getDash().then(response => console.log(response));
                 }
             }).catch(error => {
-                //console.log(error.response.data);4
                 const errors = Object.values(error.response.data);
                 console.log(errors)
                 setErrorState(errors)

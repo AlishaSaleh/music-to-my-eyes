@@ -1,24 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import '../App.css';
 import Card from '../components/Card'
-import API from "../utils/API";
 
 function Match() {
-
-    // const [loggedUser, setLogged] = useState()
-
-    // useEffect(() => {
-    //     async function fetchData() {
-    //         API.getMatch().then(response => {
-    //             console.log(response.data)
-    //             setLogged(response.data.user);
-    //         });
-    //     };
-    //     fetchData()
-    // }, []);
-
-    //console.log(loggedUser)
-
 
     return (
         <div>

@@ -12,13 +12,10 @@ export default function TrackSearchResult({ track }) {
     const divElement = {
       song: trackDiv.current.value
     }
-    console.log(divElement)
     API.saveSongs(divElement).then(res => {
-      console.log(res);
       const clickMe = Object.values(divElement)
       setAlert(alertState => [...alertState, clickMe])
     });
-    console.log(alertState);
   }
  
 
@@ -36,7 +33,7 @@ export default function TrackSearchResult({ track }) {
       style={{ cursor: "pointer" }}
       onClick={handleClick}
     >
-      <img src={track.albumUrl} style={{ height: "64px", width: "64px" }} />
+      <img src={track.albumUrl} alt={track.title} style={{ height: "64px", width: "64px" }} />
       <div className="ml-3">
         <div>{track.title}</div>
         <div className="text-muted">{track.artist}</div>
