@@ -95,7 +95,7 @@ router.post("/login", async (req, res) => {
 });
 
 // Testing Auth in Postman
-
+// NOT USED
 router.get("/test", authCheck, (req, res) => {
     res.json({ message: "authenticated!" })
 })
@@ -213,7 +213,7 @@ router.put("/like/", authCheck, async (req, res) => {
 });
 
 // Update user with their dislikes so they are no longer returned to the user
-// MIGHT NOT BE USED 
+// NOT USED - for future development
 router.put("/:id/dislike/", async (req, res) => {
     try {
         // console.log(req.params);
