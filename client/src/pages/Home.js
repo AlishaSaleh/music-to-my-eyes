@@ -1,4 +1,3 @@
-// import React, { useState } from "react";
 import React from "react";
 import Emoji from "../components/Emoji";
 import API from "../utils/API";
