@@ -70,7 +70,7 @@ function CardMatch() {
             }}
             onCardLeftScreen={() => outOfFrame(user.id)}>
             <div className="">
-              <img src={user.image} className="w-full"></img>
+              <img src={user.image} className="w-full" alt={user.name}></img>
               <h2>{user.name}</h2>
               <h4>{user.gender} | {user.location} | {user.orientation}</h4>
               <br/>
