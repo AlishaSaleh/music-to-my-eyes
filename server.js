@@ -6,14 +6,6 @@ const cors = require("cors")
 const PORT = process.env.PORT || 3001;
 require('dotenv').config();
 
-//const passport = require("passport");
-//const users = require("./routes/api/users");
-
-// Passport middleware
-// app.use(passport.initialize());
-// // Passport config
-// require("./config/passport")(passport);
-
 // Routes
 //app.use("/api/users", users);
 app.use(cors())

@@ -13,7 +13,6 @@ module.exports = function ageValidate(data) {
     
     if (age <= 18) {
         errors.dob = "You must be Over 18 to sign up";
-        console.log("under-age")
         return errors;
     }
     return null

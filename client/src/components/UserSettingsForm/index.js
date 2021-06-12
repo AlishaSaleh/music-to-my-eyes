@@ -77,7 +77,6 @@ export function SaveButton({ isLoading, children, ...props }) {
 export function UserSettingsForm() {
 
   const user = JSON.parse(localStorage.getItem('user'));
-  console.log(user);
 
   const [genderState, setGender] = useState(user.gender)
   const [locationState, setLocation] = useState(user.location)
@@ -111,19 +110,14 @@ export function UserSettingsForm() {
   const userLocal = JSON.parse(localStorage.getItem('user'));
 
   const submitForm = (e) => {
-    console.log("here")
     e.preventDefault();
     var updateUser = {};
-    console.log(passwordRef.current.value);
-    //console.log(genderState);
-    //console.log(nameRef.current.value, emailRef.current.value, passwordRef.current.value);
+  
     if (passwordRef.current.value.length > 0) {
       updateUser = {
         name: nameRef.current.value,
         email: emailRef.current.value,
         password: passwordRef.current.value,
-        // password2: password2Ref.current.value,
-        // dob: dobRef.current.value,
         image: userLocal.image,
         gender: genderState,
         location: locationState,
@@ -135,8 +129,6 @@ export function UserSettingsForm() {
       updateUser = {
         name: nameRef.current.value,
         email: emailRef.current.value,
-        // password2: password2Ref.current.value,
-        // dob: dobRef.current.value,
         image: userLocal.image,
         gender: genderState,
         location: locationState,
@@ -157,7 +149,6 @@ export function UserSettingsForm() {
     <>
       <div>
         <div className="md:grid md:grid-cols-6 md:gap-6 2xl:grid-cols-7 neg-mt relative mb-5">
-          {/* <div className="col-span-1"></div> */}
           <div className="col-start-1 md:col-start-2 2xl:col-start-3 mt-5 md:mt-0 col-span-4 md:col-span-4 2xl:col-span-3">
             <form onSubmit={e => submitForm(e)}>
               <div className="w-full flex justify-center neg-mb-50">
@@ -190,7 +181,6 @@ export function UserSettingsForm() {
                         name="gender"
                         autoComplete="gender"
                         value={genderState}
-                        // value={user.gender}
                         className="mt-1 block w-full py-2 px-3 border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       >
                         <option value="Female">Female</option>
@@ -212,7 +202,6 @@ export function UserSettingsForm() {
                       />
                     </div>
                     <div className="col-span-12 md:col-span-2 xl:col-span-2 xl:col-start-1">
-                      {/* <div className="input-group mb-3"> */}
                       <label className="form-label block text-sm font-medium text-gray-700" for="userLocation">Country</label>
                       <select value={locationState} onChange={e => setLocation(e.target.value)} className="form-select mt-1 block w-full py-2 px-3 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" id="userLocation">
                         <option value="Afghanistan">Afghanistan</option>

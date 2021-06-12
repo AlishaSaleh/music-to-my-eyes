@@ -7,6 +7,9 @@ export default {
     goToSignUp: function () {
         (document.location.replace('/signup'));
     },
+    goToDashboard: function () {
+        (document.location.replace('/dashboard'));
+    },
     // Gets all users
     getUsers: function () {
         return axios.get("/user", {

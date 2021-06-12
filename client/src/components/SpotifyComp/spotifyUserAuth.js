@@ -25,9 +25,8 @@ export default function useAuth(code) {
         setExpiresIn(res.data.expiresIn)
         window.history.pushState({}, null, "/spotify-home") //removes the code param from our URL
       })
-      .catch(() => {
-        console.log('Ive got an error')
-        // window.location = "/spotify-home"
+      .catch((err) => {
+        console.log(err)
       })
   }, [code])
 

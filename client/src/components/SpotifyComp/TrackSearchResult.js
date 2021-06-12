@@ -12,13 +12,10 @@ export default function TrackSearchResult({ track }) {
     const divElement = {
       song: trackDiv.current.value
     }
-    console.log(divElement)
     API.saveSongs(divElement).then(res => {
-      console.log(res);
       const clickMe = Object.values(divElement)
       setAlert(alertState => [...alertState, clickMe])
     });
-    console.log(alertState);
   }
  
 
