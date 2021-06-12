@@ -17,7 +17,6 @@ function Login() {
             email: emailRef.current.value,
             password: passwordRef.current.value,
         };
-        //console.log(user);
 
         API.loginUser(user).then(response => {
             if (response.status === 200) {
@@ -25,12 +24,9 @@ function Login() {
                 setAuthUser(response.data.user);
                 window.location.replace("/dashboard");
                 API.getDash()
-                //.then(response => console.log(response));
             }
         }).catch(error => {
-            //console.log(error.response.data);
             const errors = Object.values(error.response.data);
-            console.log(errors)
             setErrorState(errors)
         })
 

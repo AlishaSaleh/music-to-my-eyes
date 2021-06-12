@@ -111,7 +111,7 @@ export default function Modal(props) {
             className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
           >
             <div className="modal-overlay absolute w-full h-full bg-black opacity-50"></div>
-            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+            <div className="relative w-full md:w-1/2 my-6 mx-auto max-w-3xl">
               {/*content*/}
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/*header*/}
@@ -155,9 +155,9 @@ export default function Modal(props) {
                     type="button"
                     onClick={removePicture}
                   >
-                    Remove Profile Picture
+                    Remove
                   </button>
-                  <SaveButton isLoading={isButtonLoading} onClick={handleSubmit} onSubmit={handleSubmit}>Save Profile Picture</SaveButton>
+                  <SaveButton isLoading={isButtonLoading} onClick={handleSubmit} onSubmit={handleSubmit}>Save</SaveButton>
                 </div>
               </div>
             </div>
