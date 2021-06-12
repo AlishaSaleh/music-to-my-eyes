@@ -16,7 +16,7 @@ export default function useAuth(code) {
   //Post code to the route dealing with the login request and it will call our code from the server
   useEffect(() => {
     axios
-      .post("http://localhost:3001/spotify/login", {
+      .post("/spotify/login", {
         code,
       })
       .then(res => {
@@ -36,7 +36,7 @@ export default function useAuth(code) {
     if (!refreshToken || !expiresIn) return
     const interval = setInterval(() => {
       axios
-        .post("http://localhost:3001/spotify/refresh", {
+        .post("/spotify/refresh", {
           refreshToken,
         })
         .then(res => {
