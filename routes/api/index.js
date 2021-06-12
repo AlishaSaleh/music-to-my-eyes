@@ -7,7 +7,6 @@ const { sanitiseUser } = require("../../utils/sanitiseUser");
 
 
 router.get("/dashboard", authCheck, async (req, res) => {
-    // console.log(req.headers);
 
     const user = await User.findById(req.user.id);
  
@@ -24,11 +23,6 @@ router.get("/matches", authCheck, async (req, res) => {
            return sanitiseUser(users);
         });
         
-
-        // console.log(sanUsers)
-
-        // need to remove this user from data - client or serverside?
-        // findOne (the currently logged in user) - exclude from the find()
         return res.json({ users: sanUsers, loggedUser: req.user.id })
     } catch (err) {
         res.status(500).json(err);
@@ -39,10 +33,9 @@ router.put("/addsongs/", authCheck, async (req, res) => {
     try {
 
          const songs = req.body
-         console.log(songs);
         const songData = await User.findByIdAndUpdate(
             { _id: req.user.id },
-            { $push: { top_songs: songs.song } }, // works with id e.g. '60b602cd2c09b7409853a947' <-- format
+            { $push: { top_songs: songs.song } },
             { new: true }
         );
 
@@ -51,7 +44,6 @@ router.put("/addsongs/", authCheck, async (req, res) => {
             return;
         }
 
-        // console.log(req.params.id);
         return res.json(songData)
     } catch (err) {
         res.status(500).json(err);

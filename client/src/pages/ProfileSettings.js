@@ -1,5 +1,5 @@
 import React from "react";
-import {Container, Row, Col} from "../components/Grid";
+import {Row, Col} from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
 import Divider from "../components/Divider";
 import {UserSettingsForm} from "../components/UserSettingsForm";

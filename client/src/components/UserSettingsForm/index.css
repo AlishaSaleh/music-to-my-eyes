@@ -9,3 +9,21 @@ margin-bottom: -50px;
 .neg-mt {
     margin-top: -280px;
  }
+
+ .color-red {
+     color: #f54f4f;
+    width: fit-content;
+    height: 20px;
+ }
+
+ .color-red:hover {
+    cursor: pointer;
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}

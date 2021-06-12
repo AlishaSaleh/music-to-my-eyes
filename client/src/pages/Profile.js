@@ -14,7 +14,6 @@ function Profile() {
     useEffect(() => {
         async function fetchData() {
             API.getDash().then(response => {
-                //console.log(response.data)
                 setName(response.data.name);
                 setMatches(response.data.matches);
                 setImage(response.data.image);
@@ -27,17 +26,12 @@ function Profile() {
     useEffect(() => {
         async function fetchMatch() {
             loggedMatches.map(matchId => API.getUser(matchId).then(response => {
-             //console.log(response.data.name);
              setMatchName(matchName => [...matchName, response.data.name]);
-             //console.log(matchName);
-
             }));
             
         };
         fetchMatch()
     }, [loggedMatches]);
-
-    //console.log(matchName);
 
   
     return (

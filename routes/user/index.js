@@ -44,8 +44,6 @@ router.post("/signup", async (req, res) => {
         image
     });
 
-    //console.log(newUser);
-
     await newUser.save();
 
     const token = jwt.sign({ id: newUser.id }, config.secret, { expiresIn: '24h' });
@@ -64,10 +62,6 @@ router.post("/signup", async (req, res) => {
             image: newUser.image,
         }
     });
-
-
-    // res.status(500).json(error);
-
 });
 
 router.post("/login", async (req, res) => {
@@ -95,7 +89,7 @@ router.post("/login", async (req, res) => {
 });
 
 // Testing Auth in Postman
-
+// NOT USED
 router.get("/test", authCheck, (req, res) => {
     res.json({ message: "authenticated!" })
 })
@@ -103,21 +97,12 @@ router.get("/test", authCheck, (req, res) => {
 // [user]/ -- GET all users for Match page
 router.get("/", authCheck, async (req, res) => {
     try {
-        //const { user } = req.headers;
-        // console.log(req.headers);
         const excluded = [req.user.id, ...req.user.likes]
         const userData = await User.find({ _id: { $nin: excluded } });
         // remove password before returning
         const sanUsers = userData.map(users => {
             return sanitiseUser(users);
         });
-
-
-        // const newUsers = sanUsers.filter(({id}) => excluded.find(userId => userId.toString() !== id.toString()))
-        // need to remove this user from data - client or serverside?
-        // console.log(newUsers)
-        // console.log(excluded)
-
         // findOne (the currently logged in user) - exclude from the find()
         return res.json({ users: sanUsers })
     } catch (err) {
@@ -136,8 +121,6 @@ router.get("/:id/", async (req, res) => {
             res.status(404).json({ message: 'No user found with this id!' });
             return;
         }
-
-        // console.log(req.params.id);
         return res.json(userData)
     } catch (err) {
         res.status(500).json(err);
@@ -173,8 +156,6 @@ router.put("/like/", authCheck, async (req, res) => {
         const isLikedUser = likeArr.find(userId =>
             userId.toString() === req.user.id.toString()
         );
-        console.log(likedUser.likes);
-        console.log(isLikedUser);
 
         if (!isLikedUser) {
             return res.json(likeData)
@@ -213,10 +194,9 @@ router.put("/like/", authCheck, async (req, res) => {
 });
 
 // Update user with their dislikes so they are no longer returned to the user
-// MIGHT NOT BE USED 
+// NOT USED - for future development
 router.put("/:id/dislike/", async (req, res) => {
     try {
-        // console.log(req.params);
         const likeData = await User.findByIdAndUpdate(
             { _id: req.params.id },
             { $push: { dislikes: req.body } }, // works with id e.g. '60b602cd2c09b7409853a947' <-- format
@@ -227,8 +207,6 @@ router.put("/:id/dislike/", async (req, res) => {
             res.status(404).json({ message: 'No user found with this id!' });
             return;
         }
-
-        // console.log(req.params.id);
         return res.json(likeData)
     } catch (err) {
         res.status(500).json(err);
@@ -238,7 +216,6 @@ router.put("/:id/dislike/", async (req, res) => {
 // Update User info - profile settings --> works in Postman
 router.put("/:id/", async (req, res) => {
     try {
-        // console.log(req.body);
         if(req.body.password) {
         const salt = await bcrypt.genSalt(10);
         req.body.password = await bcrypt.hash(req.body.password, salt);
@@ -254,17 +231,14 @@ router.put("/:id/", async (req, res) => {
             res.status(404).json({ message: 'No user found with this id!' });
             return;
         }
-
-        // console.log(req.params.id);
         return res.json(userData)
     } catch (err) {
-        console.log(err);
         res.status(500).json(err);
     }
 });
 
 // Delete a User --> works in Postman
-router.delete("/:id/", async (req, res) => {
+router.delete("/:id", async (req, res) => {
     try {
         const userData = await User.findByIdAndRemove(
             { _id: req.params.id }
@@ -275,7 +249,6 @@ router.delete("/:id/", async (req, res) => {
             return;
         }
 
-        // console.log(req.params.id);
         return res.json(userData)
     } catch (err) {
         res.status(500).json(err);

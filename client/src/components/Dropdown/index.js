@@ -29,7 +29,7 @@ const Dropdown = ({ color }) => {
       <div className="flex flex-wrap fix-height pp-hide">
         <div className="w-full sm:w-6/12 md:w-4/12 px-4">
           <div className="relative inline-flex align-middle w-full">
-            <a
+            <button
               type="button"
               ref={btnDropdownRef}
               className="pp-btn"
@@ -39,7 +39,7 @@ const Dropdown = ({ color }) => {
                   : openDropdownPopover();
               }}
             ><ProfilePic src={user.image}/>
-            </a>
+            </button>
             <div
               ref={popoverDropdownRef}
               className={
