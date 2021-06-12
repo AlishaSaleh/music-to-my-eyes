@@ -4,6 +4,7 @@ import "./index.css";
 import Loader from "../Loader";
 import { useSpring, animated } from 'react-spring';
 import Modal from "../Modal";
+import DeleteModal from "../DeleteModal";
 import API from "../../utils/API"
 
 export function SaveButton({ isLoading, children, ...props }) {
@@ -470,6 +471,7 @@ export function UserSettingsForm() {
                       <input ref={passwordRef} type="password" className="form-control mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" id="firstPassword"
                       />
                     </div>
+                  <DeleteModal />
                   </div>
                 </div>
 

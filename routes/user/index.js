@@ -238,7 +238,7 @@ router.put("/:id/", async (req, res) => {
 });
 
 // Delete a User --> works in Postman
-router.delete("/:id/", async (req, res) => {
+router.delete("/:id", async (req, res) => {
     try {
         const userData = await User.findByIdAndRemove(
             { _id: req.params.id }
