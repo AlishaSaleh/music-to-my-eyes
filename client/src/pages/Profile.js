@@ -69,13 +69,13 @@ function Profile() {
                                             <img
                                                 alt="..."
                                                 src={loggedImage}
-                                                className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16"
-                                                style={{ maxWidth: "150px" }}
+                                                className="shadow-xl object-contain rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16"
+                                                style={{ maxWidth: "150px", maxHeight: "150px" }}
                                             />
                                         </div>
                                     </div>
                                 </div>
-                                <div className="text-center mt-12">
+                                <div className="text-center mt-20">
                                     <h3 className="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2">
 
                                         Welcome, {loggedName}
@@ -95,9 +95,10 @@ function Profile() {
 
                                     {/* music */}
                                     <div className="col-span-1 text-center p-5 pt-20 bg-gradient-to-r from-red to-pink rounded-2xl">
-                                        <h1 className="text-2xl pb-6">My Music</h1>
+                                        <h1 className="text-3xl font-bold pb-6">My Music</h1>
                                         <button onClick={API.goToSpotify} type="button" className="transition duration-300 btn-shadow ease-in-out transform hover:scale-110 mx-3 py-2 px-4 rounded border p-4">Add your favourite songs
                                         <img className="pt-2" alt="spotify logo" src="https://drive.google.com/thumbnail?id=1bj86C-TKkcSqVzxLqdoHLqxuDU68OdPm" /></button>
+                                        <h1 className="text-2xl my-3">My top songs:</h1> 
                                         <ul>
                                             {songName.map(song => (
                                                 <li>{song}</li>
@@ -107,10 +108,11 @@ function Profile() {
 
                                     {/* matches */}
                                     <div className="col-span-1 text-center p-5 pt-20 bg-gradient-to-l from-red to-pink rounded-2xl">
-                                        <h1 className="text-2xl">My Matches</h1>
+                                        <h1 className="text-3xl font-bold">My Matches</h1>
                                         <p>It's time to find your playlist partner! </p>
                                         <button onClick={API.goToMatch} type="button" className="transition duration-300 btn-shadow ease-in-out transform hover:scale-110 mx-3 my-3 py-2 px-4 rounded border p-4">Click here to match!
                                         <img style={{ height: 60, display: "block" }} className="pt-2 m-auto" alt="music to my eyes logo" src="https://i.imgur.com/d93GrCW.png" /></button>
+                                        <h1 className="text-2xl my-2">My matches:</h1> 
                                         <ul>
                                             {matchName.map(match => (
                                                 <li>{match}</li>

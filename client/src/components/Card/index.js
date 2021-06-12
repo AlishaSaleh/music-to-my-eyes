@@ -93,13 +93,14 @@ function CardMatch() {
       <div>
       <h1 className="text-2xl">{loggedUser.name}, are they the music to your eyes?</h1>
       <div className="relative space-y-10">
-      {lastDirection ? <h2 key={lastDirection} className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText'>Swipe a card or press a button to get started!</h2>}
+      {lastDirection ? <h2 key={lastDirection} className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText'>Swipe to the right to like!</h2>}
       </div>
       </div>
         {userMatch.map((user, index) =>
           <TinderCard
             ref={childRefs[index]}
-            className='swipe relative bg-white bg-no-repeat bg-auto shadow-md md:w-1/2 w-full rounded px-8 pt-6 pb-8 mb-4'
+            className='swipe relative bg-white bg-no-repeat shadow-md md:w-1/3 w-full rounded px-8 pt-6 pb-8 mb-10'
+            style={{ maxWidth: 500 }}
             key={user.id}
             onSwipe={(dir) => {
               likes(dir, user.id)
